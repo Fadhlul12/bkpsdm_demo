@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detail Pengumuman — SIPADU BKPSDM Kota Dumai</title>
+<meta name="description" content="Detail pengumuman resmi kepegawaian dari BKPSDM Kota Dumai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --ink:#0B2E33;
+    --teal-deep:#0E3A3F;
+    --teal:#1B5E63;
+    --teal-soft:#2C7A80;
+    --gold:#C9A227;
+    --gold-light:#E8C468;
+    --paper:#F6F1E4;
+    --paper-dark:#ECE2CA;
+    --cream:#F8F4E9;
+    --charcoal:#182420;
+    --line: rgba(11,46,51,0.14);
+    --shadow: 0 20px 50px -25px rgba(11,46,51,0.45);
+    --danger: #c0392b;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--charcoal);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin:0;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-size:12px;
+    color:var(--teal-soft);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--gold); display:inline-block;}
+
+  /* NAV */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:var(--ink);
+    border-bottom:1px solid rgba(232,196,104,0.18);
+  }
+  .nav{
+    max-width:1180px; margin:0 auto; padding:0 32px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .seal{
+    width:42px; height:42px; border-radius:50%;
+    background:#ffffff; display:flex; align-items:center; justify-content:center;
+    border:1.5px solid var(--gold-light); overflow:hidden; flex-shrink:0;
+  }
+  .brand .seal img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .brand .name{color:var(--cream);}
+  .brand .name b{display:block; font-family:'Fraunces',serif; font-size:16.5px; letter-spacing:0.01em;}
+  .brand .name span{display:block; font-size:11px; color:var(--gold-light); letter-spacing:0.05em; margin-top:2px; font-family:'IBM Plex Mono',monospace;}
+  nav.links{display:flex; align-items:center; gap:34px;}
+  nav.links a{
+    color:rgba(248,244,233,0.82); font-size:14.5px; font-weight:500;
+    position:relative; padding:4px 0;
+  }
+  nav.links a:hover{color:var(--cream);}
+  nav.links a.active{color:var(--gold-light);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 20px; border-radius:4px;
+    font-size:14px; font-weight:600; cursor:pointer; border:none;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-gold{background:linear-gradient(180deg, var(--gold-light), var(--gold)); color:var(--ink);}
+  .btn-gold:hover{transform:translateY(-1px); box-shadow:0 10px 22px -10px rgba(201,162,39,0.7);}
+  .btn-outline-ink{background:transparent; border:1.4px solid var(--ink); color:var(--ink);}
+  .btn-outline-ink:hover{background:var(--ink); color:var(--cream);}
+
+  /* PAGE HEADER */
+  .page-header{
+    background:
+      radial-gradient(900px 400px at 85% -20%, rgba(201,162,39,0.14), transparent 60%),
+      linear-gradient(180deg, var(--ink), var(--teal-deep));
+    color:var(--cream); padding:46px 0 36px; position:relative; overflow:hidden;
+  }
+  .breadcrumb{
+    position:relative; z-index:1;
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace; font-size:12px;
+    color:rgba(248,244,233,0.55); margin-bottom:14px;
+  }
+  .breadcrumb a{color:rgba(248,244,233,0.75);}
+  .breadcrumb a:hover{color:var(--gold-light);}
+
+  /* ARTICLE DETAIL CARD */
+  .article-card{
+    background:var(--cream); border:1px solid var(--line); border-radius:10px;
+    padding:40px 44px; margin-top:-24px; position:relative; z-index:10;
+    box-shadow:var(--shadow); margin-bottom:60px;
+  }
+  .article-meta{
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    padding-bottom:20px; margin-bottom:24px; border-bottom:1px solid var(--line);
+  }
+  .cat-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.08em;
+    padding:4px 10px; border-radius:3px; background:rgba(27,94,99,0.09); color:var(--teal); font-weight:700;
+  }
+  .cat-tag.urgent{background:#C0392B; color:#FBEAE7; display:inline-flex; align-items:center; gap:5px;}
+  .pub-date{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:#8a978f;}
+  .article-title{font-size:32px; line-height:1.24; margin-bottom:20px; color:var(--ink);}
+  
+  .author-badge{
+    display:flex; align-items:center; gap:12px; margin-bottom:32px; padding:12px 16px;
+    background:var(--paper); border:1px solid var(--line); border-radius:6px; width:fit-content;
+  }
+  .author-badge i{color:var(--teal); font-size:18px;}
+  .author-badge span{font-size:12.5px; color:#5b6a63;}
+  .author-badge strong{color:var(--ink); font-weight:600;}
+
+  .article-body{
+    font-size:16px; line-height:1.8; color:#2c3a34; margin-bottom:36px;
+    white-space:pre-line;
+  }
+
+  /* PDF ATTACHMENT CARD */
+  .pdf-box{
+    background:linear-gradient(135deg, rgba(11,46,51,0.04), rgba(201,162,39,0.08));
+    border:1.5px solid rgba(201,162,39,0.35); border-radius:8px; padding:24px 28px;
+    margin:36px 0; display:flex; align-items:center; justify-content:space-between; gap:20px;
+    flex-wrap:wrap;
+  }
+  .pdf-info{display:flex; align-items:center; gap:16px;}
+  .pdf-icon-wrap{
+    width:52px; height:52px; border-radius:8px; background:rgba(192,57,43,0.12);
+    color:var(--danger); display:flex; align-items:center; justify-content:center;
+    font-size:26px; flex-shrink:0; border:1px solid rgba(192,57,43,0.25);
+  }
+  .pdf-details h4{font-size:16px; font-weight:700; color:var(--ink); margin-bottom:4px;}
+  .pdf-details p{font-family:'IBM Plex Mono',monospace; font-size:12px; color:#5b6a63; margin:0;}
+
+  .pdf-actions{display:flex; gap:10px; flex-wrap:wrap;}
+
+  /* SHARE BAR */
+  .share-bar{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding-top:24px; border-top:1px dashed var(--line); flex-wrap:wrap;
+  }
+  .share-btns{display:flex; align-items:center; gap:8px;}
+  .share-btn{
+    display:inline-flex; align-items:center; gap:6px; padding:8px 14px; border-radius:4px;
+    font-size:12.5px; font-weight:600; border:1px solid var(--line); background:var(--paper);
+    color:var(--charcoal); cursor:pointer; transition:all .15s ease;
+  }
+  .share-btn:hover{background:var(--paper-dark); border-color:var(--gold);}
+  .share-btn.wa:hover{background:#2f9d5c; color:#fff; border-color:#2f9d5c;}
+
+  /* RELATED ANNOUNCEMENTS */
+  .related-section{padding:50px 0 80px;}
+  .announce-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .a-card{
+    background:var(--cream); border:1px solid var(--line); border-radius:6px;
+    padding:26px; display:flex; flex-direction:column; gap:14px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .a-card:hover{transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--gold);}
+  .a-top{display:flex; justify-content:space-between; align-items:flex-start;}
+  .a-date{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#8a978f;}
+  .a-card h3{font-size:17px; line-height:1.35; font-weight:600;}
+  .a-card p{font-size:13px; color:#5b6a63; line-height:1.6; margin:0;}
+  .a-link{font-size:13px; font-weight:700; color:var(--teal); display:flex; align-items:center; gap:6px; margin-top:auto;}
+
+  /* FOOTER */
+  footer{background:var(--teal-deep); color:rgba(248,244,233,0.75); padding:64px 0 26px;}
+  .foot-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:40px; padding-bottom:44px; border-bottom:1px solid rgba(248,244,233,0.12);}
+  .foot-brand p{font-size:13.5px; line-height:1.7; color:rgba(248,244,233,0.55); max-width:280px;}
+  .foot-col h4{font-family:'IBM Plex Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.1em; color:var(--gold-light); margin-bottom:16px;}
+  .foot-col a, .foot-col p{display:block; font-size:13.5px; color:rgba(248,244,233,0.65); margin-bottom:11px; line-height:1.6;}
+  .foot-col a:hover{color:var(--gold-light);}
+  .social{display:flex; gap:10px; margin-top:18px;}
+  .social a{
+    width:34px; height:34px; border-radius:50%; border:1px solid rgba(248,244,233,0.25);
+    display:flex; align-items:center; justify-content:center; font-size:13px;
+  }
+  .social a:hover{border-color:var(--gold-light); color:var(--gold-light);}
+  .foot-bottom{display:flex; justify-content:space-between; padding-top:22px; font-size:12px; color:rgba(248,244,233,0.42); flex-wrap:wrap; gap:10px;}
+
+  @media (max-width:850px){
+    .article-card{padding:26px 24px;}
+    .article-title{font-size:24px;}
+    .announce-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav">
+    <a href="index.html" class="brand" style="cursor:pointer;">
+      <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
+      <div class="name">
+        <b>SIPADU</b>
+        <span>BKPSDM KOTA DUMAI</span>
+      </div>
+    </a>
+    <nav class="links">
+      <a href="index.html">Beranda</a>
+      <a href="profil.html">Profil</a>
+      <a href="pengumuman.html" class="active">Pengumuman</a>
+      <a href="kegiatan.html">Kegiatan</a>
+      <a href="layanan.html">Layanan</a>
+      <a href="alur.html">Cara Mengajukan</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:14px;">
+      <a href="layanan.html" class="btn btn-gold"><i class="fa-solid fa-arrow-right-to-bracket"></i> Portal Layanan</a>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <div class="breadcrumb">
+      <a href="index.html">Beranda</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:9px;"></i>
+      <a href="pengumuman.html">Pengumuman</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:9px;"></i>
+      <span id="breadcrumbTitle">Detail Pengumuman</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="article-card" id="articleContainer">
+    <div style="text-align:center;padding:40px;color:#8a978f;">
+      <i class="fa-solid fa-circle-notch fa-spin" style="font-size:28px;margin-bottom:12px;display:block;color:var(--teal);"></i>
+      Memuat detail pengumuman...
+    </div>
+  </div>
+</div>
+
+<section class="related-section">
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;">
+      <h2 style="font-size:24px;">Pengumuman Terkait Lainnya</h2>
+      <a href="pengumuman.html" class="btn btn-outline-ink" style="font-size:13px;padding:8px 14px;"><i class="fa-solid fa-list"></i> Lihat Semua</a>
+    </div>
+    <div class="announce-grid" id="relatedGrid"></div>
+  </div>
+</section>
+
+<footer id="kontak-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
+          <div class="name"><b>SIPADU</b><span>BKPSDM KOTA DUMAI</span></div>
+        </div>
+        <p>Sistem Informasi Pengumuman dan Layanan Kepegawaian — melayani Aparatur Sipil Negara di lingkungan Pemerintah Kota Dumai secara transparan dan akuntabel.</p>
+        <div class="social">
+          <a id="f-fb" href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a id="f-ig" href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a id="f-yt" href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Kantor</h4>
+        <p id="f-alamat">Jl. Tuanku Tambusai, Bagan Besar, Kec. Bukit Kapur, Kota Dumai, Riau 28825</p>
+        <p id="f-jam">Senin–Jumat, 08.00–16.00 WIB</p>
+      </div>
+      <div class="foot-col">
+        <h4>Kontak</h4>
+        <a id="f-telp" href="kontak.html"><i class="fa-solid fa-phone" style="margin-right:8px;"></i>(0765) 123-456</a>
+        <a id="f-email" href="kontak.html"><i class="fa-solid fa-envelope" style="margin-right:8px;"></i>bkpsdm@dumaikota.go.id</a>
+      </div>
+      <div class="foot-col">
+        <h4>Tautan</h4>
+        <a href="pengumuman.html">Pengumuman</a>
+        <a href="kegiatan.html">Kegiatan</a>
+        <a href="layanan.html">Layanan Kepegawaian</a>
+        <a href="alur.html">Panduan Pengajuan</a>
+        <a href="kontak.html">Kontak</a>
+        <a href="staf.html">Direktori Staf <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:9px; margin-left:3px;"></i></a>
+        <a href="admin.html" style="color:rgba(248,244,233,0.35);font-size:12px;margin-top:6px;"><i class="fa-solid fa-shield-halved" style="margin-right:6px;font-size:10px;"></i>Admin Web</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 BKPSDM Kota Dumai. Seluruh hak dilindungi.</span>
+      <span>Dibangun untuk mendukung tata kelola ASN yang transparan</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const catLabelMap = { cpns:'CPNS/PPPK', kepangkatan:'Kepangkatan', diklat:'Pendidikan & Latihan', mutasi:'Mutasi', pensiun:'Pensiun' };
+  function catLabel(c) { return catLabelMap[c] || c; }
+
+  function fmtDate(d) {
+    if (!d) return '';
+    const dt = new Date(d + 'T00:00:00');
+    return dt.toLocaleDateString('id-ID', { day:'2-digit', month:'long', year:'numeric' });
+  }
+
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href);
+    alert('Tautan pengumuman berhasil disalin ke clipboard!');
+  }
+
+  function shareWa(title) {
+    const text = encodeURIComponent(`*${title}*\nBaca selengkapnya di SIPADU BKPSDM Kota Dumai:\n${window.location.href}`);
+    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+  }
+
+  const pengumumanId = parseInt(getQueryParam('id'), 10) || 1;
+
+  fetch('/api/pengumuman')
+    .then(res => res.json())
+    .then(allData => {
+      const p = allData.find(x => x.id === pengumumanId) || allData[0];
+      if (!p) {
+        document.getElementById('articleContainer').innerHTML = `
+          <div style="text-align:center;padding:40px;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size:36px;color:var(--danger);margin-bottom:14px;"></i>
+            <h2>Pengumuman Tidak Ditemukan</h2>
+            <p style="color:#5b6a63;margin-bottom:20px;">Pengumuman yang Anda cari tidak tersedia atau telah dihapus.</p>
+            <a href="pengumuman.html" class="btn btn-gold"><i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Pengumuman</a>
+          </div>`;
+        return;
+      }
+
+      document.title = `${p.title} — SIPADU BKPSDM Kota Dumai`;
+      document.getElementById('breadcrumbTitle').textContent = p.title;
+
+      const isUrgent = p.urgent === 'urgent';
+      const pdfHtml = p.pdfPath ? `
+        <div class="pdf-box">
+          <div class="pdf-info">
+            <div class="pdf-icon-wrap"><i class="fa-solid fa-file-pdf"></i></div>
+            <div class="pdf-details">
+              <h4>Lampiran Dokumen Resmi (PDF)</h4>
+              <p>${p.pdfName || 'Dokumen_Lampiran_Pengumuman.pdf'}</p>
+            </div>
+          </div>
+          <div class="pdf-actions">
+            <a href="${p.pdfPath}" target="_blank" download="${p.pdfName || 'Lampiran.pdf'}" class="btn btn-gold">
+              <i class="fa-solid fa-download"></i> Download Lampiran PDF
+            </a>
+            <a href="${p.pdfPath}" target="_blank" class="btn btn-outline-ink">
+              <i class="fa-solid fa-eye"></i> Buka PDF
+            </a>
+          </div>
+        </div>` : '';
+
+      document.getElementById('articleContainer').innerHTML = `
+        <div class="article-meta">
+          <span class="cat-tag${isUrgent ? ' urgent' : ''}">${isUrgent ? '<i class="fa-solid fa-bell"></i> PENTING — ' : ''}${catLabel(p.cat)}</span>
+          <span class="pub-date"><i class="fa-solid fa-calendar-days" style="margin-right:6px;"></i>${fmtDate(p.date)}</span>
+        </div>
+        <h1 class="article-title">${p.title}</h1>
+        <div class="author-badge">
+          <i class="fa-solid fa-building-shield"></i>
+          <div>
+            <span>Diterbitkan resmi oleh</span><br>
+            <strong>BKPSDM Kota Dumai</strong>
+          </div>
+        </div>
+        <div class="article-body">${p.body || 'Tidak ada uraian naskah.'}</div>
+        ${pdfHtml}
+        <div class="share-bar">
+          <a href="pengumuman.html" class="btn btn-outline-ink" style="font-size:13px;padding:8px 14px;">
+            <i class="fa-solid fa-arrow-left"></i> Kembali ke Pengumuman
+          </a>
+          <div class="share-btns">
+            <span style="font-size:12.5px;color:#8a978f;margin-right:4px;">Bagikan:</span>
+            <button class="share-btn wa" onclick="shareWa('${p.title.replace(/'/g, "\\'")}')">
+              <i class="fa-brands fa-whatsapp" style="color:#2f9d5c;"></i> WhatsApp
+            </button>
+            <button class="share-btn" onclick="copyLink()">
+              <i class="fa-solid fa-link"></i> Salin Tautan
+            </button>
+          </div>
+        </div>`;
+
+      // Render Related Announcements
+      const related = allData.filter(x => x.status === 'terbit' && x.id !== p.id).slice(0, 3);
+      const relatedGrid = document.getElementById('relatedGrid');
+      if (relatedGrid && related.length) {
+        relatedGrid.innerHTML = related.map(rel => {
+          const relUrgent = rel.urgent === 'urgent';
+          return `
+            <div class="a-card${relUrgent ? ' is-urgent' : ''}">
+              <div class="a-top">
+                <span class="cat-tag${relUrgent ? ' urgent' : ''}">${relUrgent ? 'PENTING — ' : ''}${catLabel(rel.cat)}</span>
+                <span class="a-date">${fmtDate(rel.date)}</span>
+              </div>
+              <h3>${rel.title}</h3>
+              <p>${(rel.body || '').slice(0, 110)}…</p>
+              <a class="a-link" href="pengumuman-detail.html?id=${rel.id}">Baca selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
+            </div>`;
+        }).join('');
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById('articleContainer').innerHTML = `
+        <div style="text-align:center;padding:40px;color:var(--danger);">
+          <i class="fa-solid fa-triangle-exclamation" style="font-size:32px;margin-bottom:12px;display:block;"></i>
+          Gagal memuat detail pengumuman dari server.
+        </div>`;
+    });
+</script>
+<script>
+  fetch('/api/kontak').then(r=>r.json()).then(d=>{
+    if(d.alamat) { const el = document.getElementById('f-alamat'); if(el) el.textContent = d.alamat; }
+    if(d.jam) { const el = document.getElementById('f-jam'); if(el) el.textContent = d.jam; }
+    if(d.telp) { const el = document.getElementById('f-telp'); if(el) el.innerHTML = '<i class="fa-solid fa-phone" style="margin-right:8px;"></i>' + d.telp; }
+    if(d.email) { const el = document.getElementById('f-email'); if(el) el.innerHTML = '<i class="fa-solid fa-envelope" style="margin-right:8px;"></i>' + d.email; }
+    if(d.fb) { const el = document.getElementById('f-fb'); if(el) el.href = d.fb; }
+    if(d.ig) { const el = document.getElementById('f-ig'); if(el) el.href = d.ig; }
+    if(d.yt) { const el = document.getElementById('f-yt'); if(el) el.href = d.yt; }
+  }).catch(()=>{});
+</script>
+</body>
+</html>

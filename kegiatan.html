@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIPADU — Kegiatan | BKPSDM Kota Dumai</title>
+<meta name="description" content="Dokumentasi kegiatan BKPSDM Kota Dumai — sosialisasi, rapat, pendidikan dan latihan ASN.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --ink:#0B2E33;
+    --teal-deep:#0E3A3F;
+    --teal:#1B5E63;
+    --teal-soft:#2C7A80;
+    --gold:#C9A227;
+    --gold-light:#E8C468;
+    --paper:#F6F1E4;
+    --paper-dark:#ECE2CA;
+    --cream:#F8F4E9;
+    --charcoal:#182420;
+    --line: rgba(11,46,51,0.14);
+    --shadow: 0 20px 50px -25px rgba(11,46,51,0.45);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--charcoal);font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;color:var(--ink);margin:0;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.14em;font-size:12px;color:var(--teal-soft);display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:'';width:22px;height:1px;background:var(--gold);display:inline-block;}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+
+  /* ===== NAV ===== */
+  header.site{position:sticky;top:0;z-index:50;background:var(--ink);border-bottom:1px solid rgba(232,196,104,0.18);}
+  .nav{max-width:1180px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand .seal{
+    width:42px; height:42px; border-radius:50%;
+    background:#ffffff; display:flex; align-items:center; justify-content:center;
+    border:1.5px solid var(--gold-light); overflow:hidden; flex-shrink:0;
+  }
+  .brand .seal img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .brand .name{color:var(--cream);}
+  .brand .name b{display:block;font-family:'Fraunces',serif;font-size:16.5px;letter-spacing:0.01em;}
+  .brand .name span{display:block;font-size:11px;color:var(--gold-light);letter-spacing:0.05em;margin-top:2px;font-family:'IBM Plex Mono',monospace;}
+  nav.links{display:flex;align-items:center;gap:34px;}
+  nav.links a{color:rgba(248,244,233,0.82);font-size:14.5px;font-weight:500;position:relative;padding:4px 0;}
+  nav.links a:hover{color:var(--cream);}
+  nav.links a.active{color:var(--gold-light);}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:3px;font-size:14px;font-weight:600;cursor:pointer;border:none;font-family:'Plus Jakarta Sans',sans-serif;transition:transform .15s ease,box-shadow .15s ease;}
+  .btn-gold{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:var(--ink);}
+  .btn-gold:hover{transform:translateY(-1px);box-shadow:0 10px 22px -10px rgba(201,162,39,0.7);}
+  .btn-ghost{background:transparent;border:1px solid rgba(248,244,233,0.35);color:var(--cream);}
+  .btn-ghost:hover{border-color:var(--gold-light);color:var(--gold-light);}
+  .btn-outline-ink{background:transparent;border:1.4px solid var(--ink);color:var(--ink);}
+  .btn-outline-ink:hover{background:var(--ink);color:var(--cream);}
+  .hamburger{display:none;width:38px;height:38px;border-radius:4px;background:transparent;border:1px solid rgba(248,244,233,0.3);align-items:center;justify-content:center;color:var(--cream);cursor:pointer;font-size:16px;}
+  .mobile-panel{display:none;background:var(--ink);border-top:1px solid rgba(232,196,104,0.18);padding:8px 0 18px;}
+  .mobile-panel.open{display:block;}
+  .mobile-panel a{display:block;padding:13px 32px;color:rgba(248,244,233,0.85);font-size:15px;font-weight:500;border-bottom:1px solid rgba(248,244,233,0.06);}
+  .mobile-panel a.active{color:var(--gold-light);}
+
+  /* ===== PAGE HEADER ===== */
+  .page-header{background:radial-gradient(900px 400px at 85% -20%,rgba(201,162,39,0.14),transparent 60%),linear-gradient(180deg,var(--ink),var(--teal-deep));color:var(--cream);padding:52px 0 40px;position:relative;overflow:hidden;}
+  .page-header::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(248,244,233,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(248,244,233,0.035) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(180deg,black,transparent 85%);pointer-events:none;}
+  .breadcrumb{position:relative;z-index:1;display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:rgba(248,244,233,0.55);margin-bottom:14px;}
+  .breadcrumb a{color:rgba(248,244,233,0.75);}
+  .breadcrumb a:hover{color:var(--gold-light);}
+  .page-header h1{position:relative;z-index:1;color:var(--cream);font-size:34px;}
+  .page-header p{position:relative;z-index:1;color:rgba(248,244,233,0.68);font-size:14.5px;margin-top:10px;max-width:560px;line-height:1.6;}
+
+  /* ===== FILTER BAR ===== */
+  .filter-bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px;}
+  .filter-pill{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;padding:9px 16px;border-radius:20px;border:1px solid var(--line);background:var(--cream);color:#5b6a63;cursor:pointer;transition:all .15s ease;}
+  .filter-pill:hover{border-color:var(--teal-soft);color:var(--teal);}
+  .filter-pill.active{background:var(--ink);border-color:var(--ink);color:var(--cream);}
+
+  /* ===== KEGIATAN GRID ===== */
+  .kegiatan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+
+  /* ===== KEGIATAN CARD ===== */
+  .k-card{
+    background:var(--cream);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+    display:flex;flex-direction:column;
+    transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+    cursor:pointer;
+  }
+  .k-card:hover{transform:translateY(-6px);box-shadow:0 28px 55px -20px rgba(11,46,51,0.35);border-color:var(--gold);}
+
+  /* Card image area — gradient placeholder */
+  .k-img{
+    height:200px;position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .k-img .k-img-icon{font-size:48px;color:rgba(255,255,255,0.35);position:relative;z-index:1;}
+  .k-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(11,46,51,0.35) 100%);}
+
+  /* Category label on top of image */
+  .k-cat-badge{
+    position:absolute;top:14px;left:14px;z-index:2;
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;
+    padding:4px 10px;border-radius:12px;
+  }
+  .k-cat-badge.sosialisasi{background:rgba(232,196,104,0.92);color:#5a3d00;}
+  .k-cat-badge.rapat{background:rgba(43,105,181,0.88);color:#fff;}
+  .k-cat-badge.diklat{background:rgba(44,122,128,0.9);color:#fff;}
+  .k-cat-badge.lainnya{background:rgba(90,90,90,0.85);color:#fff;}
+
+  /* Card body */
+  .k-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .k-cat-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--teal);font-weight:600;}
+  .k-title{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--ink);line-height:1.35;}
+  .k-date{display:flex;align-items:center;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8a978f;margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);}
+  .k-date i{color:var(--gold);font-size:10px;}
+
+  /* Gradient themes per category */
+  .k-img.grad-sosialisasi{background:linear-gradient(135deg,#1B5E63 0%,#C9A227 100%);}
+  .k-img.grad-rapat{background:linear-gradient(135deg,#2b58a8 0%,#0B2E33 100%);}
+  .k-img.grad-diklat{background:linear-gradient(135deg,#0E3A3F 0%,#2C7A80 60%,#E8C468 100%);}
+  .k-img.grad-lainnya{background:linear-gradient(135deg,#3a4a44 0%,#1B5E63 100%);}
+
+  /* Hidden cards */
+  .k-card.hidden{display:none;}
+
+  /* ===== PAGINATION ===== */
+  .pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:48px;flex-wrap:wrap;}
+  .pagination button{
+    min-width:38px;height:38px;padding:0 10px;border-radius:6px;border:1px solid var(--line);background:var(--cream);
+    font-family:'IBM Plex Mono',monospace;font-size:13px;color:#5b6a63;cursor:pointer;
+    transition:all .15s ease;display:flex;align-items:center;gap:6px;
+  }
+  .pagination button.active{background:var(--ink);border-color:var(--ink);color:var(--cream);}
+  .pagination button:hover:not(.active):not(:disabled){border-color:var(--gold);color:var(--teal);}
+  .pagination button:disabled{opacity:0.4;cursor:not-allowed;}
+  .pagination .pg-arrow{padding:0 14px;}
+
+  /* ===== EMPTY STATE ===== */
+  .no-result{display:none;text-align:center;padding:60px 20px;color:#8a978f;}
+  .no-result i{font-size:32px;color:var(--line);margin-bottom:14px;display:block;}
+  .no-result.show{display:block;}
+
+  /* ===== SECTION ===== */
+  section{padding:64px 0;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--teal-deep);color:rgba(248,244,233,0.75);padding:64px 0 26px;}
+  .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(248,244,233,0.12);}
+  .foot-brand .brand{margin-bottom:16px;}
+  .foot-brand p{font-size:13.5px;line-height:1.7;color:rgba(248,244,233,0.55);max-width:280px;}
+  .foot-col h4{font-family:'IBM Plex Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold-light);margin-bottom:16px;}
+  .foot-col a,.foot-col p{display:block;font-size:13.5px;color:rgba(248,244,233,0.65);margin-bottom:11px;line-height:1.6;}
+  .foot-col a:hover{color:var(--gold-light);}
+  .social{display:flex;gap:10px;margin-top:18px;}
+  .social a{width:34px;height:34px;border-radius:50%;border:1px solid rgba(248,244,233,0.25);display:flex;align-items:center;justify-content:center;font-size:13px;}
+  .social a:hover{border-color:var(--gold-light);color:var(--gold-light);}
+  .foot-bottom{display:flex;justify-content:space-between;padding-top:22px;font-size:12px;color:rgba(248,244,233,0.42);flex-wrap:wrap;gap:10px;}
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:980px){
+    nav.links{display:none;}
+    .hamburger{display:flex;}
+    .kegiatan-grid{grid-template-columns:repeat(2,1fr);}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:600px){
+    .kegiatan-grid{grid-template-columns:1fr;}
+  }
+  @media (min-width:981px){.mobile-panel{display:none !important;}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav">
+    <a href="index.html" class="brand" style="cursor:pointer;">
+      <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
+      <div class="name">
+        <b>SIPADU</b>
+        <span>BKPSDM KOTA DUMAI</span>
+      </div>
+    </a>
+    <nav class="links">
+      <a href="index.html">Beranda</a>
+      <a href="profil.html">Profil</a>
+      <a href="pengumuman.html">Pengumuman</a>
+      <a href="kegiatan.html" class="active">Kegiatan</a>
+      <a href="layanan.html">Layanan</a>
+      <a href="alur.html">Cara Mengajukan</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <a href="layanan.html" class="btn btn-gold"><i class="fa-solid fa-arrow-right-to-bracket"></i> Portal Layanan</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Buka menu" aria-expanded="false">
+        <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="index.html">Beranda</a>
+    <a href="profil.html">Profil</a>
+    <a href="pengumuman.html">Pengumuman</a>
+    <a href="kegiatan.html" class="active">Kegiatan</a>
+    <a href="layanan.html">Layanan</a>
+    <a href="alur.html">Cara Mengajukan</a>
+    <a href="kontak.html">Kontak</a>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><i class="fa-solid fa-chevron-right" style="font-size:9px;"></i><span>Kegiatan</span></div>
+    <h1>Kegiatan BKPSDM</h1>
+    <p>Dokumentasi kegiatan resmi BKPSDM Kota Dumai — sosialisasi kebijakan kepegawaian, rapat koordinasi, serta pendidikan dan pelatihan ASN.</p>
+  </div>
+</section>
+
+<section id="kegiatan" style="padding-top:56px;">
+  <div class="wrap">
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-pill active" data-filter="all">Semua</button>
+      <button class="filter-pill" data-filter="sosialisasi">Sosialisasi</button>
+      <button class="filter-pill" data-filter="rapat">Rapat</button>
+      <button class="filter-pill" data-filter="diklat">Pendidikan &amp; Latihan</button>
+      <button class="filter-pill" data-filter="lainnya">Lainnya</button>
+    </div>
+
+    <div class="kegiatan-grid" id="kegiatanGrid"></div>
+
+    <div class="no-result" id="noResult">
+      <i class="fa-solid fa-calendar-xmark"></i>
+      <p>Tidak ada kegiatan untuk kategori ini.</p>
+    </div>
+
+    <div class="pagination" id="pagination"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
+          <div class="name"><b>SIPADU</b><span>BKPSDM KOTA DUMAI</span></div>
+        </div>
+        <p>Sistem Informasi Pengumuman dan Layanan Kepegawaian — melayani ASN Kota Dumai secara transparan dan akuntabel.</p>
+        <div class="social">
+          <a id="f-fb" href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a id="f-ig" href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a id="f-yt" href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Kantor</h4>
+        <p id="f-alamat">Jl. Tuanku Tambusai, Bagan Besar, Kec. Bukit Kapur, Kota Dumai, Riau 28825</p>
+        <p id="f-jam">Senin–Jumat, 08.00–16.00 WIB</p>
+      </div>
+      <div class="foot-col">
+        <h4>Kontak</h4>
+        <a id="f-telp" href="kontak.html"><i class="fa-solid fa-phone" style="margin-right:8px;"></i>(0765) 123-456</a>
+        <a id="f-email" href="kontak.html"><i class="fa-solid fa-envelope" style="margin-right:8px;"></i>bkpsdm@dumaikota.go.id</a>
+      </div>
+      <div class="foot-col">
+        <h4>Tautan</h4>
+        <a href="pengumuman.html">Pengumuman</a>
+        <a href="kegiatan.html">Kegiatan</a>
+        <a href="layanan.html">Layanan Kepegawaian</a>
+        <a href="alur.html">Panduan Pengajuan</a>
+        <a href="kontak.html">Kontak</a>
+        <a href="staf.html">Direktori Staf <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:9px;margin-left:3px;"></i></a>
+        <a href="admin.html" style="color:rgba(248,244,233,0.35);font-size:12px;margin-top:6px;"><i class="fa-solid fa-shield-halved" style="margin-right:6px;font-size:10px;"></i>Admin Web</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 BKPSDM Kota Dumai. Seluruh hak dilindungi.</span>
+      <span>Dibangun untuk mendukung tata kelola ASN yang transparan</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ===== Hamburger =====
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const hamburgerIcon = document.getElementById('hamburgerIcon');
+  const mobilePanel = document.getElementById('mobilePanel');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobilePanel.classList.toggle('open');
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+    hamburgerIcon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+  });
+  mobilePanel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobilePanel.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', false);
+      hamburgerIcon.className = 'fa-solid fa-bars';
+    });
+  });
+
+  // ===== Data Kegiatan dari localStorage (dikelola admin.html) =====
+  const KKEY = 'sipadu_kegiatan';
+  const DEFAULT_KEGIATAN = [
+    { id:1, cat:'sosialisasi', icon:'fa-bullhorn',
+      title:'Sosialisasi Kebijakan Pengelolaan Kinerja ASN Tahun 2026',
+      date:'2026-07-28', loc:'Aula BKPSDM Kota Dumai', image:'' },
+    { id:2, cat:'rapat', icon:'fa-users',
+      title:'Rapat Koordinasi Persiapan Seleksi CPNS Formasi 2026',
+      date:'2026-07-22', loc:'Ruang Rapat Sekretariat', image:'' },
+    { id:3, cat:'diklat', icon:'fa-graduation-cap',
+      title:'Pendidikan dan Pelatihan Dasar CPNS Golongan III Angkatan VIII',
+      date:'2026-07-15', loc:'Pusdiklat Regional Pekanbaru', image:'' },
+    { id:4, cat:'sosialisasi', icon:'fa-chalkboard-user',
+      title:'Sosialisasi Sistem Informasi Manajemen ASN (SIASN) untuk Operator OPD',
+      date:'2026-07-10', loc:'Aula BKPSDM Kota Dumai', image:'' },
+    { id:5, cat:'rapat', icon:'fa-handshake',
+      title:'Rapat Evaluasi Pelaksanaan Kenaikan Pangkat Periode April 2026',
+      date:'2026-07-04', loc:'Ruang Rapat Bidang Mutasi', image:'' },
+    { id:6, cat:'diklat', icon:'fa-person-chalkboard',
+      title:'Pelatihan Kepemimpinan Administrator (PKA) Angkatan XII',
+      date:'2026-07-01', loc:'LAN RI Jakarta', image:'' },
+    { id:7, cat:'sosialisasi', icon:'fa-info-circle',
+      title:'Sosialisasi Peraturan Pensiun dan Manfaat Jaminan Hari Tua BPJS Ketenagakerjaan',
+      date:'2026-06-24', loc:'Hotel Cahaya Dumai', image:'' },
+    { id:8, cat:'rapat', icon:'fa-clipboard-list',
+      title:'Rapat Penyusunan Formasi Kebutuhan ASN Pemerintah Kota Dumai Tahun 2027',
+      date:'2026-06-18', loc:'Ruang Rapat Sekretariat', image:'' },
+    { id:9, cat:'diklat', icon:'fa-award',
+      title:'Bimbingan Teknis Penerapan Penilaian Kinerja Berbasis SKP Berbasis PMK',
+      date:'2026-06-12', loc:'Aula BKPSDM Kota Dumai', image:'' },
+    { id:10, cat:'rapat', icon:'fa-comments',
+      title:'Rapat Koordinasi Mutasi Pejabat Eselon III dan IV Semester I 2026',
+      date:'2026-06-05', loc:'Ruang Rapat Bupati', image:'' },
+    { id:11, cat:'sosialisasi', icon:'fa-file-contract',
+      title:'Sosialisasi Peraturan Disiplin ASN dan Tata Tertib Kantor',
+      date:'2026-05-28', loc:'Aula BKPSDM Kota Dumai', image:'' },
+    { id:12, cat:'diklat', icon:'fa-laptop-code',
+      title:'Pelatihan Digitalisasi Layanan Kepegawaian bagi Operator BKPSDM',
+      date:'2026-05-20', loc:'Lab Komputer BKPSDM', image:'' },
+  ];
+
+  let activitiesData = [];
+  const catIconMap = { sosialisasi:'fa-bullhorn', rapat:'fa-users', diklat:'fa-graduation-cap', lainnya:'fa-calendar-check' };
+
+  function fetchKegiatan() {
+    fetch('/api/kegiatan')
+      .then(res => res.json())
+      .then(data => {
+        activitiesData = data.map(k => ({
+          id: k.id,
+          cat: k.cat,
+          icon: catIconMap[k.cat] || 'fa-calendar-check',
+          title: k.title,
+          date: k.date,
+          loc: k.loc || '',
+          image: k.image || ''
+        }));
+        renderCards();
+      })
+      .catch(err => {
+        console.error('Error fetching kegiatan:', err);
+      });
+  }
+
+  const ITEMS_PER_PAGE = 6;
+  let currentFilter = 'all';
+  let currentPage = 1;
+
+  function getFiltered() {
+    if (currentFilter === 'all') return activitiesData;
+    return activitiesData.filter(k => k.cat === currentFilter);
+  }
+
+  function getCatLabel(cat) {
+    const map = { sosialisasi:'Sosialisasi', rapat:'Rapat', diklat:'Pendidikan & Latihan', lainnya:'Lainnya' };
+    return map[cat] || cat;
+  }
+
+  function renderCards() {
+    const filtered = getFiltered();
+    const grid = document.getElementById('kegiatanGrid');
+    const noResult = document.getElementById('noResult');
+    grid.innerHTML = '';
+
+    if (filtered.length === 0) {
+      noResult.classList.add('show');
+      renderPagination(0, 0);
+      return;
+    }
+    noResult.classList.remove('show');
+
+    const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+    if (currentPage > totalPages) currentPage = 1;
+
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const pageItems = filtered.slice(start, start + ITEMS_PER_PAGE);
+
+    pageItems.forEach(k => {
+      const card = document.createElement('div');
+      card.className = 'k-card';
+      const dateStr = k.date ? (() => {
+        // Support ISO date format (2026-07-28) or already formatted string
+        if (/^\d{4}-\d{2}-\d{2}$/.test(k.date)) {
+          return new Date(k.date + 'T00:00:00').toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
+        }
+        return k.date;
+      })() : '';
+
+      // Image area: use uploaded photo if available, else gradient
+      const imgContent = k.image
+        ? `<div class="k-img" style="background-image:url('${k.image}');background-size:cover;background-position:center;">
+             <span class="k-cat-badge ${k.cat}">${getCatLabel(k.cat)}</span>
+           </div>`
+        : `<div class="k-img grad-${k.cat}">
+             <i class="fa-solid ${k.icon || 'fa-calendar-check'} k-img-icon"></i>
+             <span class="k-cat-badge ${k.cat}">${getCatLabel(k.cat)}</span>
+           </div>`;
+
+      card.innerHTML = `
+        ${imgContent}
+        <div class="k-body">
+          <div class="k-cat-label">${getCatLabel(k.cat)}</div>
+          <div class="k-title">${k.title}</div>
+          <div class="k-date">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>${dateStr}</span>
+            ${k.loc ? `<span style="margin-left:8px;color:var(--line);">|</span>
+            <i class="fa-solid fa-location-dot" style="margin-left:4px;"></i>
+            <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${k.loc}</span>` : ''}
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+
+    renderPagination(totalPages, filtered.length);
+  }
+
+  function renderPagination(totalPages, total) {
+    const pg = document.getElementById('pagination');
+    pg.innerHTML = '';
+    if (totalPages <= 1) return;
+
+    const prev = document.createElement('button');
+    prev.className = 'pg-arrow';
+    prev.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Sebelumnya';
+    prev.disabled = currentPage === 1;
+    prev.addEventListener('click', () => { if(currentPage > 1){ currentPage--; renderCards(); window.scrollTo({top:400,behavior:'smooth'}); }});
+    pg.appendChild(prev);
+
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      if (i === currentPage) btn.classList.add('active');
+      btn.addEventListener('click', () => { currentPage = i; renderCards(); window.scrollTo({top:400,behavior:'smooth'}); });
+      pg.appendChild(btn);
+    }
+
+    const next = document.createElement('button');
+    next.className = 'pg-arrow';
+    next.innerHTML = 'Selanjutnya <i class="fa-solid fa-chevron-right"></i>';
+    next.disabled = currentPage === totalPages;
+    next.addEventListener('click', () => { if(currentPage < totalPages){ currentPage++; renderCards(); window.scrollTo({top:400,behavior:'smooth'}); }});
+    pg.appendChild(next);
+  }
+
+  // ===== Filter =====
+  document.getElementById('filterBar').addEventListener('click', e => {
+    const btn = e.target.closest('.filter-pill');
+    if (!btn) return;
+    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    currentPage = 1;
+    renderCards();
+  });
+
+  // ===== Init =====
+  fetchKegiatan();
+</script>
+<script>
+  fetch('/api/kontak').then(r=>r.json()).then(d=>{
+    if(d.alamat) { const el = document.getElementById('f-alamat'); if(el) el.textContent = d.alamat; }
+    if(d.jam) { const el = document.getElementById('f-jam'); if(el) el.textContent = d.jam; }
+    if(d.telp) { const el = document.getElementById('f-telp'); if(el) el.innerHTML = '<i class="fa-solid fa-phone" style="margin-right:8px;"></i>' + d.telp; }
+    if(d.email) { const el = document.getElementById('f-email'); if(el) el.innerHTML = '<i class="fa-solid fa-envelope" style="margin-right:8px;"></i>' + d.email; }
+    if(d.fb) { const el = document.getElementById('f-fb'); if(el) el.href = d.fb; }
+    if(d.ig) { const el = document.getElementById('f-ig'); if(el) el.href = d.ig; }
+    if(d.yt) { const el = document.getElementById('f-yt'); if(el) el.href = d.yt; }
+  }).catch(()=>{});
+</script>
+</body>
+</html>

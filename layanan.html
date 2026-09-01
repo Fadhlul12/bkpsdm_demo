@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIPADU — Layanan | BKPSDM Kota Dumai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --ink:#0B2E33;
+    --teal-deep:#0E3A3F;
+    --teal:#1B5E63;
+    --teal-soft:#2C7A80;
+    --gold:#C9A227;
+    --gold-light:#E8C468;
+    --paper:#F6F1E4;
+    --paper-dark:#ECE2CA;
+    --cream:#F8F4E9;
+    --charcoal:#182420;
+    --line: rgba(11,46,51,0.14);
+    --shadow: 0 20px 50px -25px rgba(11,46,51,0.45);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--charcoal);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin:0;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-size:12px;
+    color:var(--teal-soft);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--gold); display:inline-block;}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ===== NAV ===== */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:var(--ink);
+    border-bottom:1px solid rgba(232,196,104,0.18);
+  }
+  .nav{
+    max-width:1180px; margin:0 auto; padding:0 32px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .seal, .admin-seal{
+    width:42px; height:42px; border-radius:50%;
+    background:#ffffff; display:flex; align-items:center; justify-content:center;
+    border:1.5px solid var(--gold-light); overflow:hidden; flex-shrink:0;
+  }
+  .seal img, .admin-seal img{
+    width:100%; height:100%; object-fit:contain; display:block;
+  }
+  .brand .name{color:var(--cream);}
+  .brand .name b{display:block; font-family:'Fraunces',serif; font-size:16.5px; letter-spacing:0.01em;}
+  .brand .name span{display:block; font-size:11px; color:var(--gold-light); letter-spacing:0.05em; margin-top:2px; font-family:'IBM Plex Mono',monospace;}
+  nav.links{display:flex; align-items:center; gap:34px;}
+  nav.links a{
+    color:rgba(248,244,233,0.82); font-size:14.5px; font-weight:500;
+    position:relative; padding:4px 0;
+  }
+  nav.links a:hover{color:var(--cream);}
+  nav.links a.active{color:var(--gold-light);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 20px; border-radius:3px;
+    font-size:14px; font-weight:600; cursor:pointer; border:none;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-gold{background:linear-gradient(180deg, var(--gold-light), var(--gold)); color:var(--ink);}
+  .btn-gold:hover{transform:translateY(-1px); box-shadow:0 10px 22px -10px rgba(201,162,39,0.7);}
+  .btn-ghost{background:transparent; border:1px solid rgba(248,244,233,0.35); color:var(--cream);}
+  .btn-ghost:hover{border-color:var(--gold-light); color:var(--gold-light);}
+  .btn-outline-ink{background:transparent; border:1.4px solid var(--ink); color:var(--ink);}
+  .btn-outline-ink:hover{background:var(--ink); color:var(--cream);}
+
+  /* ===== HERO SLIDER ===== */
+  .hero-bg{
+    position:absolute; inset:0; overflow:hidden; z-index:0;
+  }
+  .hero-slide{
+    position:absolute; inset:0;
+    opacity:0; transition:opacity 1.1s ease;
+    background-size:cover; background-position:center;
+  }
+  .hero-slide::before{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(100deg, rgba(11,46,51,0.94) 0%, rgba(11,46,51,0.82) 38%, rgba(14,58,63,0.55) 68%, rgba(14,58,63,0.35) 100%);
+  }
+  .hero-slide.active{opacity:1; z-index:1;}
+  .hero-slide.active .hero-slide-art{animation:kenburns 7s ease-out forwards;}
+  @keyframes kenburns{
+    0%{transform:scale(1.08) translate(0,0);}
+    100%{transform:scale(1.16) translate(-1.5%,-1%);}
+  }
+  .hero-slide-art{
+    position:absolute; inset:-6%;
+    background-repeat:no-repeat;
+  }
+  .slide-art-1{background:
+    radial-gradient(420px 420px at 88% 18%, rgba(232,196,104,0.35), transparent 70%),
+    radial-gradient(600px 600px at 70% 85%, rgba(44,122,128,0.55), transparent 70%),
+    linear-gradient(160deg, #0E3A3F, #0B2E33 70%);}
+  .slide-art-2{background:
+    radial-gradient(500px 500px at 82% 75%, rgba(201,162,39,0.3), transparent 70%),
+    radial-gradient(500px 500px at 20% 15%, rgba(27,94,99,0.6), transparent 70%),
+    linear-gradient(200deg, #0B2E33, #123B40 60%);}
+  .slide-art-3{background:
+    radial-gradient(460px 460px at 25% 80%, rgba(232,196,104,0.28), transparent 70%),
+    radial-gradient(520px 520px at 85% 25%, rgba(44,122,128,0.5), transparent 70%),
+    linear-gradient(140deg, #0E3A3F, #0A2226 65%);}
+  .slide-art-4{background:
+    radial-gradient(480px 480px at 78% 82%, rgba(201,162,39,0.3), transparent 70%),
+    radial-gradient(480px 480px at 15% 20%, rgba(27,94,99,0.55), transparent 70%),
+    linear-gradient(170deg, #0B2E33, #0E3A3F 70%);}
+  .hero-icon-mark{
+    position:absolute; right:6%; top:50%; transform:translateY(-50%);
+    font-size:280px; color:rgba(248,244,233,0.05); z-index:0;
+  }
+  .hero-grid{position:relative; z-index:2;}
+  .hero-slide-content{transition:opacity .5s ease, transform .5s ease;}
+  .hero-slide-content.switching{opacity:0; transform:translateY(8px);}
+  .hero-dots{
+    position:relative; z-index:2; display:flex; gap:8px; margin-top:44px;
+  }
+  .hero-dots button{
+    width:26px; height:4px; border-radius:2px; border:none; padding:0;
+    background:rgba(248,244,233,0.28); cursor:pointer; transition:background .2s ease, width .2s ease;
+  }
+  .hero-dots button.active{background:var(--gold-light); width:38px;}
+  .hero-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+    width:42px; height:42px; border-radius:50%;
+    background:rgba(248,244,233,0.08); border:1px solid rgba(248,244,233,0.25);
+    color:var(--cream); display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:background .2s ease, border-color .2s ease;
+  }
+  .hero-arrow:hover{background:rgba(232,196,104,0.18); border-color:var(--gold-light); color:var(--gold-light);}
+  .hero-arrow.prev{left:24px;}
+  .hero-arrow.next{right:24px;}
+  @media (max-width:980px){
+    .hero-arrow{display:none;}
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    background:var(--ink);
+    color:var(--cream);
+    padding:84px 0 96px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:'';
+    position:absolute; inset:0;
+    background-image: linear-gradient(rgba(248,244,233,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(248,244,233,0.035) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image: linear-gradient(180deg, black, transparent 75%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative; z-index:1;
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;
+  }
+  .hero h1{
+    font-size:44px; line-height:1.14; color:var(--cream); max-width:560px;
+  }
+  .hero h1 em{font-style:italic; color:var(--gold-light);}
+  .hero p.lead{
+    margin:22px 0 30px; font-size:16.5px; line-height:1.65; color:rgba(248,244,233,0.9); max-width:480px;
+  }
+  .hero-cta{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:34px;}
+  .search-box{
+    display:flex; align-items:center; gap:10px;
+    background:rgba(248,244,233,0.07);
+    border:1px solid rgba(248,244,233,0.22);
+    border-radius:4px; padding:13px 16px; max-width:460px;
+  }
+  .search-box i{color:var(--gold-light);}
+  .search-box input{
+    background:transparent; border:none; outline:none; color:var(--cream);
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; width:100%;
+  }
+  .search-box input::placeholder{color:rgba(248,244,233,0.45);}
+  .search-box button{
+    background:var(--gold); color:var(--ink); border:none; border-radius:3px;
+    padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap;
+  }
+
+  /* Flip board signature */
+  .board{
+    background:linear-gradient(180deg,#0A2226,#081A1D);
+    border:1px solid rgba(232,196,104,0.25);
+    border-radius:6px; padding:22px 22px 20px;
+    box-shadow: var(--shadow);
+  }
+  .board-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-bottom:14px; margin-bottom:16px; border-bottom:1px dashed rgba(232,196,104,0.25);
+  }
+  .board-head .label{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em;
+    color:var(--gold-light); text-transform:uppercase; display:flex; gap:8px; align-items:center;
+  }
+  .dot-live{width:7px; height:7px; border-radius:50%; background:#7CD98A; box-shadow:0 0 0 3px rgba(124,217,138,0.18); animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.4;}}
+  .board-time{font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(248,244,233,0.5);}
+  .flip-row{display:flex; align-items:center; gap:12px; padding:9px 0; border-bottom:1px solid rgba(248,244,233,0.06);}
+  .flip-row:last-child{border-bottom:none;}
+  .flip-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:0.06em;
+    padding:3px 7px; border-radius:2px; white-space:nowrap; text-transform:uppercase;
+    background:rgba(232,196,104,0.14); color:var(--gold-light); border:1px solid rgba(232,196,104,0.3);
+  }
+  .flip-text{display:flex; gap:3px; flex-wrap:wrap;}
+  .flip-char{
+    width:15px; height:22px; background:#0F2C30; border-radius:2px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--cream);
+    box-shadow: inset 0 1px 0 rgba(248,244,233,0.08), inset 0 -1px 0 rgba(0,0,0,0.4);
+    animation: flipin 0.5s ease both;
+  }
+  .flip-char.space{background:transparent; box-shadow:none;}
+  @keyframes flipin{
+    0%{transform:rotateX(90deg); opacity:0;}
+    60%{transform:rotateX(-12deg);}
+    100%{transform:rotateX(0deg); opacity:1;}
+  }
+
+  /* ===== STATS ===== */
+  .stats{
+    background:var(--gold); color:var(--ink);
+  }
+  .stats-grid{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    padding:26px 0;
+  }
+  .stat{padding:6px 28px; border-left:1px solid rgba(11,46,51,0.35);}
+  .stat:first-child{border-left:none;}
+  .stat .num{font-family:'IBM Plex Mono',monospace; font-size:28px; font-weight:600;}
+  .stat .lbl{font-size:12.5px; margin-top:4px; color:rgba(11,46,51,0.75);}
+
+  /* ===== SECTION GENERIC ===== */
+  section{padding:88px 0;}
+  .sec-head{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+    margin-bottom:44px; flex-wrap:wrap;
+  }
+  .sec-head h2{font-size:32px; margin-top:10px; max-width:480px;}
+  .sec-head p{color:#5b6a63; font-size:14.5px; max-width:360px; line-height:1.6;}
+
+  /* Pengumuman */
+  .announce-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .a-card{
+    background:var(--cream); border:1px solid var(--line); border-radius:6px;
+    padding:26px; display:flex; flex-direction:column; gap:14px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .a-card:hover{transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--gold);}
+  .a-top{display:flex; justify-content:space-between; align-items:flex-start;}
+  .a-cat{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.08em;
+    padding:4px 9px; border-radius:2px; background:rgba(27,94,99,0.09); color:var(--teal);
+  }
+  .a-cat.urgent{background:#C0392B; color:#FBEAE7; display:inline-flex; align-items:center; gap:5px; box-shadow:0 0 0 1px rgba(192,57,43,0.35);}
+  .a-cat.urgent::before{content:'\f0f3'; font-family:'Font Awesome 6 Free'; font-weight:900; font-size:9px;}
+  .a-card.is-urgent{border-color:rgba(192,57,43,0.35);}
+  .a-card.is-urgent:hover{border-color:#C0392B;}
+  .a-date{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#8a978f; text-align:right;}
+  .a-card h3{font-size:18px; line-height:1.35; font-weight:600;}
+  .a-card p{font-size:13.5px; color:#5b6a63; line-height:1.6; margin:0;}
+  .a-link{font-size:13px; font-weight:700; color:var(--teal); display:flex; align-items:center; gap:6px; margin-top:auto;}
+  .a-link i{font-size:11px; transition:transform .15s ease;}
+  .a-card:hover .a-link i{transform:translateX(4px);}
+
+  /* Layanan */
+  .layanan-band{background:var(--ink); color:var(--cream);}
+  .layanan-band .sec-head h2{color:var(--cream);}
+  .layanan-band .sec-head p{color:rgba(248,244,233,0.6);}
+  .layanan-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(248,244,233,0.12); border:1px solid rgba(248,244,233,0.12); border-radius:6px; overflow:hidden;}
+  .l-card{
+    background:var(--teal-deep); padding:26px 22px 24px; min-height:170px;
+    display:flex; flex-direction:column; gap:12px; position:relative;
+    transition:background .15s ease, transform .15s ease;
+    border-top:2px solid transparent;
+  }
+  .l-card:hover{background:#124347; transform:translateY(-3px); border-top-color:var(--gold);}
+  .l-top{display:flex; align-items:center; justify-content:space-between;}
+  .l-icon{
+    width:48px; height:48px; border-radius:10px; background:rgba(232,196,104,0.12);
+    border:1px solid rgba(232,196,104,0.22);
+    display:flex; align-items:center; justify-content:center; color:var(--gold-light); font-size:19px;
+  }
+  .l-no{font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(248,244,233,0.3);}
+  .l-card h3{color:var(--cream); font-size:15.5px; font-weight:600; font-family:'Fraunces',serif;}
+  .l-card p{font-size:12.5px; color:rgba(248,244,233,0.55); line-height:1.55; margin:0;}
+
+  /* Alur */
+  .flow{display:grid; grid-template-columns:repeat(4,1fr); gap:0; row-gap:36px; position:relative;}
+  .f-step{position:relative; padding:0 18px 0 0;}
+  .f-step::after{
+    content:''; position:absolute; top:23px; left:46px; right:0; height:1px;
+    background:repeating-linear-gradient(90deg, var(--gold) 0 8px, transparent 8px 16px);
+  }
+  .f-step:nth-child(4n)::after,
+  .f-step:last-child::after{ display:none; }
+  .f-num{
+    width:46px; height:46px; border-radius:50%; background:var(--paper); border:2px solid var(--gold);
+    display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace;
+    font-weight:600; color:var(--ink); font-size:15px; position:relative; z-index:1; margin-bottom:18px;
+  }
+  .f-step h3{font-size:15.5px; margin-bottom:8px;}
+  .f-step p{font-size:13px; color:#5b6a63; line-height:1.6; margin:0;}
+
+  /* Footer */
+  footer{background:var(--teal-deep); color:rgba(248,244,233,0.75); padding:64px 0 26px;}
+  .foot-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:40px; padding-bottom:44px; border-bottom:1px solid rgba(248,244,233,0.12);}
+  .foot-brand .brand{margin-bottom:16px;}
+  .foot-brand p{font-size:13.5px; line-height:1.7; color:rgba(248,244,233,0.55); max-width:280px;}
+  .foot-col h4{font-family:'IBM Plex Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.1em; color:var(--gold-light); margin-bottom:16px;}
+  .foot-col a, .foot-col p{display:block; font-size:13.5px; color:rgba(248,244,233,0.65); margin-bottom:11px; line-height:1.6;}
+  .foot-col a:hover{color:var(--gold-light);}
+  .social{display:flex; gap:10px; margin-top:18px;}
+  .social a{
+    width:34px; height:34px; border-radius:50%; border:1px solid rgba(248,244,233,0.25);
+    display:flex; align-items:center; justify-content:center; font-size:13px;
+  }
+  .social a:hover{border-color:var(--gold-light); color:var(--gold-light);}
+  .foot-bottom{display:flex; justify-content:space-between; padding-top:22px; font-size:12px; color:rgba(248,244,233,0.42); flex-wrap:wrap; gap:10px;}
+
+  .hamburger{
+    display:none; width:38px; height:38px; border-radius:4px;
+    background:transparent; border:1px solid rgba(248,244,233,0.3);
+    align-items:center; justify-content:center; color:var(--cream); cursor:pointer;
+    font-size:16px;
+  }
+  .mobile-panel{
+    display:none;
+    background:var(--ink); border-top:1px solid rgba(232,196,104,0.18);
+    padding:8px 0 18px;
+  }
+  .mobile-panel.open{display:block;}
+  .mobile-panel a{
+    display:block; padding:13px 32px; color:rgba(248,244,233,0.85);
+    font-size:15px; font-weight:500; border-bottom:1px solid rgba(248,244,233,0.06);
+  }
+  .mobile-panel a.active{color:var(--gold-light);}
+
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr;}
+    nav.links{display:none;}
+    .hamburger{display:flex;}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .announce-grid{grid-template-columns:1fr;}
+    .layanan-grid{grid-template-columns:repeat(2,1fr);}
+    .flow{grid-template-columns:1fr; gap:28px;}
+    .f-step::after{display:none;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (min-width:981px){
+    .mobile-panel{display:none !important;}
+  }
+  /* ===== PAGE HEADER (non-home pages) ===== */
+  .page-header{
+    background:
+      radial-gradient(900px 400px at 85% -20%, rgba(201,162,39,0.14), transparent 60%),
+      linear-gradient(180deg, var(--ink), var(--teal-deep));
+    color:var(--cream); padding:52px 0 40px; position:relative; overflow:hidden;
+  }
+  .page-header::after{
+    content:''; position:absolute; inset:0;
+    background-image: linear-gradient(rgba(248,244,233,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(248,244,233,0.035) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image: linear-gradient(180deg, black, transparent 85%);
+    pointer-events:none;
+  }
+  .breadcrumb{
+    position:relative; z-index:1;
+    display:flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono',monospace; font-size:12px;
+    color:rgba(248,244,233,0.55); margin-bottom:14px;
+  }
+  .breadcrumb a{color:rgba(248,244,233,0.75);}
+  .breadcrumb a:hover{color:var(--gold-light);}
+  .page-header h1{position:relative; z-index:1; color:var(--cream); font-size:34px;}
+  .page-header p{position:relative; z-index:1; color:rgba(248,244,233,0.68); font-size:14.5px; margin-top:10px; max-width:560px; line-height:1.6;}
+
+  /* ===== FILTER PILLS (Pengumuman) ===== */
+  .filter-bar{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:36px;}
+  .filter-pill{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.05em;
+    padding:9px 16px; border-radius:20px; border:1px solid var(--line); background:var(--cream);
+    color:#5b6a63; cursor:pointer; transition:all .15s ease;
+  }
+  .filter-pill:hover{border-color:var(--teal-soft); color:var(--teal);}
+  .filter-pill.active{background:var(--ink); border-color:var(--ink); color:var(--cream);}
+  .a-card{display:flex;}
+  .a-card.hidden{display:none;}
+
+  /* ===== PAGINATION ===== */
+  .pagination{display:flex; align-items:center; justify-content:center; gap:8px; margin-top:40px;}
+  .pagination button{
+    width:38px; height:38px; border-radius:4px; border:1px solid var(--line); background:var(--cream);
+    font-family:'IBM Plex Mono',monospace; font-size:13px; color:#5b6a63; cursor:pointer;
+  }
+  .pagination button.active{background:var(--ink); border-color:var(--ink); color:var(--cream);}
+  .pagination button:hover:not(.active){border-color:var(--gold);}
+  .pagination .pg-arrow{width:auto; padding:0 14px; display:flex; align-items:center; gap:6px;}
+
+  /* ===== SECTION LINK-OUT CARD (preview → full page) ===== */
+  .preview-foot{display:flex; justify-content:center; margin-top:40px;}
+  .layanan-band .preview-foot{margin-top:0; padding-top:36px;}
+
+  /* ===== FAQ ACCORDION ===== */
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-item summary{
+    list-style:none; cursor:pointer; padding:22px 4px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    font-family:'Fraunces',serif; font-weight:600; font-size:16.5px; color:var(--ink);
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary .faq-icon{
+    width:26px; height:26px; border-radius:50%; border:1.4px solid var(--teal); color:var(--teal);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:transform .2s ease;
+  }
+  .faq-item[open] summary .faq-icon{transform:rotate(45deg); background:var(--teal); color:var(--cream);}
+  .faq-item p{padding:0 4px 22px; color:#5b6a63; font-size:14.5px; line-height:1.7; margin:0; max-width:720px;}
+
+  /* ===== CONTACT PAGE ===== */
+  .contact-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:start;}
+  .contact-cards{display:flex; flex-direction:column; gap:16px;}
+  .c-card{
+    background:var(--cream); border:1px solid var(--line); border-radius:6px; padding:22px;
+    display:flex; gap:16px; align-items:flex-start;
+  }
+  .c-card .c-icon{
+    width:44px; height:44px; border-radius:8px; background:rgba(27,94,99,0.09); color:var(--teal);
+    display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0;
+  }
+  .c-card h4{font-size:14.5px; margin-bottom:4px;}
+  .c-card p{font-size:13.5px; color:#5b6a63; line-height:1.6; margin:0;}
+  .map-box{
+    margin-top:16px; border-radius:6px; border:1px solid var(--line); overflow:hidden;
+    background:
+      repeating-linear-gradient(45deg, rgba(11,46,51,0.04) 0 2px, transparent 2px 14px),
+      var(--paper-dark);
+    min-height:200px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:8px; color:var(--teal); text-align:center; padding:20px;
+  }
+  .map-box i{font-size:26px;}
+  .map-box span{font-family:'IBM Plex Mono',monospace; font-size:12px; color:#5b6a63;}
+  .form-card{background:var(--cream); border:1px solid var(--line); border-radius:8px; padding:32px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
+  .form-field{display:flex; flex-direction:column; gap:7px; margin-bottom:16px;}
+  .form-field label{font-size:12.5px; font-weight:600; color:var(--ink);}
+  .form-field input, .form-field select, .form-field textarea{
+    border:1px solid var(--line); border-radius:4px; padding:11px 13px; font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:14px; color:var(--charcoal); background:#fff; outline:none; resize:vertical;
+  }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus{border-color:var(--teal-soft);}
+  .form-note{font-size:12px; color:#8a978f; margin-top:10px;}
+
+  @media (max-width:980px){
+    .contact-grid{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+  }
+
+  /* ===== OFFLINE INFO BANNER ===== */
+  .offline-banner{
+    display:flex; gap:20px; align-items:flex-start;
+    background:var(--cream); border:1px solid var(--line); border-left:5px solid var(--gold);
+    border-radius:8px; padding:24px 28px; margin-bottom:48px;
+  }
+  .offline-icon{
+    width:46px; height:46px; border-radius:50%; background:rgba(201,162,39,0.14); color:var(--gold);
+    display:flex; align-items:center; justify-content:center; font-size:19px; flex-shrink:0;
+  }
+  .offline-banner h3{font-size:16px; margin-bottom:6px;}
+  .offline-banner p{font-size:13.5px; line-height:1.7; color:#4a5751; margin:0; max-width:700px;}
+  .offline-banner p strong{color:var(--ink);}
+  .offline-banner .ob-meta{
+    display:flex; gap:18px; margin-top:12px; flex-wrap:wrap;
+  }
+  .offline-banner .ob-meta span{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--teal); display:flex; align-items:center; gap:6px;
+  }
+
+  /* ===== SERVICE CARDS ===== */
+  .svc-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+
+  .staff-cta{
+    display:flex; align-items:center; gap:20px; text-decoration:none;
+    background:linear-gradient(120deg, var(--ink), var(--teal-deep));
+    border-radius:10px; padding:24px 28px; margin-bottom:36px; position:relative; overflow:hidden;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .staff-cta::before{
+    content:''; position:absolute; inset:0;
+    background-image: linear-gradient(rgba(248,244,233,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(248,244,233,0.04) 1px, transparent 1px);
+    background-size:22px 22px;
+    mask-image: linear-gradient(120deg, black, transparent 75%);
+  }
+  .staff-cta:hover{transform:translateY(-3px); box-shadow:var(--shadow);}
+  .staff-cta-icon{
+    position:relative; z-index:1; flex-shrink:0;
+    width:52px; height:52px; border-radius:50%; background:rgba(232,196,104,0.14);
+    border:1px solid rgba(232,196,104,0.3); color:var(--gold-light);
+    display:flex; align-items:center; justify-content:center; font-size:20px;
+  }
+  .staff-cta-text{position:relative; z-index:1; flex:1; min-width:200px;}
+  .staff-cta-text h3{color:var(--cream); font-size:16.5px; margin-bottom:5px; font-family:'Fraunces',serif; font-weight:600;}
+  .staff-cta-text p{color:rgba(248,244,233,0.65); font-size:13px; line-height:1.6; margin:0; max-width:560px;}
+  .staff-cta-text p strong{color:var(--gold-light); font-weight:600;}
+  .staff-cta-btn{
+    position:relative; z-index:1; flex-shrink:0;
+    display:flex; align-items:center; gap:8px;
+    background:linear-gradient(180deg, var(--gold-light), var(--gold)); color:var(--ink);
+    font-size:13.5px; font-weight:700; padding:11px 18px; border-radius:4px; white-space:nowrap;
+  }
+  .staff-cta-btn i{font-size:11px; transition:transform .15s ease;}
+  .staff-cta:hover .staff-cta-btn i{transform:translateX(4px);}
+
+  @media (max-width:700px){
+    .staff-cta{flex-direction:column; align-items:flex-start; text-align:left;}
+    .staff-cta-btn{width:100%; justify-content:center;}
+  }
+  .svc-card{
+    background:var(--cream); border:1px solid var(--line); border-radius:8px; overflow:hidden;
+    display:flex; flex-direction:column;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .svc-card:hover{transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--gold);}
+  .svc-head{
+    background:linear-gradient(155deg, var(--teal-deep), var(--ink));
+    padding:20px 18px 16px; position:relative; overflow:hidden;
+  }
+  .svc-head::after{
+    content:''; position:absolute; inset:0;
+    background-image: linear-gradient(rgba(248,244,233,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(248,244,233,0.05) 1px, transparent 1px);
+    background-size:18px 18px;
+  }
+  .svc-icon{
+    width:42px; height:42px; border-radius:10px; background:rgba(232,196,104,0.14); border:1px solid rgba(232,196,104,0.28);
+    color:var(--gold-light); display:flex; align-items:center; justify-content:center; font-size:17px;
+    position:relative; z-index:1; margin-bottom:14px;
+  }
+  .svc-tag{
+    position:relative; z-index:1; display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:9px;
+    letter-spacing:0.05em; text-transform:uppercase; background:var(--gold); color:var(--ink);
+    padding:4px 9px; border-radius:2px; font-weight:700;
+  }
+  .svc-body{padding:16px 18px 18px; display:flex; flex-direction:column; gap:12px; flex:1;}
+  .svc-body h3{font-size:14.5px; line-height:1.35; min-height:38px;}
+  .svc-actions{display:flex; flex-direction:column; gap:8px; margin-top:auto;}
+  .svc-btn{
+    display:flex; align-items:center; justify-content:center; gap:7px;
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.02em; font-weight:600;
+    padding:9px 8px; border-radius:20px; border:1.2px solid var(--line); color:var(--teal);
+    background:transparent; cursor:pointer; transition:all .15s ease;
+  }
+  .svc-btn:hover{border-color:var(--teal-soft); background:rgba(27,94,99,0.06);}
+  .svc-btn.primary{border-color:var(--ink); color:var(--ink); background:var(--paper-dark);}
+  .svc-btn.primary:hover{background:var(--ink); color:var(--cream); border-color:var(--ink);}
+
+  @media (max-width:980px){
+    .svc-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:560px){
+    .svc-grid{grid-template-columns:1fr;}
+    .offline-banner{flex-direction:column;}
+  }
+
+  /* ===== MODAL: SYARAT & KETENTUAN ===== */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(11,46,51,0.55); backdrop-filter:blur(2px);
+    display:none; align-items:center; justify-content:center; z-index:200; padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--cream); border-radius:10px; max-width:480px; width:100%;
+    max-height:85vh; overflow-y:auto; box-shadow:0 30px 70px -20px rgba(11,46,51,0.5);
+    animation:modalIn .22s ease both;
+  }
+  @keyframes modalIn{from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:translateY(0) scale(1);}}
+  .modal-head{
+    background:linear-gradient(155deg, var(--teal-deep), var(--ink)); color:var(--cream);
+    padding:22px 26px; display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
+    position:sticky; top:0;
+  }
+  .modal-head h3{color:var(--cream); font-size:18px; line-height:1.3;}
+  .modal-head span{display:block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px;}
+  .modal-close{
+    background:rgba(248,244,233,0.12); border:none; color:var(--cream); width:30px; height:30px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;
+  }
+  .modal-close:hover{background:rgba(232,196,104,0.25); color:var(--gold-light);}
+  .modal-body{padding:22px 26px 26px;}
+  .modal-body p.modal-note{font-size:13px; color:#5b6a63; line-height:1.65; margin:0 0 16px;}
+  .req-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+  .req-list li{display:flex; gap:10px; font-size:13.5px; color:#3f4c46; line-height:1.55;}
+  .req-list li i{color:var(--teal); margin-top:3px; flex-shrink:0; font-size:12px;}
+  .modal-foot{display:flex; gap:10px; margin-top:22px; flex-wrap:wrap;}
+
+  /* ===== TOAST ===== */
+  .toast{
+    position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:var(--cream); padding:13px 22px; border-radius:6px;
+    font-size:13.5px; display:flex; align-items:center; gap:10px; box-shadow:var(--shadow);
+    z-index:300; opacity:0; pointer-events:none; transition:opacity .22s ease, transform .22s ease;
+    border-left:3px solid var(--gold);
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+  .toast i{color:var(--gold-light);}
+
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav">
+    <a href="index.html" class="brand" style="cursor:pointer;">
+      <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
+      <div class="name">
+        <b>SIPADU</b>
+        <span>BKPSDM KOTA DUMAI</span>
+      </div>
+    </a>
+    <nav class="links">
+      <a href="index.html">Beranda</a>
+      <a href="profil.html">Profil</a>
+      <a href="pengumuman.html">Pengumuman</a>
+      <a href="kegiatan.html">Kegiatan</a>
+      <a href="layanan.html" class="active">Layanan</a>
+      <a href="alur.html">Cara Mengajukan</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:14px;">
+      <a href="layanan.html" class="btn btn-gold"><i class="fa-solid fa-list-check"></i> Informasi Layanan</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Buka menu" aria-expanded="false">
+        <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="index.html">Beranda</a>
+    <a href="profil.html">Profil</a>
+    <a href="pengumuman.html">Pengumuman</a>
+    <a href="kegiatan.html">Kegiatan</a>
+    <a href="layanan.html" class="active">Layanan</a>
+    <a href="alur.html">Cara Mengajukan</a>
+    <a href="kontak.html">Kontak</a>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><i class="fa-solid fa-chevron-right" style="font-size:9px;"></i><span>Layanan</span></div>
+    <h1>Jenis-Jenis Pelayanan</h1>
+    <p>Berikut jenis-jenis pelayanan yang disediakan oleh BKPSDM Kota Dumai. Pelajari syarat & ketentuan sebelum datang ke kantor.</p>
+  </div>
+</section>
+<section id="layanan" style="padding-top:56px;">
+  <div class="wrap">
+
+    <div class="offline-banner">
+      <div class="offline-icon"><i class="fa-solid fa-building-flag"></i></div>
+      <div>
+        <h3>Layanan ini diproses secara luring (offline)</h3>
+        <p>Seluruh jenis layanan di bawah ini <strong>belum dapat diajukan secara daring</strong>. Silakan cek syarat & ketentuan dan unduh formulir terlebih dahulu, lengkapi berkas yang diminta, lalu datang langsung ke Kantor BKPSDM Kota Dumai sesuai jam layanan.</p>
+        <div class="ob-meta">
+          <span><i class="fa-solid fa-clock"></i> Senin–Jumat, 08.00–16.00 WIB</span>
+          <span><i class="fa-solid fa-location-dot"></i>Jl. Tuanku Tambusai, Bagan Besar, Kec. Bukit Kapur, Kota Dumai</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="staf.html" class="staff-cta">
+      <div class="staff-cta-icon"><i class="fa-solid fa-user-clock"></i></div>
+      <div class="staff-cta-text">
+        <h3>Cek dulu staf yang bertugas sebelum datang</h3>
+        <p>Lihat siapa saja staf yang sedang <strong>di kantor, cuti, atau dinas luar</strong> hari ini, lengkap dengan kontak WhatsApp dan emailnya — supaya kunjungan Anda tidak sia-sia.</p>
+      </div>
+      <div class="staff-cta-btn">Lihat Status Staff <i class="fa-solid fa-arrow-right"></i></div>
+    </a>
+    <div id="svcGrid" class="svc-grid">
+      <!-- Kartu layanan akan dirender oleh JS dari API -->
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:#999;"><i class="fa-solid fa-spinner fa-spin"></i> Memuat layanan...</div>
+    </div>
+  </div>
+</section>
+
+<section id="alur-mini">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow">PANDUAN SINGKAT</div>
+        <h2>Prosedur pengajuan di kantor</h2>
+      </div>
+      <p>Empat langkah prosedur pelayanan fisik di kantor BKPSDM Kota Dumai.</p>
+    </div>
+    <div class="flow" id="flowStepsContainer">
+      <!-- Steps will be rendered by JS -->
+      <div style="text-align:center;padding:20px;color:#999;"><i class="fa-solid fa-spinner fa-spin"></i> Memuat panduan...</div>
+    </div>
+    <div class="preview-foot">
+      <a href="alur.html" class="btn btn-outline-ink"><i class="fa-solid fa-circle-question"></i> Panduan Lengkap & FAQ</a>
+    </div>
+  </div>
+</section>
+
+
+<div class="modal-overlay" id="syaratModal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-labelledby="syaratTitle">
+    <div class="modal-head">
+      <div>
+        <span>Syarat &amp; Ketentuan</span>
+        <h3 id="syaratTitle">Nama Layanan</h3>
+      </div>
+      <button class="modal-close" onclick="closeSyarat()" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-note">Lengkapi seluruh dokumen berikut sebelum datang ke loket BKPSDM Kota Dumai. Berkas yang tidak lengkap akan dikembalikan untuk dilengkapi.</p>
+      <ul class="req-list" id="syaratList"></ul>
+      <!-- Info staf tujuan -->
+      <div id="staffTargetBox" style="margin-top:18px;padding:14px 16px;background:rgba(27,94,99,0.07);border:1px solid rgba(27,94,99,0.18);border-radius:5px;display:none;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;"><i class="fa-solid fa-user-tie" style="margin-right:6px;"></i>Hubungi Staf Pelaksana</div>
+        <div id="staffTargetName" style="font-weight:600;font-size:14px;"></div>
+        <a id="staffTargetLink" href="staf.html" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--teal);margin-top:5px;font-weight:600;">
+          <i class="fa-solid fa-arrow-right"></i> Lihat di Direktori Staf
+        </a>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-outline-ink" onclick="closeSyarat()">Tutup</button>
+        <button id="modalPdfBtn" class="btn btn-gold" style="display:none;" onclick="downloadPDF()">
+          <i class="fa-solid fa-file-pdf"></i> Download Formulir PDF
+        </button>
+        <a href="kontak.html" class="btn" style="background:var(--teal);color:var(--cream);text-decoration:none;"><i class="fa-solid fa-phone"></i> Tanya BKPSDM</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><i class="fa-solid fa-circle-info"></i> <span id="toastMsg"></span></div>
+
+<footer id="kontak-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
+          <div class="name"><b>SIPADU</b><span>BKPSDM KOTA DUMAI</span></div>
+        </div>
+        <p>Sistem Informasi Pengumuman dan Layanan Kepegawaian — melayani Aparatur Sipil Negara di lingkungan Pemerintah Kota Dumai secara transparan dan akuntabel.</p>
+        <div class="social">
+          <a id="f-fb" href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a id="f-ig" href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a id="f-yt" href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Kantor</h4>
+        <p id="f-alamat">Jl. Tuanku Tambusai, Bagan Besar, Kec. Bukit Kapur, Kota Dumai, Riau 28825</p>
+        <p id="f-jam">Senin–Jumat, 08.00–16.00 WIB</p>
+      </div>
+      <div class="foot-col">
+        <h4>Kontak</h4>
+        <a id="f-telp" href="kontak.html"><i class="fa-solid fa-phone" style="margin-right:8px;"></i>(0765) 123-456</a>
+        <a id="f-email" href="kontak.html"><i class="fa-solid fa-envelope" style="margin-right:8px;"></i>bkpsdm@dumaikota.go.id</a>
+      </div>
+      <div class="foot-col">
+        <h4>Tautan</h4>
+        <a href="pengumuman.html">Pengumuman</a>
+        <a href="kegiatan.html">Kegiatan</a>
+        <a href="layanan.html">Layanan Kepegawaian</a>
+        <a href="alur.html">Panduan Pengajuan</a>
+        <a href="kontak.html">Kontak</a>
+        <a href="staf.html">Direktori Staf <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:9px; margin-left:3px;"></i></a>
+        <a href="admin.html" style="color:rgba(248,244,233,0.35);font-size:12px;margin-top:6px;"><i class="fa-solid fa-shield-halved" style="margin-right:6px;font-size:10px;"></i>Admin Web</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 BKPSDM Kota Dumai. Seluruh hak dilindungi.</span>
+      <span>Dibangun untuk mendukung tata kelola ASN yang transparan</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const hamburgerIcon = document.getElementById('hamburgerIcon');
+  const mobilePanel = document.getElementById('mobilePanel');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobilePanel.classList.toggle('open');
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+    hamburgerIcon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+  });
+  mobilePanel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobilePanel.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', false);
+      hamburgerIcon.className = 'fa-solid fa-bars';
+    });
+  });
+
+  function fetchAlur() {
+    fetch('/api/alur')
+      .then(res => res.json())
+      .then(data => {
+        if (data.steps) {
+          const stepsHtml = data.steps.map(step => `
+            <div class="f-step">
+              <div class="f-num">${step.num}</div>
+              <h3>${step.title}</h3>
+              <p>${step.desc}</p>
+            </div>
+          `).join('');
+          const container = document.getElementById('flowStepsContainer');
+          if (container) container.innerHTML = stepsHtml;
+        }
+      })
+      .catch(err => {
+        console.error("Error loading alur data:", err);
+      });
+  }
+  fetchAlur();
+
+  // ===== Data layanan dari backend =====
+  let layananData = [];
+  let currentLayanan = null;
+
+  const toast = document.getElementById('toast');
+  const toastMsg = document.getElementById('toastMsg');
+  let toastTimer;
+  function showToast(msg) {
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+  }
+
+  function renderCards(data) {
+    const grid = document.getElementById('svcGrid');
+    if (!data || data.length === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#999;">Tidak ada layanan tersedia.</div>';
+      return;
+    }
+    grid.innerHTML = data.map(l => {
+      const hasPdf = l.pdfPath && l.pdfPath.trim() !== '';
+      const hasContact = l.contactPersonName && l.contactPersonName.trim() !== '';
+      const staffSearchName = encodeURIComponent(l.contactPersonName || '');
+      let actionBtn = '';
+      if (hasPdf) {
+        actionBtn = `<button class="svc-btn" onclick="downloadPDFCard('${l.id}')"><i class="fa-solid fa-file-pdf"></i> Download Formulir</button>`;
+      } else if (hasContact) {
+        actionBtn = `<a class="svc-btn" href="staf.html?q=${staffSearchName}" style="text-decoration:none;display:inline-flex;align-items:center;gap:7px;"><i class="fa-solid fa-user-tie"></i> Hubungi Staf</a>`;
+      } else {
+        actionBtn = `<button class="svc-btn" onclick="showToast('Formulir belum diunggah. Silakan hubungi staf pelaksana.')"><i class="fa-solid fa-download"></i> Download Formulir</button>`;
+      }
+      return `
+        <div class="svc-card" data-svc="${l.id}">
+          <div class="svc-head"><div class="svc-icon"><i class="fa-solid ${l.icon}"></i></div><span class="svc-tag">${l.tag}</span></div>
+          <div class="svc-body">
+            <h3>${l.title}</h3>
+            <div class="svc-actions">
+              <button class="svc-btn primary" onclick="openSyarat(this)"><i class="fa-solid fa-circle-info"></i> Syarat &amp; Ketentuan</button>
+              ${actionBtn}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function fetchLayanan() {
+    fetch('/api/layanan')
+      .then(r => r.json())
+      .then(data => {
+        layananData = data;
+        renderCards(data);
+      })
+      .catch(() => {
+        // Fallback: render statik dari data lokal
+        document.getElementById('svcGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#999;">Gagal memuat layanan. Pastikan server berjalan.</div>';
+      });
+  }
+  fetchLayanan();
+
+  // ===== MODAL SYARAT =====
+  const syaratModal = document.getElementById('syaratModal');
+  const syaratTitle = document.getElementById('syaratTitle');
+  const syaratList = document.getElementById('syaratList');
+  const modalPdfBtn = document.getElementById('modalPdfBtn');
+  const staffTargetBox = document.getElementById('staffTargetBox');
+  const staffTargetName = document.getElementById('staffTargetName');
+  const staffTargetLink = document.getElementById('staffTargetLink');
+
+  function openSyarat(btn) {
+    const card = btn.closest('.svc-card');
+    const id = card.dataset.svc;
+    const data = layananData.find(x => x.id === id);
+    if (!data) return;
+    currentLayanan = data;
+    syaratTitle.textContent = data.title;
+    syaratList.innerHTML = (data.items || []).map(item => `<li><i class="fa-solid fa-circle-check"></i> ${item}</li>`).join('');
+
+    // Tampilkan info staf tujuan
+    if (data.contactPersonName && data.contactPersonName.trim()) {
+      staffTargetName.textContent = data.staffTarget || data.contactPersonName;
+      const q = encodeURIComponent(data.contactPersonName);
+      staffTargetLink.href = `staf.html?q=${q}`;
+      staffTargetBox.style.display = 'block';
+    } else {
+      staffTargetBox.style.display = 'none';
+    }
+
+    // Tampilkan tombol PDF jika ada
+    if (data.pdfPath && data.pdfPath.trim()) {
+      modalPdfBtn.style.display = 'inline-flex';
+    } else {
+      modalPdfBtn.style.display = 'none';
+    }
+
+    syaratModal.classList.add('open');
+    syaratModal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeSyarat() {
+    syaratModal.classList.remove('open');
+    syaratModal.setAttribute('aria-hidden', 'true');
+  }
+  syaratModal.addEventListener('click', e => { if (e.target === syaratModal) closeSyarat(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSyarat(); });
+
+  function downloadPDF() {
+    if (!currentLayanan || !currentLayanan.pdfPath) return;
+    const a = document.createElement('a');
+    a.href = currentLayanan.pdfPath;
+    a.download = currentLayanan.pdfName || 'formulir.pdf';
+    a.click();
+  }
+
+  function downloadPDFCard(id) {
+    const data = layananData.find(x => x.id === id);
+    if (!data || !data.pdfPath) {
+      showToast('Formulir PDF belum diunggah — silakan tanyakan ke loket BKPSDM.');
+      return;
+    }
+    const a = document.createElement('a');
+    a.href = data.pdfPath;
+    a.download = data.pdfName || 'formulir.pdf';
+    a.click();
+  }
+</script>
+<script>
+  fetch('/api/kontak').then(r=>r.json()).then(d=>{
+    if(d.alamat) { const el = document.getElementById('f-alamat'); if(el) el.textContent = d.alamat; }
+    if(d.jam) { const el = document.getElementById('f-jam'); if(el) el.textContent = d.jam; }
+    if(d.telp) { const el = document.getElementById('f-telp'); if(el) el.innerHTML = '<i class="fa-solid fa-phone" style="margin-right:8px;"></i>' + d.telp; }
+    if(d.email) { const el = document.getElementById('f-email'); if(el) el.innerHTML = '<i class="fa-solid fa-envelope" style="margin-right:8px;"></i>' + d.email; }
+    if(d.fb) { const el = document.getElementById('f-fb'); if(el) el.href = d.fb; }
+    if(d.ig) { const el = document.getElementById('f-ig'); if(el) el.href = d.ig; }
+    if(d.yt) { const el = document.getElementById('f-yt'); if(el) el.href = d.yt; }
+  }).catch(()=>{});
+</script>
+</body>
+</html>
