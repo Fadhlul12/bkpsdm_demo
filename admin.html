@@ -511,42 +511,81 @@
     <div class="tab-content" id="tab-board">
       <div class="admin-toolbar"><h3>Edit Papan Pengumuman</h3></div>
       <div style="background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:28px;max-width:680px;">
-        <p style="font-size:13px;color:#5b6a63;margin-bottom:24px;">Edit teks yang muncul di papan pengumuman flip di halaman utama website. Tulis dalam huruf KAPITAL, maksimal ±30 karakter per baris.</p>
+        <p style="font-size:13px;color:#5b6a63;margin-bottom:24px;">Edit label kategori dan teks yang muncul di papan pengumuman flip di halaman utama website. Label ditulis singkat (maks. 10 karakter), teks dalam huruf KAPITAL (maks. ±30 karakter).</p>
 
-        <div class="field">
-          <label style="display:flex;align-items:center;gap:8px;">
-            <span style="background:var(--teal);color:var(--cream);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 8px;border-radius:3px;letter-spacing:0.08em;">CPNS</span>
-            Baris 1 — CPNS
-          </label>
-          <input type="text" id="b-row1" placeholder="Contoh: SKD DIMULAI 18 AGUSTUS" maxlength="35" style="text-transform:uppercase;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;">
-        </div>
-        <div class="field">
-          <label style="display:flex;align-items:center;gap:8px;">
-            <span style="background:var(--teal);color:var(--cream);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 8px;border-radius:3px;letter-spacing:0.08em;">PANGKAT</span>
-            Baris 2 — Kepangkatan
-          </label>
-          <input type="text" id="b-row2" placeholder="Contoh: USULAN DIBUKA S/D 20 AGT" maxlength="35" style="text-transform:uppercase;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;">
-        </div>
-        <div class="field">
-          <label style="display:flex;align-items:center;gap:8px;">
-            <span style="background:var(--teal);color:var(--cream);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 8px;border-radius:3px;letter-spacing:0.08em;">DIKLAT</span>
-            Baris 3 — Diklat
-          </label>
-          <input type="text" id="b-row3" placeholder="Contoh: PENDAFTARAN DIKLATPIM XII" maxlength="35" style="text-transform:uppercase;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;">
-        </div>
-        <div class="field">
-          <label style="display:flex;align-items:center;gap:8px;">
-            <span style="background:var(--teal);color:var(--cream);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 8px;border-radius:3px;letter-spacing:0.08em;">PENSIUN</span>
-            Baris 4 — Pensiun
-          </label>
-          <input type="text" id="b-row4" placeholder="Contoh: CEK STATUS MPP ANDA" maxlength="35" style="text-transform:uppercase;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <!-- Row 1 -->
+          <div style="background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--teal);font-weight:600;letter-spacing:0.1em;margin-bottom:12px;">BARIS 1</div>
+            <div class="field-row">
+              <div class="field" style="flex:0 0 140px;">
+                <label><i class="fa-solid fa-tag" style="margin-right:5px;color:var(--gold);"></i> Label / Tag</label>
+                <input type="text" id="b-tag1" placeholder="CPNS" maxlength="12" style="font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;">
+              </div>
+              <div class="field" style="flex:1;">
+                <label><i class="fa-solid fa-align-left" style="margin-right:5px;color:var(--teal-soft);"></i> Teks Pengumuman</label>
+                <input type="text" id="b-row1" placeholder="Contoh: SKD DIMULAI 18 AGUSTUS" maxlength="35" style="text-transform:uppercase;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div style="background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--teal);font-weight:600;letter-spacing:0.1em;margin-bottom:12px;">BARIS 2</div>
+            <div class="field-row">
+              <div class="field" style="flex:0 0 140px;">
+                <label><i class="fa-solid fa-tag" style="margin-right:5px;color:var(--gold);"></i> Label / Tag</label>
+                <input type="text" id="b-tag2" placeholder="PANGKAT" maxlength="12" style="font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;">
+              </div>
+              <div class="field" style="flex:1;">
+                <label><i class="fa-solid fa-align-left" style="margin-right:5px;color:var(--teal-soft);"></i> Teks Pengumuman</label>
+                <input type="text" id="b-row2" placeholder="Contoh: USULAN DIBUKA S/D 20 AGT" maxlength="35" style="text-transform:uppercase;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div style="background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--teal);font-weight:600;letter-spacing:0.1em;margin-bottom:12px;">BARIS 3</div>
+            <div class="field-row">
+              <div class="field" style="flex:0 0 140px;">
+                <label><i class="fa-solid fa-tag" style="margin-right:5px;color:var(--gold);"></i> Label / Tag</label>
+                <input type="text" id="b-tag3" placeholder="DIKLAT" maxlength="12" style="font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;">
+              </div>
+              <div class="field" style="flex:1;">
+                <label><i class="fa-solid fa-align-left" style="margin-right:5px;color:var(--teal-soft);"></i> Teks Pengumuman</label>
+                <input type="text" id="b-row3" placeholder="Contoh: PENDAFTARAN DIKLATPIM XII" maxlength="35" style="text-transform:uppercase;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 4 -->
+          <div style="background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--teal);font-weight:600;letter-spacing:0.1em;margin-bottom:12px;">BARIS 4</div>
+            <div class="field-row">
+              <div class="field" style="flex:0 0 140px;">
+                <label><i class="fa-solid fa-tag" style="margin-right:5px;color:var(--gold);"></i> Label / Tag</label>
+                <input type="text" id="b-tag4" placeholder="PENSIUN" maxlength="12" style="font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;">
+              </div>
+              <div class="field" style="flex:1;">
+                <label><i class="fa-solid fa-align-left" style="margin-right:5px;color:var(--teal-soft);"></i> Teks Pengumuman</label>
+                <input type="text" id="b-row4" placeholder="Contoh: CEK STATUS MPP ANDA" maxlength="35" style="text-transform:uppercase;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;">
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div style="margin-top:6px;">
+        <div style="margin-top:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
           <button class="btn btn-gold" onclick="saveBoard()" id="btnSaveBoard">
             <i class="fa-solid fa-floppy-disk"></i> Simpan Papan
           </button>
-          <span id="boardSaveStatus" style="margin-left:14px;font-size:13px;color:#5b6a63;"></span>
+          <span id="boardSaveStatus" style="margin-left:0;font-size:13px;color:#5b6a63;"></span>
+        </div>
+
+        <!-- Preview Papan -->
+        <div style="margin-top:24px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--teal);text-transform:uppercase;margin-bottom:10px;">Preview Papan</div>
+          <div id="boardPreview" style="background:linear-gradient(180deg,#0A2226,#081A1D);border:1px solid rgba(232,196,104,0.25);border-radius:6px;padding:16px 20px;font-family:'IBM Plex Mono',monospace;"></div>
         </div>
       </div>
     </div>
@@ -1631,6 +1670,10 @@
         document.getElementById('b-row2').value = data.row2 || '';
         document.getElementById('b-row3').value = data.row3 || '';
         document.getElementById('b-row4').value = data.row4 || '';
+        document.getElementById('b-tag1').value = data.tag1 || 'CPNS';
+        document.getElementById('b-tag2').value = data.tag2 || 'PANGKAT';
+        document.getElementById('b-tag3').value = data.tag3 || 'DIKLAT';
+        document.getElementById('b-tag4').value = data.tag4 || 'PENSIUN';
         const st = document.getElementById('boardSaveStatus');
         if (data.updatedAt) {
           const d = new Date(data.updatedAt);
@@ -1638,9 +1681,34 @@
         } else {
           st.textContent = 'Belum pernah disimpan.';
         }
+        updateBoardPreview();
       })
       .catch(() => showToast('Gagal memuat data papan.', 'danger'));
   }
+
+  function updateBoardPreview() {
+    const preview = document.getElementById('boardPreview');
+    if (!preview) return;
+    const rows = [
+      { tag: document.getElementById('b-tag1')?.value || 'CPNS', text: document.getElementById('b-row1')?.value || '' },
+      { tag: document.getElementById('b-tag2')?.value || 'PANGKAT', text: document.getElementById('b-row2')?.value || '' },
+      { tag: document.getElementById('b-tag3')?.value || 'DIKLAT', text: document.getElementById('b-row3')?.value || '' },
+      { tag: document.getElementById('b-tag4')?.value || 'PENSIUN', text: document.getElementById('b-row4')?.value || '' },
+    ];
+    preview.innerHTML = rows.map(r => `
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(248,244,233,0.07);">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.06em;padding:3px 7px;border-radius:2px;white-space:nowrap;text-transform:uppercase;background:rgba(232,196,104,0.14);color:#E8C468;border:1px solid rgba(232,196,104,0.3);min-width:60px;text-align:center;">${r.tag || '—'}</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#F8F4E9;letter-spacing:0.04em;">${r.text.toUpperCase() || '—'}</span>
+      </div>
+    `).join('');
+  }
+
+  // Live preview update on input
+  ['b-row1','b-row2','b-row3','b-row4','b-tag1','b-tag2','b-tag3','b-tag4'].forEach(id => {
+    document.addEventListener('input', e => {
+      if (e.target && e.target.id === id) updateBoardPreview();
+    });
+  });
 
   function saveBoard() {
     const btn = document.getElementById('btnSaveBoard');
@@ -1650,7 +1718,11 @@
       row1: (document.getElementById('b-row1').value || '').toUpperCase().trim(),
       row2: (document.getElementById('b-row2').value || '').toUpperCase().trim(),
       row3: (document.getElementById('b-row3').value || '').toUpperCase().trim(),
-      row4: (document.getElementById('b-row4').value || '').toUpperCase().trim()
+      row4: (document.getElementById('b-row4').value || '').toUpperCase().trim(),
+      tag1: (document.getElementById('b-tag1').value || 'CPNS').toUpperCase().trim(),
+      tag2: (document.getElementById('b-tag2').value || 'PANGKAT').toUpperCase().trim(),
+      tag3: (document.getElementById('b-tag3').value || 'DIKLAT').toUpperCase().trim(),
+      tag4: (document.getElementById('b-tag4').value || 'PENSIUN').toUpperCase().trim(),
     };
     fetch('/api/board', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) })
       .then(r => r.json())

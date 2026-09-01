@@ -582,19 +582,19 @@
         <span class="board-time" id="boardTime">Memuat...</span>
       </div>
       <div class="flip-row">
-        <span class="flip-tag">CPNS</span>
+        <span class="flip-tag" id="tag1">CPNS</span>
         <div class="flip-text" id="row1"></div>
       </div>
       <div class="flip-row">
-        <span class="flip-tag">PANGKAT</span>
+        <span class="flip-tag" id="tag2">PANGKAT</span>
         <div class="flip-text" id="row2"></div>
       </div>
       <div class="flip-row">
-        <span class="flip-tag">DIKLAT</span>
+        <span class="flip-tag" id="tag3">DIKLAT</span>
         <div class="flip-text" id="row3"></div>
       </div>
       <div class="flip-row">
-        <span class="flip-tag">PENSIUN</span>
+        <span class="flip-tag" id="tag4">PENSIUN</span>
         <div class="flip-text" id="row4"></div>
       </div>
     </div>
@@ -809,6 +809,11 @@
         buildRow('row2', data.row2 || '');
         buildRow('row3', data.row3 || '');
         buildRow('row4', data.row4 || '');
+        // Update labels/tags dynamically
+        const t1 = document.getElementById('tag1'); if (t1 && data.tag1) t1.textContent = data.tag1;
+        const t2 = document.getElementById('tag2'); if (t2 && data.tag2) t2.textContent = data.tag2;
+        const t3 = document.getElementById('tag3'); if (t3 && data.tag3) t3.textContent = data.tag3;
+        const t4 = document.getElementById('tag4'); if (t4 && data.tag4) t4.textContent = data.tag4;
         const timeEl = document.getElementById('boardTime');
         if (timeEl) {
           if (data.updatedAt) {

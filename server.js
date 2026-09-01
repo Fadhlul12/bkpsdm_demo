@@ -378,6 +378,10 @@ const DEFAULT_BOARD = {
   row2: "USULAN DIBUKA S/D 20 AGT",
   row3: "PENDAFTARAN DIKLATPIM XII",
   row4: "CEK STATUS MPP ANDA",
+  tag1: "CPNS",
+  tag2: "PANGKAT",
+  tag3: "DIKLAT",
+  tag4: "PENSIUN",
   updatedAt: null
 };
 
