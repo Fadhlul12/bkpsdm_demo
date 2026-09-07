@@ -111,7 +111,7 @@
   }
   .hero-slide::before{
     content:''; position:absolute; inset:0;
-    background:linear-gradient(100deg, rgba(16,35,65,0.96) 0%, rgba(16,35,65,0.82) 45%, rgba(16,35,65,0.35) 75%, rgba(16,35,65,0.15) 100%);
+    background:linear-gradient(95deg, rgba(10,25,45,0.92) 0%, rgba(10,25,45,0.78) 45%, rgba(10,25,45,0.35) 75%, rgba(10,25,45,0.12) 100%);
   }
   .hero-slide.active{opacity:1; z-index:1;}
   .hero-slide.active .hero-slide-art{animation:kenburns 7s ease-out forwards;}
@@ -145,16 +145,12 @@
     position:absolute; right:6%; top:50%; transform:translateY(-50%);
     font-size:280px; color:rgba(248,244,233,0.05); z-index:0;
   }
-  /* ===== HERO SLIDER — RAMAH LANSIA HIGH CONTRAST CARD ===== */
   .hero-slide-content{
     transition:opacity .5s ease, transform .5s ease;
-    background: linear-gradient(145deg, rgba(11, 28, 48, 0.88), rgba(16, 35, 65, 0.92));
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 2px solid rgba(248, 209, 83, 0.45);
-    border-radius: 16px;
-    padding: 30px 34px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(248, 209, 83, 0.1);
+    background: transparent;
+    border: none;
+    padding: 0;
+    box-shadow: none;
     max-width: 680px;
   }
   .hero-slide-content.switching{opacity:0; transform:translateY(8px);}
@@ -208,23 +204,27 @@
     text-align:left; display:flex; flex-direction:column; align-items:flex-start;
   }
   .hero .eyebrow{
-    color:#F8D153; font-size:13px; font-weight:800; letter-spacing:0.08em;
+    color:#FFD700; font-size:13px; font-weight:800; letter-spacing:0.08em;
     margin:0 0 14px 0; justify-content:flex-start; display:flex; align-items:center; gap:10px;
-    text-shadow:0 2px 4px rgba(0,0,0,0.8);
+    text-shadow:0 2px 8px rgba(0,0,0,0.95), 0 0 10px rgba(0,0,0,0.9);
   }
   .hero .eyebrow::before{
-    content:''; width:24px; height:3px; background:#F8D153; display:inline-block; border-radius:2px;
+    content:''; width:24px; height:3px; background:#FFD700; display:inline-block; border-radius:2px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.95);
   }
   .hero h1{
-    font-size:42px; line-height:1.2; color:#FFFFFF; max-width:620px;
-    margin:0 0 16px 0; text-align:left; font-weight:800;
-    text-shadow:0 2px 8px rgba(0,0,0,0.9);
+    font-size:46px; line-height:1.15; color:#FFFFFF; max-width:640px;
+    margin:0 0 18px 0; text-align:left; font-weight:800;
+    text-shadow:0 3px 12px rgba(0,0,0,0.95), 0 1px 4px rgba(0,0,0,0.9);
   }
-  .hero h1 em{font-style:italic; color:#F8D153; text-shadow:0 2px 8px rgba(0,0,0,0.9);}
+  .hero h1 em{
+    font-style:italic; color:#FFD700;
+    text-shadow:0 3px 12px rgba(0,0,0,0.95), 0 0 16px rgba(255,215,0,0.5);
+  }
   .hero p.lead{
-    margin:0; font-size:18px; line-height:1.75; font-weight:600;
-    color:#F8F4E9; max-width:600px; text-align:left;
-    text-shadow:0 1px 3px rgba(0,0,0,0.8);
+    margin:0 0 28px 0; font-size:18px; line-height:1.7; font-weight:700;
+    color:#FFFFFF; max-width:620px; text-align:left;
+    text-shadow:0 2px 10px rgba(0,0,0,0.95), 0 1px 3px rgba(0,0,0,0.9);
   }
   .search-box{
     display:flex; align-items:center; gap:10px;
@@ -829,7 +829,7 @@
     setTimeout(() => {
       heroEyebrow.textContent = data.eyebrow || 'PEMERINTAH KOTA DUMAI · BADAN KEPEGAWAIAN & PSDM';
       heroTitle.innerHTML = data.title || '';
-      let cleanLead = (data.lead || '').replace(/SIKAP\s+SIKAP/gi, 'SIKAP');
+      let cleanLead = (data.lead || '').replace(/SIPADU/gi, 'SIKAP').replace(/SIKAP\s+SIKAP/gi, 'SIKAP');
       heroLead.textContent = cleanLead;
       if (heroCta) heroCta.innerHTML = '';
       heroContent.classList.remove('switching');
