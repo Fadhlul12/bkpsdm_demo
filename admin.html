@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin â€” SIPADU BKPSDM Kota Dumai</title>
-<meta name="description" content="Panel admin SIPADU untuk mengelola konten pengumuman, kegiatan, dan banner hero slider.">
+<title>Admin — SIKAP BKPSDM Kota Dumai</title>
+<meta name="description" content="Panel admin SIKAP untuk mengelola konten pengumuman, kegiatan, dan banner hero slider.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root{
-    --ink:#0B2E33;--teal-deep:#0E3A3F;--teal:#1B5E63;--teal-soft:#2C7A80;
-    --gold:#C9A227;--gold-light:#E8C468;--paper:#F6F1E4;--paper-dark:#ECE2CA;
-    --cream:#F8F4E9;--charcoal:#182420;--line:rgba(11,46,51,0.14);
-    --shadow:0 20px 50px -25px rgba(11,46,51,0.45);
+    --ink:#1B365D;--teal-deep:#122846;--teal:#27528A;--teal-soft:#3B6CA8;
+    --gold:#EAA900;--gold-light:#FFC82E;--paper:#F4F6F9;--paper-dark:#E2E8F0;
+    --cream:#FFFFFF;--charcoal:#1E293B;--line:rgba(27,54,93,0.12);
+    --shadow:0 20px 50px -25px rgba(27,54,93,0.35);
     --danger:#C0392B;--success:#2f7a4d;
   }
   *{box-sizing:border-box;}
@@ -63,12 +63,19 @@
   .login-error{display:none;font-size:12.5px;color:var(--danger);background:rgba(192,57,43,0.08);border:1px solid rgba(192,57,43,0.2);border-radius:5px;padding:8px 12px;margin:-6px 0 14px;}
   .login-error.show{display:block;}
 
+  /* ===== ROLE SELECTOR & CAPTCHA STYLES ===== */
+  .role-option{background:var(--paper); border:2px solid var(--line); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; color:var(--charcoal); transition:all 0.15s ease; user-select:none;}
+  .role-option:hover{border-color:var(--teal);}
+  .role-option.active{background:rgba(27,67,50,0.08); border-color:var(--teal); color:var(--teal);}
+  .captcha-box{background:var(--ink); color:var(--gold-light); font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:15px; padding:9px 14px; border-radius:6px; letter-spacing:1px; flex-shrink:0;}
+
+
   /* ===== DASHBOARD ===== */
   #dashboard{display:none;}
   .admin-hero{background:radial-gradient(900px 400px at 85% -20%,rgba(201,162,39,0.12),transparent 60%),linear-gradient(180deg,var(--ink),var(--teal-deep));color:var(--cream);padding:40px 0 32px;}
   .admin-hero h1{color:var(--cream);font-size:28px;margin-bottom:8px;}
   .admin-hero p{color:rgba(248,244,233,0.65);font-size:14px;}
-  .admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;}
+  .admin-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:24px;}
   .as-card{background:rgba(248,244,233,0.06);border:1px solid rgba(248,244,233,0.14);border-radius:8px;padding:16px 18px;}
   .as-card .as-num{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:600;color:var(--gold-light);}
   .as-card .as-lbl{font-size:12px;color:rgba(248,244,233,0.6);margin-top:4px;}
@@ -152,19 +159,51 @@
   <div class="login-card">
     <div class="login-head">
       <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
-      <h2>Admin SIPADU</h2>
-      <p>Panel Pengelolaan Konten Web Utama</p>
+      <h2>Portal Admin SIKAP</h2>
+      <p id="loginSubtitle">Pilih Peran &amp; Masukkan Kredensial</p>
     </div>
     <div class="login-body">
       <form id="loginForm" onsubmit="handleLogin(event)">
         <div class="field">
-          <label>Username</label>
-          <input type="text" id="loginUser" required placeholder="admin" autocomplete="username">
+          <label>1. PILIH PERAN (ROLE)</label>
+          <div class="role-selector" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <label class="role-option active" id="roleLabelWeb" onclick="selectRole('admin_web')">
+              <input type="radio" name="loginRole" value="admin_web" checked style="display:none;">
+              <i class="fa-solid fa-globe" style="font-size:18px; margin-bottom:4px; display:block;"></i>
+              <strong>Admin Web</strong>
+              <small style="display:block; font-size:10.5px; opacity:0.8; font-weight:normal;">Konten Web Utama</small>
+            </label>
+            <label class="role-option" id="roleLabelStaff" onclick="selectRole('admin_staf')">
+              <input type="radio" name="loginRole" value="admin_staf" style="display:none;">
+              <i class="fa-solid fa-users-gear" style="font-size:18px; margin-bottom:4px; display:block;"></i>
+              <strong>Admin Staff</strong>
+              <small style="display:block; font-size:10.5px; opacity:0.8; font-weight:normal;">Direktori Staf</small>
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>2. USERNAME</label>
+          <input type="text" id="loginUser" required placeholder="Masukkan username" autocomplete="username">
         </div>
         <div class="field">
-          <label>Password</label>
-          <input type="password" id="loginPass" required placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" autocomplete="current-password">
+          <label>3. PASSWORD</label>
+          <input type="password" id="loginPass" required placeholder="••••••••" autocomplete="current-password">
         </div>
+
+        <div class="field">
+          <label>4. CAPTCHA KEAMANAN (PENJUMLAHAN)</label>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <div class="captcha-box" id="captchaBox">
+              <span id="captchaQuestion">7 + 12 = ?</span>
+            </div>
+            <input type="number" id="captchaAnswer" required placeholder="Hasil" style="flex:1;">
+            <button type="button" onclick="generateCaptcha()" title="Acak Captcha" style="background:var(--paper); border:1.5px solid var(--line); border-radius:6px; padding:9px 12px; cursor:pointer; color:var(--teal);">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </button>
+          </div>
+        </div>
+
         <div class="login-error" id="loginError">Username atau password salah.</div>
         <button type="submit" class="btn btn-gold" style="width:100%;">
           <i class="fa-solid fa-right-to-bracket"></i> Masuk ke Dashboard
@@ -185,7 +224,7 @@
       <div class="admin-brand">
         <div class="admin-seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
         <div class="name">
-          <b>Admin SIPADU</b>
+          <b>Admin SIKAP</b>
           <span><span class="admin-badge">Web Utama</span> BKPSDM Kota Dumai</span>
         </div>
       </div>
@@ -201,11 +240,12 @@
     <div class="wrap">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--gold-light);text-transform:uppercase;margin-bottom:8px;">Panel Admin</div>
       <h1>Dashboard Pengelolaan Konten</h1>
-      <p>Kelola pengumuman, kegiatan, dan banner hero slider yang tampil di website SIPADU BKPSDM Kota Dumai.</p>
+      <p>Kelola pengumuman, kegiatan, dan banner hero slider yang tampil di website SIKAP BKPSDM Kota Dumai.</p>
       <div class="admin-stats">
         <div class="as-card"><div class="as-num" id="statPengumuman">0</div><div class="as-lbl">Total Pengumuman</div></div>
         <div class="as-card"><div class="as-num" id="statKegiatan">0</div><div class="as-lbl">Total Kegiatan</div></div>
         <div class="as-card"><div class="as-num" id="statSlides">0</div><div class="as-lbl">Slide Banner Hero</div></div>
+        <div class="as-card"><div class="as-num" id="statAplikasi">0</div><div class="as-lbl">Aplikasi ASN</div></div>
         <div class="as-card"><div class="as-num" id="statTerbit">0</div><div class="as-lbl">Pengumuman Terbit</div></div>
       </div>
     </div>
@@ -222,11 +262,12 @@
       <button class="tab-btn" data-tab="slides" onclick="switchTab('slides',this)">
         <i class="fa-solid fa-images" style="margin-right:6px;"></i>Hero Slider / Banner
       </button>
-      <button class="tab-btn" data-tab="stats" onclick="switchTab('stats',this)">
-        <i class="fa-solid fa-chart-simple" style="margin-right:6px;"></i>Statistik Beranda
-      </button>
+
       <button class="tab-btn" data-tab="layanan" onclick="switchTab('layanan',this)">
         <i class="fa-solid fa-folder-open" style="margin-right:6px;"></i>Jenis Layanan
+      </button>
+      <button class="tab-btn" data-tab="aplikasi" onclick="switchTab('aplikasi',this)">
+        <i class="fa-solid fa-shapes" style="margin-right:6px;"></i>Aplikasi ASN
       </button>
       <button class="tab-btn" data-tab="profil" onclick="switchTab('profil',this)">
         <i class="fa-solid fa-building" style="margin-right:6px;"></i>Profil Instansi
@@ -234,19 +275,16 @@
       <button class="tab-btn" data-tab="kontak" onclick="switchTab('kontak',this)">
         <i class="fa-solid fa-address-book" style="margin-right:6px;"></i>Kontak
       </button>
-      <button class="tab-btn" data-tab="alur" onclick="switchTab('alur',this)">
-        <i class="fa-solid fa-list-check" style="margin-right:6px;"></i>Cara Mengajukan
-      </button>
-      <button class="tab-btn" data-tab="board" onclick="switchTab('board',this)">
-        <i class="fa-solid fa-display" style="margin-right:6px;"></i>Papan Pengumuman
-      </button>
     </div>
 
     <!-- TAB: PENGUMUMAN -->
     <div class="tab-content active" id="tab-pengumuman">
       <div class="admin-toolbar">
         <h3>Daftar Pengumuman</h3>
-        <button class="btn btn-gold" onclick="openModal('pengumuman')"><i class="fa-solid fa-plus"></i> Tambah Pengumuman</button>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-outline" style="border-color:var(--ink);color:var(--ink);" onclick="openCategoryModal()"><i class="fa-solid fa-tags"></i> Kelola Kategori</button>
+          <button class="btn btn-gold" onclick="openModal('pengumuman')"><i class="fa-solid fa-plus"></i> Tambah Pengumuman</button>
+        </div>
       </div>
       <table class="data-table" id="tblPengumuman">
         <thead>
@@ -325,6 +363,27 @@
       </table>
     </div>
 
+    <!-- TAB: APLIKASI ASN -->
+    <div class="tab-content" id="tab-aplikasi">
+      <div class="admin-toolbar">
+        <h3>Kelola Aplikasi ASN</h3>
+        <button class="btn btn-gold" onclick="openModal('aplikasi')"><i class="fa-solid fa-plus"></i> Tambah Aplikasi</button>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Logo</th>
+            <th>Nama Aplikasi</th>
+            <th>Deskripsi</th>
+            <th>URL / Link</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyAplikasi"></tbody>
+      </table>
+    </div>
+
     <!-- TAB: PROFIL INSTANSI -->
     <div class="tab-content" id="tab-profil">
       <div class="admin-toolbar"><h3>Edit Profil Instansi</h3></div>
@@ -388,10 +447,6 @@
           </div>
         </div>
         <div class="field">
-          <label>Email Penerima Form Pesan</label>
-          <input type="email" id="kontak-email-penerima" placeholder="tujuan@gmail.com">
-        </div>
-        <div class="field">
           <label>Jam Layanan</label>
           <input type="text" id="kontak-jam" placeholder="Seninâ€“Jumat, 08.00â€“16.00 WIB">
         </div>
@@ -445,150 +500,9 @@
       </div>
     </div>
 
-    <!-- TAB: STATISTIK BERANDA -->
-    <div class="tab-content" id="tab-stats">
-      <div class="admin-toolbar"><h3>Edit Angka Statistik Beranda</h3></div>
-      <div style="background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:28px;max-width:760px;">
-        <p style="font-size:13px;color:#5b6a63;margin-bottom:24px;">Edit 4 angka statistik dan keterangannya yang tampil pada pita emas di beranda utama website.</p>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-          <div style="background:#fff;border:1px solid var(--line);border-radius:6px;padding:18px;">
-            <h4 style="margin:0 0 12px 0;font-size:14px;color:var(--teal);"><i class="fa-solid fa-chart-line" style="margin-right:6px;"></i>Statistik 1</h4>
-            <div class="field" style="margin-bottom:10px;">
-              <label>Nilai / Angka</label>
-              <input type="text" id="stat-num-0" placeholder="Contoh: 3.412">
-            </div>
-            <div class="field" style="margin:0;">
-              <label>Keterangan / Label</label>
-              <input type="text" id="stat-lbl-0" placeholder="Contoh: ASN Terdaftar">
-            </div>
-          </div>
 
-          <div style="background:#fff;border:1px solid var(--line);border-radius:6px;padding:18px;">
-            <h4 style="margin:0 0 12px 0;font-size:14px;color:var(--teal);"><i class="fa-solid fa-chart-line" style="margin-right:6px;"></i>Statistik 2</h4>
-            <div class="field" style="margin-bottom:10px;">
-              <label>Nilai / Angka</label>
-              <input type="text" id="stat-num-1" placeholder="Contoh: 8">
-            </div>
-            <div class="field" style="margin:0;">
-              <label>Keterangan / Label</label>
-              <input type="text" id="stat-lbl-1" placeholder="Contoh: Pengumuman Bulan Ini">
-            </div>
-          </div>
 
-          <div style="background:#fff;border:1px solid var(--line);border-radius:6px;padding:18px;">
-            <h4 style="margin:0 0 12px 0;font-size:14px;color:var(--teal);"><i class="fa-solid fa-chart-line" style="margin-right:6px;"></i>Statistik 3</h4>
-            <div class="field" style="margin-bottom:10px;">
-              <label>Nilai / Angka</label>
-              <input type="text" id="stat-num-2" placeholder="Contoh: 14">
-            </div>
-            <div class="field" style="margin:0;">
-              <label>Keterangan / Label</label>
-              <input type="text" id="stat-lbl-2" placeholder="Contoh: Jenis Layanan">
-            </div>
-          </div>
-
-          <div style="background:#fff;border:1px solid var(--line);border-radius:6px;padding:18px;">
-            <h4 style="margin:0 0 12px 0;font-size:14px;color:var(--teal);"><i class="fa-solid fa-chart-line" style="margin-right:6px;"></i>Statistik 4</h4>
-            <div class="field" style="margin-bottom:10px;">
-              <label>Nilai / Angka</label>
-              <input type="text" id="stat-num-3" placeholder="Contoh: 2–5">
-            </div>
-            <div class="field" style="margin:0;">
-              <label>Keterangan / Label</label>
-              <input type="text" id="stat-lbl-3" placeholder="Contoh: Hari Kerja Proses Layanan">
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top:24px;">
-          <button class="btn btn-gold" onclick="saveHomeStats()"><i class="fa-solid fa-check"></i> Simpan Angka Statistik</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB: PAPAN PENGUMUMAN -->
-    <div class="tab-content" id="tab-board">
-      <div class="admin-toolbar"><h3>Edit Papan Pengumuman</h3></div>
-      <div style="background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:28px;max-width:680px;">
-        <p style="font-size:13px;color:#5b6a63;margin-bottom:24px;">Edit label kategori dan teks yang muncul di papan pengumuman flip di halaman utama website. Label ditulis singkat (maks. 10 karakter), teks dalam huruf KAPITAL (maks. ±30 karakter).</p>
-
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          <!-- Row 1 -->
-          <div style="background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px;">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--teal);font-weight:600;letter-spacing:0.1em;margin-bottom:12px;">BARIS 1</div>
-            <div class="field-row">
-              <div class="field" style="flex:0 0 140px;">
-                <label><i class="fa-solid fa-tag" style="margin-right:5px;color:var(--gold);"></i> Label / Tag</label>
-                <input type="text" id="b-tag1" placeholder="CPNS" maxlength="12" style="font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;">
-              </div>
-              <div class="field" style="flex:1;">
-                <label><i class="fa-solid fa-align-left" style="margin-right:5px;color:var(--teal-soft);"></i> Teks Pengumuman</label>
-                <input type="text" id="b-row1" placeholder="Contoh: SKD DIMULAI 18 AGUSTUS" maxlength="35" style="text-transform:uppercase;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;">
-              </div>
-            </div>
-          </div>
-
-          <!-- Row 2 -->
-          <div style="background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px;">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--teal);font-weight:600;letter-spacing:0.1em;margin-bottom:12px;">BARIS 2</div>
-            <div class="field-row">
-              <div class="field" style="flex:0 0 140px;">
-                <label><i class="fa-solid fa-tag" style="margin-right:5px;color:var(--gold);"></i> Label / Tag</label>
-                <input type="text" id="b-tag2" placeholder="PANGKAT" maxlength="12" style="font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;">
-              </div>
-              <div class="field" style="flex:1;">
-                <label><i class="fa-solid fa-align-left" style="margin-right:5px;color:var(--teal-soft);"></i> Teks Pengumuman</label>
-                <input type="text" id="b-row2" placeholder="Contoh: USULAN DIBUKA S/D 20 AGT" maxlength="35" style="text-transform:uppercase;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;">
-              </div>
-            </div>
-          </div>
-
-          <!-- Row 3 -->
-          <div style="background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px;">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--teal);font-weight:600;letter-spacing:0.1em;margin-bottom:12px;">BARIS 3</div>
-            <div class="field-row">
-              <div class="field" style="flex:0 0 140px;">
-                <label><i class="fa-solid fa-tag" style="margin-right:5px;color:var(--gold);"></i> Label / Tag</label>
-                <input type="text" id="b-tag3" placeholder="DIKLAT" maxlength="12" style="font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;">
-              </div>
-              <div class="field" style="flex:1;">
-                <label><i class="fa-solid fa-align-left" style="margin-right:5px;color:var(--teal-soft);"></i> Teks Pengumuman</label>
-                <input type="text" id="b-row3" placeholder="Contoh: PENDAFTARAN DIKLATPIM XII" maxlength="35" style="text-transform:uppercase;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;">
-              </div>
-            </div>
-          </div>
-
-          <!-- Row 4 -->
-          <div style="background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px;">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--teal);font-weight:600;letter-spacing:0.1em;margin-bottom:12px;">BARIS 4</div>
-            <div class="field-row">
-              <div class="field" style="flex:0 0 140px;">
-                <label><i class="fa-solid fa-tag" style="margin-right:5px;color:var(--gold);"></i> Label / Tag</label>
-                <input type="text" id="b-tag4" placeholder="PENSIUN" maxlength="12" style="font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;">
-              </div>
-              <div class="field" style="flex:1;">
-                <label><i class="fa-solid fa-align-left" style="margin-right:5px;color:var(--teal-soft);"></i> Teks Pengumuman</label>
-                <input type="text" id="b-row4" placeholder="Contoh: CEK STATUS MPP ANDA" maxlength="35" style="text-transform:uppercase;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
-          <button class="btn btn-gold" onclick="saveBoard()" id="btnSaveBoard">
-            <i class="fa-solid fa-floppy-disk"></i> Simpan Papan
-          </button>
-          <span id="boardSaveStatus" style="margin-left:0;font-size:13px;color:#5b6a63;"></span>
-        </div>
-
-        <!-- Preview Papan -->
-        <div style="margin-top:24px;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--teal);text-transform:uppercase;margin-bottom:10px;">Preview Papan</div>
-          <div id="boardPreview" style="background:linear-gradient(180deg,#0A2226,#081A1D);border:1px solid rgba(232,196,104,0.25);border-radius:6px;padding:16px 20px;font-family:'IBM Plex Mono',monospace;"></div>
-        </div>
-      </div>
-    </div>
 
   </div>
 </div>
@@ -608,13 +522,12 @@
         </div>
         <div class="field-row">
           <div class="field">
-            <label>Kategori</label>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <label style="margin-bottom:0;">Kategori</label>
+              <button type="button" style="background:none;border:none;color:var(--teal);font-size:11px;cursor:pointer;font-weight:600;" onclick="openCategoryModal()"><i class="fa-solid fa-plus"></i> Kategori Baru</button>
+            </div>
             <select id="p-cat">
-              <option value="cpns">CPNS/PPPK</option>
-              <option value="kepangkatan">Kepangkatan</option>
-              <option value="diklat">Pendidikan &amp; Latihan</option>
-              <option value="mutasi">Mutasi</option>
-              <option value="pensiun">Pensiun</option>
+              <!-- Dynamically populated from JS -->
             </select>
           </div>
           <div class="field">
@@ -652,12 +565,43 @@
             <button type="button" id="btn-clear-pengumuman-pdf" class="btn btn-danger" style="display:none;padding:4px 8px;font-size:11px;margin-top:0;" onclick="clearPengumumanPdf()">Hapus PDF</button>
           </div>
         </div>
+        <div class="field-row">
+          <div class="field">
+            <label><i class="fa-solid fa-link" style="color:var(--gold);margin-right:4px;"></i> URL Tautan / Link Eksternal (Opsional)</label>
+            <input type="url" id="p-linkUrl" placeholder="https://sscasn.bkn.go.id atau https://...">
+          </div>
+          <div class="field">
+            <label>Label Tombol Link (Opsional)</label>
+            <input type="text" id="p-linkLabel" placeholder="misal: Buka Link Pendaftaran">
+          </div>
+        </div>
         <input type="hidden" id="p-id" value="">
         <div class="modal-foot">
           <button type="button" class="btn btn-outline btn-ink" style="border:1.4px solid var(--ink);color:var(--ink);background:transparent;" onclick="closeModal('pengumuman')">Batal</button>
           <button type="submit" class="btn btn-gold"><i class="fa-solid fa-check"></i> Simpan</button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL KELOLA KATEGORI PENGUMUMAN ===== -->
+<div class="modal-overlay" id="modalCategories">
+  <div class="modal-box" style="max-width:460px;">
+    <div class="modal-head">
+      <h3>Kelola Kategori Pengumuman</h3>
+      <button class="modal-close" onclick="closeCategoryModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <form onsubmit="saveCategoryForm(event)" style="display:flex;gap:8px;margin-bottom:20px;">
+        <input type="text" id="cat-new-name" placeholder="Nama Kategori Baru (mis: Beasiswa)" required style="flex:1;padding:9px 12px;border:1.5px solid var(--line);border-radius:6px;font-size:13.5px;outline:none;">
+        <button type="submit" class="btn btn-gold btn-sm"><i class="fa-solid fa-plus"></i> Tambah</button>
+      </form>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--teal);margin-bottom:12px;font-weight:600;">Daftar Kategori Terpasang</div>
+      <div id="catListContainer" style="display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto;padding-right:4px;"></div>
+      <div class="modal-foot" style="margin-top:20px;">
+        <button type="button" class="btn btn-outline" style="border:1.4px solid var(--ink);color:var(--ink);background:transparent;" onclick="closeCategoryModal()">Selesai</button>
+      </div>
     </div>
   </div>
 </div>
@@ -672,10 +616,10 @@
     <div class="modal-body">
       <form id="formKegiatan" onsubmit="saveKegiatan(event)">
         <div class="field">
-          <label>Foto Kegiatan (Unggah Gambar)</label>
-          <input type="file" id="k-image-file" accept="image/*" onchange="handleImageUpload(event, 'k-image', 'k-preview')">
-          <input type="hidden" id="k-image" value="">
-          <div class="img-preview-box" id="k-preview"><span>Belum ada foto yang diunggah</span></div>
+          <label><i class="fa-solid fa-images" style="color:var(--gold);margin-right:4px;"></i> Galeri Foto Kegiatan (Dapat mengunggah banyak foto sekaligus)</label>
+          <input type="file" id="k-image-files" accept="image/*" multiple onchange="handleKegiatanMultiUpload(event)">
+          <div id="k-images-container" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;"></div>
+          <div id="k-images-empty" style="font-size:12px;color:#8a978f;margin-top:4px;">Belum ada foto yang diunggah.</div>
         </div>
         <div class="field">
           <label>Judul Kegiatan</label>
@@ -798,7 +742,11 @@
         </div>
         <div class="field">
           <label>Persyaratan / Dokumen (pisahkan per baris)</label>
-          <textarea id="l-items" rows="6" placeholder="Fotokopi SK Pangkat&#10;SKP 2 tahun terakhir&#10;..." required></textarea>
+          <textarea id="l-items" rows="5" placeholder="Fotokopi SK Pangkat&#10;SKP 2 tahun terakhir&#10;..." required></textarea>
+        </div>
+        <div class="field">
+          <label>Tahapan Prosedur Khusus Layanan Ini (pisahkan per baris)</label>
+          <textarea id="l-procedure" rows="4" placeholder="Pengusulan Berkas oleh Pengelola OPD asal&#10;Verifikasi berkas fisik & SIASN BKN&#10;Penerbitan SK & Penyerahan di Loket BKPSDM"></textarea>
         </div>
         <div class="field">
           <label>Nama Staf Tujuan (untuk redirect direktori)</label>
@@ -824,6 +772,48 @@
   </div>
 </div>
 
+<!-- ===== MODAL APLIKASI ASN ===== -->
+<div class="modal-overlay" id="modalAplikasi">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalAplikasiTitle">Tambah Aplikasi ASN</h3>
+      <button class="modal-close" onclick="closeModal('aplikasi')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="formAplikasi" onsubmit="saveAplikasi(event)">
+        <div class="field">
+          <label>Nama Aplikasi</label>
+          <input type="text" id="app-title" required placeholder="Contoh: SIASN, Simpeg Kota Dumai">
+        </div>
+        <div class="field">
+          <label>Deskripsi Singkat Layanan</label>
+          <textarea id="app-desc" rows="3" required placeholder="Contoh: SIASN adalah Layanan Perencanaan Kebutuhan ASN."></textarea>
+        </div>
+        <div class="field">
+          <label>URL / Link Akses Aplikasi</label>
+          <input type="url" id="app-url" required placeholder="https://siasn.bkn.go.id">
+        </div>
+        <div class="field">
+          <label>Logo Aplikasi (URL / Unggah File)</label>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <input type="text" id="app-logo" placeholder="URL logo atau upload file..." style="flex:1;">
+            <label for="app-logo-file" class="btn btn-sm btn-outline" style="border-color:var(--teal);color:var(--teal);cursor:pointer;white-space:nowrap;">
+              <i class="fa-solid fa-upload"></i> Unggah Logo
+            </label>
+            <input type="file" id="app-logo-file" accept="image/*" style="display:none;" onchange="handleAdminAppLogoUpload(event)">
+          </div>
+          <div id="app-logo-info" style="font-size:12px;color:#8a978f;margin-top:4px;">Belum ada logo terpilih.</div>
+        </div>
+        <input type="hidden" id="app-id" value="">
+        <div class="modal-foot">
+          <button type="button" class="btn btn-outline btn-ink" style="border:1.4px solid var(--ink);color:var(--ink);background:transparent;" onclick="closeModal('aplikasi')">Batal</button>
+          <button type="submit" class="btn btn-gold"><i class="fa-solid fa-check"></i> Simpan Aplikasi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- ===== CONFIRM DELETE ===== -->
 <div class="modal-overlay" id="confirmOverlay">
   <div class="confirm-box">
@@ -841,24 +831,99 @@
 <div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toastMsg"></span></div>
 
 <script>
-  // ===== AUTH =====
-  const ADMIN_CREDS = { username: 'adminweb', password: 'sipadu2026' };
+  // ===== AUTH & CAPTCHA =====
+  const CREDS_ADMIN_WEB = { username: 'adminweb', password: 'sipadu2026', role: 'admin_web', name: 'Admin Web' };
+  const CREDS_ADMIN_STAF = { username: 'adminstaf', password: 'staf2026', role: 'admin_staf', name: 'Admin Staff' };
   const SESSION_KEY = 'sipadu_admin_session';
+
+  let currentRole = 'admin_web';
+  let captchaAnswerNum = 0;
+
+  function selectRole(role) {
+    currentRole = role;
+    const webLbl = document.getElementById('roleLabelWeb');
+    const staffLbl = document.getElementById('roleLabelStaff');
+    const subtitle = document.getElementById('loginSubtitle');
+    const userInp = document.getElementById('loginUser');
+
+    if (role === 'admin_web') {
+      webLbl.classList.add('active');
+      staffLbl.classList.remove('active');
+      webLbl.querySelector('input').checked = true;
+      if (subtitle) subtitle.textContent = 'Panel Pengelolaan Konten Web Utama';
+      if (userInp) userInp.placeholder = 'adminweb';
+    } else {
+      staffLbl.classList.add('active');
+      webLbl.classList.remove('active');
+      staffLbl.querySelector('input').checked = true;
+      if (subtitle) subtitle.textContent = 'Panel Pengelolaan Direktori Staf';
+      if (userInp) userInp.placeholder = 'adminstaf';
+    }
+  }
+
+  function generateCaptcha() {
+    const num1 = Math.floor(Math.random() * 15) + 1;
+    const num2 = Math.floor(Math.random() * 15) + 1;
+    captchaAnswerNum = num1 + num2;
+    const qEl = document.getElementById('captchaQuestion');
+    if (qEl) qEl.textContent = `${num1} + ${num2} = ?`;
+    const ansInp = document.getElementById('captchaAnswer');
+    if (ansInp) ansInp.value = '';
+  }
 
   function handleLogin(e) {
     e.preventDefault();
     const u = document.getElementById('loginUser').value.trim();
     const p = document.getElementById('loginPass').value;
-    if (u === ADMIN_CREDS.username && p === ADMIN_CREDS.password) {
-      sessionStorage.setItem(SESSION_KEY, JSON.stringify({ user: u, time: Date.now() }));
-      document.getElementById('loginError').classList.remove('show');
-      document.getElementById('loginOverlay').style.display = 'none';
-      document.getElementById('dashboard').style.display = 'block';
-      document.getElementById('adminUserLabel').textContent = u;
-      initDashboard();
+    const userCaptcha = parseInt(document.getElementById('captchaAnswer').value, 10);
+    const errBox = document.getElementById('loginError');
+
+    // 1. Verify Captcha
+    if (isNaN(userCaptcha) || userCaptcha !== captchaAnswerNum) {
+      errBox.textContent = 'Jawaban captcha keamanan salah! Silakan hitung kembali.';
+      errBox.classList.add('show');
+      generateCaptcha();
+      return;
+    }
+
+    // 2. Verify Credentials based on role
+    let isValid = false;
+    let loggedUserObj = null;
+
+    if (currentRole === 'admin_web') {
+      if ((u === CREDS_ADMIN_WEB.username && p === CREDS_ADMIN_WEB.password) || (u === 'admin' && p === 'sipadu2026')) {
+        isValid = true;
+        loggedUserObj = { user: u, role: 'admin_web', title: 'Admin Web', time: Date.now() };
+      }
+    } else if (currentRole === 'admin_staf') {
+      if ((u === CREDS_ADMIN_STAF.username && p === CREDS_ADMIN_STAF.password) || (u === 'admin' && p === 'admin123')) {
+        isValid = true;
+        loggedUserObj = { user: u, role: 'admin_staf', title: 'Admin Staff', time: Date.now() };
+      }
+    }
+
+    if (isValid && loggedUserObj) {
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(loggedUserObj));
+      errBox.classList.remove('show');
+
+      if (loggedUserObj.role === 'admin_web') {
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('adminUserLabel').textContent = `${loggedUserObj.user} (${loggedUserObj.title})`;
+        initDashboard();
+        showToast('Berhasil masuk sebagai Admin Web');
+      } else if (loggedUserObj.role === 'admin_staf') {
+        showToast('Berhasil masuk sebagai Admin Staff. Mengalihkan...');
+        setTimeout(() => {
+          window.location.href = 'staf.html?admin=true';
+        }, 500);
+      }
     } else {
-      document.getElementById('loginError').classList.add('show');
+      const roleTitle = currentRole === 'admin_web' ? 'Admin Web' : 'Admin Staff';
+      errBox.textContent = `Username atau password untuk ${roleTitle} salah.`;
+      errBox.classList.add('show');
       document.getElementById('loginPass').value = '';
+      generateCaptcha();
     }
   }
 
@@ -868,16 +933,30 @@
   }
 
   window.addEventListener('DOMContentLoaded', () => {
-    const sess = sessionStorage.getItem(SESSION_KEY);
-    if (sess) {
-      document.getElementById('loginOverlay').style.display = 'none';
-      document.getElementById('dashboard').style.display = 'block';
-      document.getElementById('adminUserLabel').textContent = JSON.parse(sess).user;
-      initDashboard();
+    generateCaptcha();
+    const sessStr = sessionStorage.getItem(SESSION_KEY);
+    if (sessStr) {
+      try {
+        const sess = JSON.parse(sessStr);
+        if (sess.role === 'admin_staf') {
+          alert('Akses Ditolak: Anda login sebagai Admin Staff. Halaman ini khusus Admin Web. Anda akan diarahkan ke Dashboard Staff.');
+          window.location.href = 'staf.html?admin=true';
+          return;
+        } else if (sess.role === 'admin_web') {
+          document.getElementById('loginOverlay').style.display = 'none';
+          document.getElementById('dashboard').style.display = 'block';
+          document.getElementById('adminUserLabel').textContent = `${sess.user} (Admin Web)`;
+          initDashboard();
+        }
+      } catch (err) {
+        sessionStorage.removeItem(SESSION_KEY);
+      }
     }
     const today = new Date().toISOString().split('T')[0];
-    document.getElementById('p-date').value = today;
-    document.getElementById('k-date').value = today;
+    const pDate = document.getElementById('p-date');
+    const kDate = document.getElementById('k-date');
+    if (pDate) pDate.value = today;
+    if (kDate) kDate.value = today;
   });
 
   // ===== TOAST =====
@@ -893,23 +972,119 @@
   }
 
   // ===== API HELPERS =====
+  const API_BASE = (location.protocol === 'file:' || (location.port && location.port !== '3000')) 
+    ? 'http://localhost:3000' 
+    : '';
+
   function api(url, method='GET', body=null) {
+    const fullUrl = url.startsWith('http') ? url : (API_BASE + (url.startsWith('/') ? url : '/' + url));
     const opts = { method, headers: { 'Content-Type': 'application/json' } };
     if (body) opts.body = JSON.stringify(body);
-    return fetch(url, opts).then(r => r.json());
+    return fetch(fullUrl, opts).then(r => {
+      if (!r.ok) throw new Error(`HTTP Error ${r.status}`);
+      return r.json();
+    });
   }
 
   // ===== CACHE =====
-  let _pengumuman = [], _kegiatan = [], _slides = [], _layanan = [];
+  let _pengumuman = [], _kegiatan = [], _slides = [], _layanan = [], _aplikasi = [], _pengumumanCategories = [];
+
+  function loadPengumumanCategories() {
+    return api('/api/pengumuman-categories').then(cats => {
+      _pengumumanCategories = cats || [];
+      renderCategorySelectOptions();
+      renderCategoryManagerList();
+      if (_pengumuman.length) renderPengumuman();
+    }).catch(err => console.error("Error loading categories:", err));
+  }
+
+  function renderCategorySelectOptions() {
+    const select = document.getElementById('p-cat');
+    if (!select) return;
+    const currentVal = select.value;
+    select.innerHTML = _pengumumanCategories.map(c => 
+      `<option value="${c.id}">${c.name}</option>`
+    ).join('');
+    if (currentVal && _pengumumanCategories.some(c => c.id === currentVal)) {
+      select.value = currentVal;
+    }
+  }
+
+  function renderCategoryManagerList() {
+    const container = document.getElementById('catListContainer');
+    if (!container) return;
+    if (!_pengumumanCategories.length) {
+      container.innerHTML = '<div style="font-size:12px;color:#8a978f;">Belum ada kategori.</div>';
+      return;
+    }
+    container.innerHTML = _pengumumanCategories.map(c => `
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--paper);border:1px solid var(--line);border-radius:6px;">
+        <div>
+          <span style="font-weight:600;font-size:13.5px;">${c.name}</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8a978f;margin-left:8px;">(${c.id})</span>
+        </div>
+        <button type="button" class="btn btn-sm btn-danger" style="padding:3px 8px;font-size:11px;" onclick="deleteCategory('${c.id}')"><i class="fa-solid fa-trash"></i></button>
+      </div>
+    `).join('');
+  }
+
+  function openCategoryModal() {
+    document.getElementById('modalCategories').classList.add('open');
+    renderCategoryManagerList();
+  }
+  function closeCategoryModal() {
+    document.getElementById('modalCategories').classList.remove('open');
+  }
+
+  function saveCategoryForm(e) {
+    e.preventDefault();
+    const input = document.getElementById('cat-new-name');
+    const name = input ? input.value.trim() : '';
+    if (!name) return;
+    
+    api('/api/pengumuman-categories', 'POST', { name: name })
+      .then(res => {
+        if (res.success) {
+          input.value = '';
+          _pengumumanCategories = res.data;
+          renderCategorySelectOptions();
+          renderCategoryManagerList();
+          renderPengumuman();
+          showToast('Kategori berhasil ditambahkan!', 'success');
+        } else {
+          showToast(res.error || 'Gagal menyimpan kategori.', 'danger');
+        }
+      })
+      .catch(() => showToast('Gagal menyimpan kategori.', 'danger'));
+  }
+
+  function deleteCategory(catId) {
+    if (!confirm('Apakah Anda yakin ingin menghapus kategori ini?')) return;
+    api('/api/pengumuman-categories/' + catId, 'DELETE')
+      .then(res => {
+        if (res.success) {
+          _pengumumanCategories = res.data;
+          renderCategorySelectOptions();
+          renderCategoryManagerList();
+          renderPengumuman();
+          showToast('Kategori berhasil dihapus.', 'success');
+        } else {
+          showToast('Gagal menghapus kategori.', 'danger');
+        }
+      })
+      .catch(() => showToast('Gagal menghapus kategori.', 'danger'));
+  }
 
   // ===== DASHBOARD INIT =====
   function initDashboard() {
+    loadPengumumanCategories();
     Promise.all([
-      api('/api/pengumuman').then(d => { _pengumuman = d; renderPengumuman(); }),
-      api('/api/kegiatan').then(d => { _kegiatan = d; renderKegiatan(); }),
-      api('/api/slides').then(d => { _slides = d; renderSlides(); }),
-      api('/api/layanan').then(d => { _layanan = d; renderLayanan(); }),
-    ]).then(updateStats).catch(err => { console.error('Init error', err); showToast('Gagal memuat data dari server.', 'danger'); });
+      api('/api/pengumuman').then(d => { _pengumuman = Array.isArray(d) ? d : []; renderPengumuman(); }).catch(e => { _pengumuman = []; renderPengumuman(); console.error(e); }),
+      api('/api/kegiatan').then(d => { _kegiatan = Array.isArray(d) ? d : []; renderKegiatan(); }).catch(e => { _kegiatan = []; renderKegiatan(); console.error(e); }),
+      api('/api/slides').then(d => { _slides = Array.isArray(d) ? d : []; renderSlides(); }).catch(e => { _slides = []; renderSlides(); console.error(e); }),
+      api('/api/layanan').then(d => { _layanan = Array.isArray(d) ? d : []; renderLayanan(); }).catch(e => { _layanan = []; renderLayanan(); console.error(e); }),
+      api('/api/aplikasi').then(d => { _aplikasi = Array.isArray(d) ? d : []; renderAplikasi(); }).catch(e => { _aplikasi = []; renderAplikasi(); console.error(e); }),
+    ]).then(updateStats).catch(err => { console.error('Init error', err); });
     loadProfil();
     loadKontak();
     loadAlur();
@@ -917,10 +1092,17 @@
   }
 
   function updateStats() {
-    document.getElementById('statPengumuman').textContent = _pengumuman.length;
-    document.getElementById('statKegiatan').textContent = _kegiatan.length;
-    document.getElementById('statSlides').textContent = _slides.length;
-    document.getElementById('statTerbit').textContent = _pengumuman.filter(x => x.status === 'terbit').length;
+    const pengCount = Array.isArray(_pengumuman) ? _pengumuman.length : 0;
+    const kegCount = Array.isArray(_kegiatan) ? _kegiatan.length : 0;
+    const slideCount = Array.isArray(_slides) ? _slides.length : 0;
+    const appCount = Array.isArray(_aplikasi) ? _aplikasi.length : 0;
+    const terbitCount = Array.isArray(_pengumuman) ? _pengumuman.filter(x => x && x.status === 'terbit').length : 0;
+
+    const elP = document.getElementById('statPengumuman'); if (elP) elP.textContent = pengCount;
+    const elK = document.getElementById('statKegiatan'); if (elK) elK.textContent = kegCount;
+    const elS = document.getElementById('statSlides'); if (elS) elS.textContent = slideCount;
+    const elA = document.getElementById('statAplikasi'); if (elA) elA.textContent = appCount;
+    const elT = document.getElementById('statTerbit'); if (elT) elT.textContent = terbitCount;
   }
 
   // ===== TABS =====
@@ -929,7 +1111,6 @@
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
     document.getElementById('tab-' + name).classList.add('active');
-    if (name === 'board') loadBoard();
     if (name === 'stats') loadHomeStats();
   }
 
@@ -940,6 +1121,8 @@
     return dt.toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
   }
   function catLabel(cat) {
+    const found = _pengumumanCategories.find(c => c.id === cat);
+    if (found) return found.name;
     const mp = { cpns:'CPNS/PPPK', kepangkatan:'Kepangkatan', diklat:'Diklat', mutasi:'Mutasi', pensiun:'Pensiun', sosialisasi:'Sosialisasi', rapat:'Rapat', lainnya:'Lainnya' };
     return mp[cat] || cat;
   }
@@ -1028,6 +1211,56 @@
     document.getElementById('p-pdf-file').value = '';
   }
 
+  let _currentKegiatanImages = [];
+
+  function renderKegiatanImagesPreview() {
+    const container = document.getElementById('k-images-container');
+    const emptyNotice = document.getElementById('k-images-empty');
+    if (!container) return;
+    if (!_currentKegiatanImages.length) {
+      container.innerHTML = '';
+      if (emptyNotice) emptyNotice.style.display = 'block';
+      return;
+    }
+    if (emptyNotice) emptyNotice.style.display = 'none';
+    container.innerHTML = _currentKegiatanImages.map((url, idx) => `
+      <div style="position:relative;width:90px;height:70px;border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--paper-dark);">
+        <img src="${url}" style="width:100%;height:100%;object-fit:cover;">
+        <button type="button" onclick="removeKegiatanImage(${idx})" style="position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:rgba(192,57,43,0.85);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;" title="Hapus Foto"><i class="fa-solid fa-xmark"></i></button>
+        ${idx === 0 ? '<span style="position:absolute;bottom:2px;left:2px;background:rgba(27,54,93,0.85);color:#fff;font-size:8px;padding:1px 4px;border-radius:2px;font-family:\'IBM Plex Mono\',monospace;">Sampul</span>' : ''}
+      </div>
+    `).join('');
+  }
+
+  function handleKegiatanMultiUpload(e) {
+    const files = Array.from(e.target.files);
+    if (!files.length) return;
+    let completed = 0;
+    files.forEach(file => {
+      const fd = new FormData();
+      fd.append('file', file);
+      fetch('/api/upload', { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(res => {
+          if (res.filePath) {
+            _currentKegiatanImages.push(res.filePath);
+          }
+        })
+        .finally(() => {
+          completed++;
+          if (completed === files.length) {
+            renderKegiatanImagesPreview();
+            e.target.value = '';
+          }
+        });
+    });
+  }
+
+  function removeKegiatanImage(idx) {
+    _currentKegiatanImages.splice(idx, 1);
+    renderKegiatanImagesPreview();
+  }
+
   function renderPengumuman() {
     const tbody = document.getElementById('tbodyPengumuman');
     if (!_pengumuman.length) {
@@ -1042,6 +1275,7 @@
           <div style="display:flex;gap:6px;align-items:center;margin-top:2px;">
             ${p.urgent==='urgent'?'<span style="font-size:10px;color:var(--danger);font-family:\'IBM Plex Mono\',monospace;">● URGENT</span>':''}
             ${p.pdfPath?'<span style="font-size:10px;color:var(--teal);font-family:\'IBM Plex Mono\',monospace;"><i class="fa-solid fa-file-pdf" style="color:#c0392b;"></i> PDF Lampiran</span>':''}
+            ${p.linkUrl?'<span style="font-size:10px;color:var(--gold);font-family:\'IBM Plex Mono\',monospace;"><i class="fa-solid fa-link"></i> Link Eksternal</span>':''}
           </div>
         </td>
         <td><span class="cat-tag ${p.cat}">${catLabel(p.cat)}</span></td>
@@ -1069,7 +1303,14 @@
     tbody.innerHTML = _kegiatan.map((k, i) => `
       <tr>
         <td style="color:#8a978f;font-family:'IBM Plex Mono',monospace;font-size:12px;">${i+1}</td>
-        <td>${k.image ? `<img src="${k.image}" class="tbl-thumb">` : '<span style="font-size:11px;color:#8a978f;">Gradien</span>'}</td>
+        <td>
+          ${(k.images && k.images.length > 0)
+            ? `<div style="position:relative;display:inline-block;">
+                <img src="${k.images[0]}" class="tbl-thumb">
+                ${k.images.length > 1 ? `<span style="position:absolute;bottom:-2px;right:-2px;background:var(--gold);color:var(--ink);font-size:9px;font-weight:800;padding:1px 4px;border-radius:3px;box-shadow:0 2px 4px rgba(0,0,0,0.3);"><i class="fa-solid fa-images" style="font-size:8px;"></i> ${k.images.length}</span>` : ''}
+               </div>`
+            : (k.image ? `<img src="${k.image}" class="tbl-thumb">` : '<span style="font-size:11px;color:#8a978f;">Gradien</span>')}
+        </td>
         <td><div class="tbl-title">${k.title}</div></td>
         <td><span class="cat-tag ${k.cat}">${catLabel(k.cat)}</span></td>
         <td class="tbl-date">${fmtDate(k.date)}</td>
@@ -1114,12 +1355,39 @@
       <tr>
         <td style="color:#8a978f;font-family:'IBM Plex Mono',monospace;font-size:12px;">${i+1}</td>
         <td><div class="tbl-title">${l.title}</div><div style="font-size:11px;color:#8a978f;font-family:'IBM Plex Mono',monospace;">${l.id}</div></td>
-        <td style="font-size:12.5px;color:#5b6a63;">${l.contactPersonName||'â€”'}</td>
+        <td style="font-size:12.5px;color:#5b6a63;">${l.contactPersonName||'—'}</td>
         <td style="font-size:12px;">${l.pdfName ? `<i class="fa-solid fa-file-pdf" style="color:var(--danger);margin-right:4px;"></i>${l.pdfName}` : '<span style="color:#8a978f;">Belum ada</span>'}</td>
         <td>
           <div class="tbl-actions">
             <button class="btn btn-sm" style="border:1px solid var(--line);background:transparent;color:var(--teal);" onclick="editLayanan('${l.id}')"><i class="fa-solid fa-pen"></i></button>
             <button class="btn btn-sm btn-danger" onclick="confirmDelete('layanan','${l.id}','${escHtml(l.title)}')"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </td>
+      </tr>`).join('');
+  }
+
+  function renderAplikasi() {
+    const tbody = document.getElementById('tbodyAplikasi');
+    if (!tbody) return;
+    if (!_aplikasi.length) {
+      tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><i class="fa-solid fa-shapes"></i>Belum ada data aplikasi.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = _aplikasi.map((app, i) => `
+      <tr>
+        <td style="color:#8a978f;font-family:'IBM Plex Mono',monospace;font-size:12px;">${i+1}</td>
+        <td>
+          <div style="width:60px;height:42px;border-radius:6px;overflow:hidden;border:1.5px solid var(--line);background:#F8FAFC;display:flex;align-items:center;justify-content:center;padding:4px;">
+            ${app.logo ? `<img src="${app.logo}" style="width:100%;height:100%;max-width:52px;max-height:34px;object-fit:contain;object-position:center;display:block;margin:auto;">` : '<i class="fa-solid fa-image" style="color:#8a978f;font-size:14px;"></i>'}
+          </div>
+        </td>
+        <td><div class="tbl-title">${app.title}</div></td>
+        <td style="font-size:12.5px;color:#5b6a63;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${app.desc||'—'}</td>
+        <td style="font-size:12px;font-family:'IBM Plex Mono',monospace;"><a href="${app.url||'#'}" target="_blank" style="color:var(--teal);">${app.url||'—'}</a></td>
+        <td>
+          <div class="tbl-actions">
+            <button class="btn btn-sm" style="border:1px solid var(--line);background:transparent;color:var(--teal);" onclick="editAplikasi(${app.id})"><i class="fa-solid fa-pen"></i></button>
+            <button class="btn btn-sm btn-danger" onclick="confirmDelete('aplikasi',${app.id},'${escHtml(app.title)}')"><i class="fa-solid fa-trash"></i></button>
           </div>
         </td>
       </tr>`).join('');
@@ -1131,6 +1399,8 @@
       document.getElementById('modalPengumumanTitle').textContent = 'Tambah Pengumuman';
       document.getElementById('formPengumuman').reset();
       document.getElementById('p-id').value = '';
+      document.getElementById('p-linkUrl').value = '';
+      document.getElementById('p-linkLabel').value = '';
       document.getElementById('p-date').value = new Date().toISOString().split('T')[0];
       clearPengumumanPdf();
       document.getElementById('modalPengumuman').classList.add('open');
@@ -1138,8 +1408,8 @@
       document.getElementById('modalKegiatanTitle').textContent = 'Tambah Kegiatan';
       document.getElementById('formKegiatan').reset();
       document.getElementById('k-id').value = '';
-      document.getElementById('k-image').value = '';
-      document.getElementById('k-preview').innerHTML = '<span>Belum ada foto yang diunggah</span>';
+      _currentKegiatanImages = [];
+      renderKegiatanImagesPreview();
       document.getElementById('k-date').value = new Date().toISOString().split('T')[0];
       document.getElementById('modalKegiatan').classList.add('open');
     } else if (type === 'slides') {
@@ -1159,6 +1429,13 @@
       document.getElementById('btn-clear-pdf').style.display = 'none';
       document.getElementById('l-id').readOnly = false;
       document.getElementById('modalLayanan').classList.add('open');
+    } else if (type === 'aplikasi') {
+      document.getElementById('modalAplikasiTitle').textContent = 'Tambah Aplikasi ASN';
+      document.getElementById('formAplikasi').reset();
+      document.getElementById('app-id').value = '';
+      document.getElementById('app-logo').value = '';
+      document.getElementById('app-logo-info').textContent = 'Belum ada logo terpilih.';
+      document.getElementById('modalAplikasi').classList.add('open');
     }
   }
 
@@ -1179,6 +1456,8 @@
     document.getElementById('p-body').value = p.body || '';
     document.getElementById('p-pdfPath').value = p.pdfPath || '';
     document.getElementById('p-pdfName').value = p.pdfName || '';
+    document.getElementById('p-linkUrl').value = p.linkUrl || '';
+    document.getElementById('p-linkLabel').value = p.linkLabel || '';
     document.getElementById('p-pdf-info').textContent = p.pdfName ? '✓ ' + p.pdfName : 'Belum ada file lampiran terpilih.';
     document.getElementById('btn-clear-pengumuman-pdf').style.display = p.pdfName ? 'inline-block' : 'none';
     document.getElementById('modalPengumuman').classList.add('open');
@@ -1193,8 +1472,8 @@
     document.getElementById('k-date').value = k.date;
     document.getElementById('k-loc').value = k.loc||'';
     document.getElementById('k-desc').value = k.desc||'';
-    document.getElementById('k-image').value = k.image||'';
-    document.getElementById('k-preview').innerHTML = k.image ? `<img src="${k.image}">` : '<span>Belum ada foto yang diunggah</span>';
+    _currentKegiatanImages = (k.images && k.images.length) ? [...k.images] : (k.image ? [k.image] : []);
+    renderKegiatanImagesPreview();
     document.getElementById('modalKegiatan').classList.add('open');
   }
 
@@ -1224,12 +1503,25 @@
     document.getElementById('l-tag').value = l.tag||'';
     document.getElementById('l-icon').value = l.icon||'';
     document.getElementById('l-items').value = (l.items||[]).join('\n');
+    document.getElementById('l-procedure').value = (l.procedure||[]).join('\n');
     document.getElementById('l-contact').value = l.contactPersonName||'';
     document.getElementById('l-pdfPath').value = l.pdfPath||'';
     document.getElementById('l-pdfName').value = l.pdfName||'';
-    document.getElementById('l-pdf-info').textContent = l.pdfName ? 'âœ“ ' + l.pdfName : 'Belum ada file terpilih.';
+    document.getElementById('l-pdf-info').textContent = l.pdfName ? '✓ ' + l.pdfName : 'Belum ada file terpilih.';
     document.getElementById('btn-clear-pdf').style.display = l.pdfName ? 'inline-block' : 'none';
     document.getElementById('modalLayanan').classList.add('open');
+  }
+
+  function editAplikasi(id) {
+    const app = _aplikasi.find(x => x.id === id); if (!app) return;
+    document.getElementById('modalAplikasiTitle').textContent = 'Edit Aplikasi ASN';
+    document.getElementById('app-id').value = id;
+    document.getElementById('app-title').value = app.title;
+    document.getElementById('app-desc').value = app.desc;
+    document.getElementById('app-url').value = app.url;
+    document.getElementById('app-logo').value = app.logo || '';
+    document.getElementById('app-logo-info').textContent = app.logo ? '✓ Logo terpasang' : 'Belum ada logo terpilih.';
+    document.getElementById('modalAplikasi').classList.add('open');
   }
 
   // ===== SAVE =====
@@ -1246,6 +1538,8 @@
       body: document.getElementById('p-body').value.trim(),
       pdfPath: document.getElementById('p-pdfPath').value,
       pdfName: document.getElementById('p-pdfName').value,
+      linkUrl: document.getElementById('p-linkUrl').value.trim(),
+      linkLabel: document.getElementById('p-linkLabel').value.trim(),
     };
     api('/api/pengumuman', 'POST', item).then(() => {
       return api('/api/pengumuman');
@@ -1266,7 +1560,8 @@
       date: document.getElementById('k-date').value,
       loc: document.getElementById('k-loc').value.trim(),
       desc: document.getElementById('k-desc').value.trim(),
-      image: document.getElementById('k-image').value,
+      image: _currentKegiatanImages[0] || '',
+      images: _currentKegiatanImages,
     };
     api('/api/kegiatan', 'POST', item).then(() => {
       return api('/api/kegiatan');
@@ -1309,6 +1604,7 @@
       tag: document.getElementById('l-tag').value.trim(),
       icon: document.getElementById('l-icon').value.trim(),
       items: document.getElementById('l-items').value.trim().split('\n').filter(x => x.trim()),
+      procedure: document.getElementById('l-procedure').value.trim().split('\n').filter(x => x.trim()),
       contactPersonName: document.getElementById('l-contact').value.trim(),
       staffTarget: document.getElementById('l-contact').value.trim(),
       pdfPath: document.getElementById('l-pdfPath').value,
@@ -1322,6 +1618,52 @@
       closeModal('layanan');
       showToast(oldId ? 'Layanan berhasil diperbarui.' : 'Layanan baru berhasil ditambahkan.');
     }).catch(() => showToast('Gagal menyimpan layanan.', 'danger'));
+  }
+
+  function saveAplikasi(e) {
+    e.preventDefault();
+    const id = document.getElementById('app-id').value;
+    const item = {
+      title: document.getElementById('app-title').value.trim(),
+      desc: document.getElementById('app-desc').value.trim(),
+      url: document.getElementById('app-url').value.trim(),
+      logo: document.getElementById('app-logo').value.trim()
+    };
+    if (id) {
+      item.id = parseInt(id);
+    }
+    api('/api/aplikasi', 'POST', item)
+      .then(() => api('/api/aplikasi'))
+      .then(d => {
+        _aplikasi = Array.isArray(d) ? d : [];
+        renderAplikasi();
+        updateStats();
+        closeModal('aplikasi');
+        showToast(id ? 'Aplikasi berhasil diperbarui.' : 'Aplikasi baru berhasil ditambahkan.');
+      })
+      .catch(err => {
+        console.error('Error saving aplikasi:', err);
+        showToast('Gagal menyimpan aplikasi.', 'danger');
+      });
+  }
+
+  function handleAdminAppLogoUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const fd = new FormData();
+    fd.append('file', file);
+    document.getElementById('app-logo-info').textContent = 'Mengunggah logo...';
+    fetch(API_BASE + '/api/upload', { method: 'POST', body: fd })
+      .then(r => r.json())
+      .then(res => {
+        if (res.filePath) {
+          document.getElementById('app-logo').value = res.filePath;
+          document.getElementById('app-logo-info').textContent = '✓ ' + (res.filename || file.name);
+        } else {
+          showToast('Upload logo gagal.', 'danger');
+        }
+      })
+      .catch(() => showToast('Upload logo gagal.', 'danger'));
   }
 
   // ===== PROFIL =====
@@ -1436,7 +1778,7 @@
     if (!file) return;
     const formData = new FormData();
     formData.append('file', file);
-    fetch('/api/upload', { method: 'POST', body: formData })
+    fetch(API_BASE + '/api/upload', { method: 'POST', body: formData })
       .then(r => r.json())
       .then(data => {
         document.getElementById('profil-struktur-url').value = data.filePath;
@@ -1475,7 +1817,6 @@
       document.getElementById('kontak-alamat').value = data.alamat || '';
       document.getElementById('kontak-telp').value = data.telp || '';
       document.getElementById('kontak-email').value = data.email || '';
-      document.getElementById('kontak-email-penerima').value = data.emailPenerima || '';
       document.getElementById('kontak-jam').value = data.jam || '';
       document.getElementById('kontak-map').value = data.mapIframeSrc || '';
       document.getElementById('kontak-fb').value = data.fb || '#';
@@ -1489,7 +1830,6 @@
       alamat: document.getElementById('kontak-alamat').value.trim(),
       telp: document.getElementById('kontak-telp').value.trim(),
       email: document.getElementById('kontak-email').value.trim(),
-      emailPenerima: document.getElementById('kontak-email-penerima').value.trim(),
       jam: document.getElementById('kontak-jam').value.trim(),
       mapIframeSrc: document.getElementById('kontak-map').value.trim(),
       fb: document.getElementById('kontak-fb').value.trim(),
@@ -1506,17 +1846,17 @@
   let _alurFaq = [];
 
   const DEFAULT_STEPS = [
-    { num:'01', title:'Cek Syarat & Formulir', desc:'Pelajari persyaratan layanan dan unduh formulir permohonan melalui website SIPADU.' },
+    { num:'01', title:'Cek Syarat & Formulir', desc:'Pelajari persyaratan layanan dan unduh formulir permohonan melalui website SIKAP.' },
     { num:'02', title:'Lengkapi Berkas Fisik', desc:'Cetak dan isi formulir serta lengkapi seluruh dokumen persyaratan fisik yang dibutuhkan.' },
     { num:'03', title:'Serahkan ke Loket BKPSDM', desc:'Datang langsung ke kantor BKPSDM Kota Dumai untuk verifikasi dan penyerahan berkas.' },
     { num:'04', title:'Pengambilan Dokumen / SK', desc:'Ambil Surat Keputusan (SK) atau dokumen resmi langsung di loket layanan setelah diproses.' },
   ];
   const DEFAULT_FAQ = [
-    { q:'Apakah pengajuan layanan kepegawaian bisa dilakukan sepenuhnya secara daring?', a:'Belum. SIPADU digunakan untuk melihat pengumuman, mempelajari syarat & ketentuan, serta mengunduh formulir. Berkas fisik tetap harus diserahkan langsung ke loket BKPSDM Kota Dumai pada jam kerja.' },
+    { q:'Apakah pengajuan layanan kepegawaian bisa dilakukan sepenuhnya secara daring?', a:'Belum. SIKAP digunakan untuk melihat pengumuman, mempelajari syarat & ketentuan, serta mengunduh formulir. Berkas fisik tetap harus diserahkan langsung ke loket BKPSDM Kota Dumai pada jam kerja.' },
     { q:'Berapa lama proses verifikasi berkas setelah diserahkan ke loket?', a:'Rata-rata proses verifikasi berkas memakan waktu 2–5 hari kerja, tergantung jenis layanan dan kelengkapan dokumen yang diserahkan.' },
     { q:'Bagaimana cara mengetahui staf yang menangani layanan saya?', a:'Gunakan Direktori Staf di menu tautan bagian bawah halaman. Anda bisa mencari nama staf, melihat statusnya saat ini, lalu menghubunginya langsung lewat WhatsApp atau email.' },
     { q:'Bagaimana jika berkas saya ditolak atau kurang lengkap saat diperiksa di loket?', a:'Petugas akan menjelaskan langsung dokumen apa yang kurang atau perlu diperbaiki. Anda dapat melengkapinya dan menyerahkan kembali tanpa perlu mengajukan permohonan baru.' },
-    { q:'Apakah layanan ini dikenakan biaya?', a:'Seluruh layanan kepegawaian melalui SIPADU tidak dipungut biaya apa pun. Waspadai pihak yang mengatasnamakan BKPSDM dan meminta imbalan.' },
+    { q:'Apakah layanan ini dikenakan biaya?', a:'Seluruh layanan kepegawaian melalui SIKAP tidak dipungut biaya apa pun. Waspadai pihak yang mengatasnamakan BKPSDM dan meminta imbalan.' },
   ];
 
   function syncAlurInputsFromDOM() {
@@ -1636,7 +1976,7 @@
   function closeConfirm() { document.getElementById('confirmOverlay').classList.remove('open'); _deleteCallback = null; }
 
   function doDelete(type, id) {
-    const url = `/api/${type}/${id}`;
+    const url = API_BASE + `/api/${type}/${id}`;
     fetch(url, { method: 'DELETE' }).then(() => {
       if (type === 'pengumuman') {
         return api('/api/pengumuman').then(d => { _pengumuman = d; renderPengumuman(); });
@@ -1646,6 +1986,8 @@
         return api('/api/slides').then(d => { _slides = d; renderSlides(); });
       } else if (type === 'layanan') {
         return api('/api/layanan').then(d => { _layanan = d; renderLayanan(); });
+      } else if (type === 'aplikasi') {
+        return api('/api/aplikasi').then(d => { _aplikasi = d || []; renderAplikasi(); });
       }
     }).then(() => {
       updateStats();
@@ -1654,95 +1996,14 @@
   }
 
   // Close modal on overlay click
-  ['modalPengumuman','modalKegiatan','modalSlides','modalLayanan','confirmOverlay'].forEach(id => {
+  ['modalPengumuman','modalKegiatan','modalSlides','modalLayanan','modalAplikasi','confirmOverlay'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('click', e => {
       if (e.target === el) el.classList.remove('open');
     });
   });
 
-  // ===== PAPAN PENGUMUMAN =====
-  function loadBoard() {
-    fetch('/api/board')
-      .then(r => r.json())
-      .then(data => {
-        document.getElementById('b-row1').value = data.row1 || '';
-        document.getElementById('b-row2').value = data.row2 || '';
-        document.getElementById('b-row3').value = data.row3 || '';
-        document.getElementById('b-row4').value = data.row4 || '';
-        document.getElementById('b-tag1').value = data.tag1 || 'CPNS';
-        document.getElementById('b-tag2').value = data.tag2 || 'PANGKAT';
-        document.getElementById('b-tag3').value = data.tag3 || 'DIKLAT';
-        document.getElementById('b-tag4').value = data.tag4 || 'PENSIUN';
-        const st = document.getElementById('boardSaveStatus');
-        if (data.updatedAt) {
-          const d = new Date(data.updatedAt);
-          st.textContent = 'Terakhir disimpan: ' + d.toLocaleString('id-ID', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
-        } else {
-          st.textContent = 'Belum pernah disimpan.';
-        }
-        updateBoardPreview();
-      })
-      .catch(() => showToast('Gagal memuat data papan.', 'danger'));
-  }
 
-  function updateBoardPreview() {
-    const preview = document.getElementById('boardPreview');
-    if (!preview) return;
-    const rows = [
-      { tag: document.getElementById('b-tag1')?.value || 'CPNS', text: document.getElementById('b-row1')?.value || '' },
-      { tag: document.getElementById('b-tag2')?.value || 'PANGKAT', text: document.getElementById('b-row2')?.value || '' },
-      { tag: document.getElementById('b-tag3')?.value || 'DIKLAT', text: document.getElementById('b-row3')?.value || '' },
-      { tag: document.getElementById('b-tag4')?.value || 'PENSIUN', text: document.getElementById('b-row4')?.value || '' },
-    ];
-    preview.innerHTML = rows.map(r => `
-      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(248,244,233,0.07);">
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.06em;padding:3px 7px;border-radius:2px;white-space:nowrap;text-transform:uppercase;background:rgba(232,196,104,0.14);color:#E8C468;border:1px solid rgba(232,196,104,0.3);min-width:60px;text-align:center;">${r.tag || '—'}</span>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#F8F4E9;letter-spacing:0.04em;">${r.text.toUpperCase() || '—'}</span>
-      </div>
-    `).join('');
-  }
-
-  // Live preview update on input
-  ['b-row1','b-row2','b-row3','b-row4','b-tag1','b-tag2','b-tag3','b-tag4'].forEach(id => {
-    document.addEventListener('input', e => {
-      if (e.target && e.target.id === id) updateBoardPreview();
-    });
-  });
-
-  function saveBoard() {
-    const btn = document.getElementById('btnSaveBoard');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
-    const payload = {
-      row1: (document.getElementById('b-row1').value || '').toUpperCase().trim(),
-      row2: (document.getElementById('b-row2').value || '').toUpperCase().trim(),
-      row3: (document.getElementById('b-row3').value || '').toUpperCase().trim(),
-      row4: (document.getElementById('b-row4').value || '').toUpperCase().trim(),
-      tag1: (document.getElementById('b-tag1').value || 'CPNS').toUpperCase().trim(),
-      tag2: (document.getElementById('b-tag2').value || 'PANGKAT').toUpperCase().trim(),
-      tag3: (document.getElementById('b-tag3').value || 'DIKLAT').toUpperCase().trim(),
-      tag4: (document.getElementById('b-tag4').value || 'PENSIUN').toUpperCase().trim(),
-    };
-    fetch('/api/board', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) })
-      .then(r => r.json())
-      .then(res => {
-        if (res.success) {
-          showToast('Papan pengumuman berhasil disimpan!');
-          const st = document.getElementById('boardSaveStatus');
-          st.textContent = 'Disimpan baru saja ✓';
-          st.style.color = 'var(--teal)';
-          setTimeout(() => { st.style.color = '#5b6a63'; loadBoard(); }, 2000);
-        } else {
-          showToast('Gagal menyimpan.', 'danger');
-        }
-      })
-      .catch(() => showToast('Error: gagal menyimpan.', 'danger'))
-      .finally(() => {
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Simpan Papan';
-      });
-  }
 
   // ===== HOME STATS =====
   function loadHomeStats() {

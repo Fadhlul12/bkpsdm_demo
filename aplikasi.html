@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIKAP — Aplikasi ASN | BKPSDM Kota Dumai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --ink:#1B365D;
+    --teal-deep:#122846;
+    --teal:#27528A;
+    --teal-soft:#3B6CA8;
+    --gold:#EAA900;
+    --gold-light:#FFC82E;
+    --paper:#F4F6F9;
+    --paper-dark:#E2E8F0;
+    --cream:#FFFFFF;
+    --charcoal:#1E293B;
+    --line: rgba(27,54,93,0.12);
+    --shadow: 0 20px 50px -25px rgba(27,54,93,0.35);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--charcoal);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin:0;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-size:12px;
+    color:var(--teal-soft);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--gold); display:inline-block;}
+
+  /* ===== NAV ===== */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:var(--ink);
+    border-bottom:1px solid rgba(232,196,104,0.18);
+  }
+  .nav{
+    max-width:1180px; margin:0 auto; padding:0 32px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .seal{
+    width:42px; height:42px; border-radius:50%;
+    background:#ffffff; display:flex; align-items:center; justify-content:center;
+    border:1.5px solid var(--gold-light); overflow:hidden; flex-shrink:0;
+  }
+  .seal img{width:100%; height:100%; object-fit:contain; display:block;}
+  .brand .name{color:var(--cream);}
+  .brand .name b{display:block; font-family:'Fraunces',serif; font-size:16.5px; letter-spacing:0.01em;}
+  .brand .name span{display:block; font-size:11px; color:var(--gold-light); letter-spacing:0.05em; margin-top:2px; font-family:'IBM Plex Mono',monospace;}
+  nav.links{display:flex; align-items:center; gap:28px;}
+  nav.links a{
+    color:rgba(248,244,233,0.9); font-size:18px; font-weight:700;
+    position:relative; padding:4px 0;
+  }
+  nav.links a:hover{color:var(--cream);}
+  nav.links a.active{color:var(--gold-light); font-weight:700;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 20px; border-radius:4px;
+    font-size:14px; font-weight:700; cursor:pointer; border:none;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-gold{background:linear-gradient(180deg, var(--gold-light), var(--gold)); color:var(--ink);}
+  .btn-gold:hover{transform:translateY(-1px); box-shadow:0 10px 22px -10px rgba(201,162,39,0.7);}
+  .btn-outline-ink{background:transparent; border:1.5px solid var(--ink); color:var(--ink);}
+  .btn-outline-ink:hover{background:var(--ink); color:var(--cream);}
+
+  /* ===== PAGE HEADER ===== */
+  .page-header{
+    background:
+      radial-gradient(900px 400px at 85% -20%, rgba(201,162,39,0.14), transparent 60%),
+      linear-gradient(180deg, var(--ink), var(--teal-deep));
+    color:var(--cream); padding:52px 0 40px; position:relative; overflow:hidden;
+  }
+  .page-header::after{
+    content:''; position:absolute; inset:0;
+    background-image: linear-gradient(rgba(248,244,233,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(248,244,233,0.035) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image: linear-gradient(180deg, black, transparent 85%);
+    pointer-events:none;
+  }
+  .breadcrumb{
+    position:relative; z-index:1;
+    display:flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono',monospace; font-size:12px;
+    color:rgba(248,244,233,0.55); margin-bottom:14px;
+  }
+  .breadcrumb a{color:rgba(248,244,233,0.75);}
+  .breadcrumb a:hover{color:var(--gold-light);}
+  .page-header h1{position:relative; z-index:1; color:var(--cream); font-size:34px;}
+  .page-header p{position:relative; z-index:1; color:rgba(255,255,255,0.92); font-size:15px; margin-top:10px; max-width:620px; line-height:1.6;}
+
+  /* ===== SEARCH TOOLBAR ===== */
+  .app-toolbar{
+    display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+    margin:-28px 0 34px; position:relative; z-index:2;
+    background:var(--cream); border:1px solid var(--line); border-radius:10px;
+    padding:18px 22px; box-shadow:var(--shadow);
+  }
+  .app-search{
+    flex:1; min-width:260px; display:flex; align-items:center; gap:10px;
+    background:var(--paper); border:1.5px solid #CBD5E1; border-radius:6px; padding:12px 16px;
+  }
+  .app-search i{color:var(--teal); font-size:16px;}
+  .app-search input{
+    border:none; background:transparent; outline:none; width:100%;
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; color:var(--charcoal); font-weight:500;
+  }
+
+  /* ===== APP CARDS GRID (RAMAH LANSIA) ===== */
+  .app-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:24px; margin-bottom:48px;}
+  .app-card{
+    background:#FFFFFF; border:2px solid #CBD5E1; border-radius:12px;
+    padding:28px 30px; display:flex; gap:24px; align-items:flex-start; position:relative;
+    box-shadow:0 6px 20px rgba(0,0,0,0.05); transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .app-card:hover{transform:translateY(-4px); box-shadow:0 20px 40px -10px rgba(27,54,93,0.22); border-color:var(--gold);}
+  .app-logo-box{
+    width:130px; height:95px; flex-shrink:0; border-radius:10px;
+    display:flex; align-items:center; justify-content:center; padding:10px;
+    background:#F8FAFC; border:1.5px solid #E2E8F0; overflow:hidden; position:relative;
+    box-sizing:border-box;
+  }
+  .app-logo-box img{
+    width:100%; height:100%; max-width:110px; max-height:75px;
+    object-fit:contain; object-position:center; display:block; margin:auto;
+  }
+  .app-content{flex:1; display:flex; flex-direction:column; gap:6px;}
+  .app-title{font-size:20px; font-family:'Fraunces',serif; font-weight:700; color:#0F172A; margin:0;}
+  .app-desc{font-size:14.5px; color:#475569; line-height:1.6; margin:0; font-weight:500;}
+  .app-link-btn{
+    display:inline-flex; align-items:center; gap:6px;
+    color:#1D4ED8; font-weight:700; font-size:15px; text-decoration:none;
+    margin-top:6px; width:fit-content; transition:color .15s ease;
+  }
+  .app-link-btn:hover{color:var(--gold); text-decoration:underline;}
+
+
+
+  /* ===== MODAL FORM (ADMIN) ===== */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(11,46,51,0.55); backdrop-filter:blur(2px);
+    display:none; align-items:center; justify-content:center; z-index:200; padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--cream); border-radius:12px; max-width:480px; width:100%;
+    max-height:88vh; overflow-y:auto; box-shadow:0 35px 80px -20px rgba(11,46,51,0.6);
+    animation:modalIn .22s ease both;
+  }
+  @keyframes modalIn{from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:translateY(0) scale(1);}}
+  .modal-head{
+    background:linear-gradient(155deg, var(--teal-deep), var(--ink)); color:#FFFFFF;
+    padding:20px 24px; display:flex; justify-content:space-between; align-items:center; gap:12px;
+    position:sticky; top:0; z-index:10;
+  }
+  .modal-head h3{color:#FFFFFF; font-size:18px;}
+  .modal-close{
+    background:rgba(248,244,233,0.15); border:none; color:var(--cream); width:32px; height:32px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; font-size:14px;
+  }
+  .modal-close:hover{background:var(--gold); color:var(--ink);}
+  .modal-body{padding:22px 24px 26px;}
+  .field{margin-bottom:16px;}
+  .field label{
+    display:block; font-family:'Plus Jakarta Sans',sans-serif; font-size:12.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.04em; color:var(--teal); margin-bottom:6px;
+  }
+  .field input, .field textarea{
+    width:100%; padding:11px 13px; border:1.5px solid #CBD5E1; border-radius:6px;
+    background:var(--paper); font-family:'Plus Jakarta Sans',sans-serif; font-size:14.5px; color:var(--charcoal);
+    outline:none;
+  }
+  .field input:focus, .field textarea:focus{border-color:var(--teal);}
+  .modal-foot{display:flex; gap:10px; margin-top:20px;}
+  .modal-foot button{flex:1;}
+
+  /* ===== TOAST ===== */
+  .toast{
+    position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:var(--cream); padding:14px 24px; border-radius:8px;
+    font-size:14.5px; font-weight:600; display:flex; align-items:center; gap:10px; box-shadow:var(--shadow);
+    z-index:300; opacity:0; pointer-events:none; transition:opacity .22s ease, transform .22s ease;
+    border-left:4px solid var(--gold);
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+  .toast i{color:var(--gold-light);}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--teal-deep); color:rgba(248,244,233,0.75); padding:64px 0 26px;}
+  .foot-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:40px; padding-bottom:44px; border-bottom:1px solid rgba(248,244,233,0.12);}
+  .foot-brand p{font-size:13.5px; line-height:1.7; color:rgba(248,244,233,0.55); max-width:280px;}
+  .foot-col h4{font-family:'IBM Plex Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.1em; color:var(--gold-light); margin-bottom:16px;}
+  .foot-col a, .foot-col p{display:block; font-size:13.5px; color:rgba(248,244,233,0.65); margin-bottom:11px; line-height:1.6;}
+  .foot-col a:hover{color:var(--gold-light);}
+  .social{display:flex; gap:10px; margin-top:18px;}
+  .social a{
+    width:34px; height:34px; border-radius:50%; border:1px solid rgba(248,244,233,0.25);
+    display:flex; align-items:center; justify-content:center; font-size:13px;
+  }
+  .social a:hover{border-color:var(--gold-light); color:var(--gold-light);}
+  .foot-bottom{display:flex; justify-content:space-between; padding-top:22px; font-size:12px; color:rgba(248,244,233,0.42); flex-wrap:wrap; gap:10px;}
+
+  .hamburger{
+    display:none; width:38px; height:38px; border-radius:4px;
+    background:transparent; border:1px solid rgba(248,244,233,0.3);
+    align-items:center; justify-content:center; color:var(--cream); cursor:pointer;
+    font-size:16px;
+  }
+  .mobile-panel{
+    display:none;
+    background:var(--ink); border-top:1px solid rgba(232,196,104,0.18);
+    padding:8px 0 18px;
+  }
+  .mobile-panel.open{display:block;}
+  .mobile-panel a{
+    display:block; padding:13px 32px; color:rgba(248,244,233,0.9);
+    font-size:18px; font-weight:700; border-bottom:1px solid rgba(248,244,233,0.06);
+  }
+  .mobile-panel a.active{color:var(--gold-light);}
+
+  @media (max-width:980px){
+    nav.links{display:none;}
+    .hamburger{display:flex;}
+    .app-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:600px){
+    .app-card{flex-direction:column; gap:16px; align-items:flex-start;}
+    .app-logo-box{width:100%; height:100px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav">
+    <a href="index.html" class="brand" style="cursor:pointer;">
+      <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
+      <div class="name">
+        <b>SIKAP</b>
+        <span>BKPSDM KOTA DUMAI</span>
+      </div>
+    </a>
+    <nav class="links">
+      <a href="index.html">Beranda</a>
+      <a href="profil.html">Profil</a>
+      <a href="pengumuman.html">Pengumuman</a>
+      <a href="kegiatan.html">Kegiatan</a>
+      <a href="layanan.html">Layanan</a>
+      <a href="aplikasi.html" class="active">Aplikasi</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:14px;">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Buka menu" aria-expanded="false">
+        <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="index.html">Beranda</a>
+    <a href="profil.html">Profil</a>
+    <a href="pengumuman.html">Pengumuman</a>
+    <a href="kegiatan.html">Kegiatan</a>
+    <a href="layanan.html">Layanan</a>
+    <a href="aplikasi.html" class="active">Aplikasi</a>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><i class="fa-solid fa-chevron-right" style="font-size:9px;"></i><span>Aplikasi ASN</span></div>
+    <h1>Aplikasi Sistem Informasi ASN</h1>
+    <p>Akses cepat ke berbagai portal sistem informasi kepegawaian nasional dan daerah yang dibutuhkan oleh seluruh Aparatur Sipil Negara (PNS & PPPK).</p>
+  </div>
+</section>
+
+<section id="aplikasi-sec" style="padding-top:40px;">
+  <div class="wrap">
+
+    <div class="app-toolbar">
+      <div class="app-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="appSearch" placeholder="Cari nama aplikasi (contoh: SIASN, E-Kinerja, Simpeg)..." oninput="toggleClearBtn(); applyFilter();">
+        <button id="clearSearchBtn" onclick="clearSearch()" style="display:none; background:none; border:none; color:#94A3B8; cursor:pointer; font-size:16px; padding:0; border-radius:50%; width:28px; height:28px; align-items:center; justify-content:center; flex-shrink:0; transition:all .15s ease;" title="Hapus pencarian">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="appGrid" class="app-grid">
+      <!-- Cards rendered via JS -->
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:#999;"><i class="fa-solid fa-spinner fa-spin"></i> Memuat daftar aplikasi...</div>
+    </div>
+
+
+  </div>
+</section>
+
+
+<div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i> <span id="toastMsg"></span></div>
+
+<footer id="kontak-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
+          <div class="name"><b>SIKAP</b><span>BKPSDM KOTA DUMAI</span></div>
+        </div>
+        <p>Sistem Informasi Pengumuman dan Layanan Kepegawaian — melayani Aparatur Sipil Negara di lingkungan Pemerintah Kota Dumai secara transparan dan akuntabel.</p>
+        <div class="social">
+          <a id="f-fb" href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a id="f-ig" href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a id="f-yt" href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Kantor</h4>
+        <p id="f-alamat">Jl. Tuanku Tambusai, Bagan Besar, Kec. Bukit Kapur, Kota Dumai, Riau 28825</p>
+        <p id="f-jam">Senin–Jumat, 08.00–16.00 WIB</p>
+      </div>
+      <div class="foot-col">
+        <h4>Kontak</h4>
+        <a id="f-telp" href="tel:0765123000"><i class="fa-solid fa-phone" style="margin-right:8px;"></i>(0765) 123-456</a>
+        <a id="f-email" href="mailto:bkpsdm@dumaikota.go.id"><i class="fa-solid fa-envelope" style="margin-right:8px;"></i>bkpsdm@dumaikota.go.id</a>
+      </div>
+      <div class="foot-col">
+        <h4>Tautan</h4>
+        <a href="pengumuman.html">Pengumuman</a>
+        <a href="kegiatan.html">Kegiatan</a>
+        <a href="layanan.html">Layanan Kepegawaian</a>
+        <a href="aplikasi.html">Aplikasi ASN</a>
+        <a href="staf.html">Direktori Staf <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:9px; margin-left:3px;"></i></a>
+        <a href="admin.html">Admin <i class="fa-solid fa-shield-halved" style="font-size:10px; margin-left:3px;"></i></a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 BKPSDM Kota Dumai. Seluruh hak dilindungi.</span>
+      <span>Portal Aplikasi Sistem Informasi Kepegawaian ASN</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile Hamburger Toggle
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const hamburgerIcon = document.getElementById('hamburgerIcon');
+  const mobilePanel = document.getElementById('mobilePanel');
+  if(hamburgerBtn){
+    hamburgerBtn.addEventListener('click', () => {
+      const isOpen = mobilePanel.classList.toggle('open');
+      hamburgerBtn.setAttribute('aria-expanded', isOpen);
+      hamburgerIcon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    });
+  }
+
+  const DEFAULT_APKS = [
+    {
+      id: 1,
+      title: "SIASN BKN",
+      desc: "Sistem Informasi Aparatur Sipil Negara untuk perencanaan kebutuhan, pengadaan, dan mutasi ASN secara nasional.",
+      url: "https://siasn.bkn.go.id",
+      logo: ""
+    },
+    {
+      id: 2,
+      title: "SIMPEG Kota Dumai",
+      desc: "Sistem Informasi Manajemen Kepegawaian Daerah yang mengelola basis data profil dan riwayat seluruh ASN Pemko Dumai.",
+      url: "https://simpeg.dumaikota.go.id",
+      logo: ""
+    },
+    {
+      id: 3,
+      title: "SSCASN BKN",
+      desc: "Portal resmi Pendaftaran dan Seleksi Calon Aparatur Sipil Negara (CPNS & PPPK) Republik Indonesia.",
+      url: "https://sscasn.bkn.go.id",
+      logo: ""
+    },
+    {
+      id: 4,
+      title: "E-Kinerja BKN",
+      desc: "Aplikasi pengelolaan dan penilaian kinerja ASN bulanan dan tahunan terintegrasi BKN.",
+      url: "https://kinerja.bkn.go.id",
+      logo: ""
+    },
+    {
+      id: 5,
+      title: "MyASN BKN",
+      desc: "Layanan mandiri pemutakhiran data dan pemantauan riwayat kepegawaian bagi seluruh PNS dan PPPK.",
+      url: "https://myasn.bkn.go.id",
+      logo: ""
+    },
+    {
+      id: 6,
+      title: "Presensi Online Dumai",
+      desc: "Sistem pencatatan kehadiran dan presensi harian ASN berbasis lokasi dan real-time Pemerintah Kota Dumai.",
+      url: "https://presensi.dumaikota.go.id",
+      logo: ""
+    },
+    {
+      id: 7,
+      title: "SILAT-ASN Dumai",
+      desc: "Sistem Informasi Pelatihan & Pengembangan Kompetensi ASN Kota Dumai untuk pendaftaran Diklat dan Bimtek.",
+      url: "https://bkpsdm.dumaikota.go.id/silat",
+      logo: ""
+    },
+    {
+      id: 8,
+      title: "E-Kenaikan Pangkat",
+      desc: "Layanan lacak berkas usulan kenaikan pangkat secara elektronik untuk ASN Pemko Dumai.",
+      url: "https://bkpsdm.dumaikota.go.id/kp",
+      logo: ""
+    }
+  ];
+
+  // State
+  let appData = [...DEFAULT_APKS];
+  let currentSearch = '';
+
+  // BKN / BKN Brand Default SVG logos fallback
+  function handleLogoError(imgEl, title) {
+    if (imgEl && imgEl.parentElement) {
+      imgEl.parentElement.innerHTML = getFallbackSvgLogo(title);
+    }
+  }
+
+  function renderAppLogo(app) {
+    if (app.logo && app.logo.trim() !== '') {
+      const safeTitle = (app.title || '').replace(/'/g, "\\'");
+      return `<img src="${app.logo}" alt="Logo ${app.title}" onerror="handleLogoError(this, '${safeTitle}')">`;
+    }
+    return getFallbackSvgLogo(app.title);
+  }
+
+  function getFallbackSvgLogo(title) {
+    const t = (title || '').toLowerCase();
+    if (t.includes('dumai') || t.includes('simpeg')) {
+      return `<img src="/uploads/logo-bkpsdm.jpg" alt="Logo Dumai">`;
+    }
+    // Logo BKN Style Badge
+    return `<div style="display:flex;align-items:center;gap:8px;font-family:'Plus Jakarta Sans',sans-serif;">
+      <svg width="42" height="42" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="14" fill="#2563EB"/>
+        <circle cx="70" cy="30" r="10" fill="#EAA900"/>
+        <circle cx="50" cy="70" r="16" fill="#1D4ED8"/>
+        <path d="M30 30 L70 30 L50 70 Z" stroke="#1E4ED8" stroke-width="4" stroke-linejoin="round"/>
+      </svg>
+      <div style="font-size:12px;font-weight:800;color:#1E293B;line-height:1.2;">BKN<br><span style="font-size:9px;color:#2563EB;">PORTAL</span></div>
+    </div>`;
+  }
+
+  function renderCards(list) {
+    const grid = document.getElementById('appGrid');
+    if (!list || list.length === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:#8a978f;"><i class="fa-solid fa-circle-info" style="font-size:32px;display:block;margin-bottom:12px;"></i>Aplikasi tidak ditemukan.</div>';
+      return;
+    }
+
+    grid.innerHTML = list.map(app => `
+      <div class="app-card" data-id="${app.id}">
+        <div class="app-logo-box">
+          ${renderAppLogo(app)}
+        </div>
+        <div class="app-content">
+          <div class="app-title">${app.title}</div>
+          <p class="app-desc">${app.desc}</p>
+          <a href="${app.url || '#'}" target="_blank" rel="noopener" class="app-link-btn">
+            Klik Disini <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:12px;"></i>
+          </a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function applyFilter() {
+    const val = document.getElementById('appSearch').value.trim().toLowerCase();
+    currentSearch = val;
+    const filtered = appData.filter(app => {
+      const matchTitle = (app.title || '').toLowerCase().includes(val);
+      const matchDesc = (app.desc || '').toLowerCase().includes(val);
+      return matchTitle || matchDesc;
+    });
+    renderCards(filtered);
+  }
+
+  function toggleClearBtn() {
+    const input = document.getElementById('appSearch');
+    const btn = document.getElementById('clearSearchBtn');
+    if (input && btn) {
+      btn.style.display = input.value.length > 0 ? 'inline-flex' : 'none';
+    }
+  }
+
+  function clearSearch() {
+    const input = document.getElementById('appSearch');
+    if (input) {
+      input.value = '';
+      toggleClearBtn();
+      applyFilter();
+      input.focus();
+    }
+  }
+
+  const API_BASE = (location.protocol === 'file:' || (location.port && location.port !== '3000')) 
+    ? 'http://localhost:3000' 
+    : '';
+
+  function fetchApps() {
+    // Render default immediately so user never sees an empty screen
+    applyFilter();
+
+    fetch(API_BASE + '/api/aplikasi')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          appData = data;
+          applyFilter();
+        }
+      })
+      .catch(err => {
+        console.warn("Gagal fetch dari server, menggunakan data bawaan:", err);
+      });
+  }
+  fetchApps();
+
+  // ===== TOAST =====
+  const toast = document.getElementById('toast');
+  const toastMsg = document.getElementById('toastMsg');
+  let toastTimer;
+  function showToast(msg) {
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+  }
+
+
+
+
+  // Footer info fetch
+  fetch(API_BASE + '/api/kontak').then(r=>r.json()).then(d=>{
+    if(d.alamat) { const el = document.getElementById('f-alamat'); if(el) el.textContent = d.alamat; }
+    if(d.jam) { const el = document.getElementById('f-jam'); if(el) el.textContent = d.jam; }
+    if(d.telp) { const el = document.getElementById('f-telp'); if(el) el.innerHTML = '<i class="fa-solid fa-phone" style="margin-right:8px;"></i>' + d.telp; }
+    if(d.email) { const el = document.getElementById('f-email'); if(el) el.innerHTML = '<i class="fa-solid fa-envelope" style="margin-right:8px;"></i>' + d.email; }
+    if(d.fb) { const el = document.getElementById('f-fb'); if(el) el.href = d.fb; }
+    if(d.ig) { const el = document.getElementById('f-ig'); if(el) el.href = d.ig; }
+    if(d.yt) { const el = document.getElementById('f-yt'); if(el) el.href = d.yt; }
+  }).catch(()=>{});
+</script>
+</body>
+</html>

@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIPADU — Layanan | BKPSDM Kota Dumai</title>
+<title>SIKAP — Layanan | BKPSDM Kota Dumai</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root{
-    --ink:#0B2E33;
-    --teal-deep:#0E3A3F;
-    --teal:#1B5E63;
-    --teal-soft:#2C7A80;
-    --gold:#C9A227;
-    --gold-light:#E8C468;
-    --paper:#F6F1E4;
-    --paper-dark:#ECE2CA;
-    --cream:#F8F4E9;
-    --charcoal:#182420;
-    --line: rgba(11,46,51,0.14);
-    --shadow: 0 20px 50px -25px rgba(11,46,51,0.45);
+    --ink:#1B365D;
+    --teal-deep:#122846;
+    --teal:#27528A;
+    --teal-soft:#3B6CA8;
+    --gold:#EAA900;
+    --gold-light:#FFC82E;
+    --paper:#F4F6F9;
+    --paper-dark:#E2E8F0;
+    --cream:#FFFFFF;
+    --charcoal:#1E293B;
+    --line: rgba(27,54,93,0.12);
+    --shadow: 0 20px 50px -25px rgba(27,54,93,0.35);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -79,9 +79,9 @@
   .brand .name{color:var(--cream);}
   .brand .name b{display:block; font-family:'Fraunces',serif; font-size:16.5px; letter-spacing:0.01em;}
   .brand .name span{display:block; font-size:11px; color:var(--gold-light); letter-spacing:0.05em; margin-top:2px; font-family:'IBM Plex Mono',monospace;}
-  nav.links{display:flex; align-items:center; gap:34px;}
+  nav.links{display:flex; align-items:center; gap:28px;}
   nav.links a{
-    color:rgba(248,244,233,0.82); font-size:14.5px; font-weight:500;
+    color:rgba(248,244,233,0.9); font-size:18px; font-weight:700;
     position:relative; padding:4px 0;
   }
   nav.links a:hover{color:var(--cream);}
@@ -111,7 +111,7 @@
   }
   .hero-slide::before{
     content:''; position:absolute; inset:0;
-    background:linear-gradient(100deg, rgba(11,46,51,0.94) 0%, rgba(11,46,51,0.82) 38%, rgba(14,58,63,0.55) 68%, rgba(14,58,63,0.35) 100%);
+    background:linear-gradient(100deg, rgba(16,35,65,0.96) 0%, rgba(16,35,65,0.82) 45%, rgba(16,35,65,0.35) 75%, rgba(16,35,65,0.15) 100%);
   }
   .hero-slide.active{opacity:1; z-index:1;}
   .hero-slide.active .hero-slide-art{animation:kenburns 7s ease-out forwards;}
@@ -124,21 +124,21 @@
     background-repeat:no-repeat;
   }
   .slide-art-1{background:
-    radial-gradient(420px 420px at 88% 18%, rgba(232,196,104,0.35), transparent 70%),
-    radial-gradient(600px 600px at 70% 85%, rgba(44,122,128,0.55), transparent 70%),
-    linear-gradient(160deg, #0E3A3F, #0B2E33 70%);}
+    radial-gradient(420px 420px at 88% 18%, rgba(255,200,46,0.35), transparent 70%),
+    radial-gradient(600px 600px at 70% 85%, rgba(59,108,168,0.55), transparent 70%),
+    linear-gradient(160deg, #122846, #1B365D 70%);}
   .slide-art-2{background:
-    radial-gradient(500px 500px at 82% 75%, rgba(201,162,39,0.3), transparent 70%),
-    radial-gradient(500px 500px at 20% 15%, rgba(27,94,99,0.6), transparent 70%),
-    linear-gradient(200deg, #0B2E33, #123B40 60%);}
+    radial-gradient(500px 500px at 82% 75%, rgba(234,169,0,0.3), transparent 70%),
+    radial-gradient(500px 500px at 20% 15%, rgba(39,82,138,0.6), transparent 70%),
+    linear-gradient(200deg, #1B365D, #163259 60%);}
   .slide-art-3{background:
-    radial-gradient(460px 460px at 25% 80%, rgba(232,196,104,0.28), transparent 70%),
-    radial-gradient(520px 520px at 85% 25%, rgba(44,122,128,0.5), transparent 70%),
-    linear-gradient(140deg, #0E3A3F, #0A2226 65%);}
+    radial-gradient(460px 460px at 25% 80%, rgba(255,200,46,0.28), transparent 70%),
+    radial-gradient(520px 520px at 85% 25%, rgba(59,108,168,0.5), transparent 70%),
+    linear-gradient(140deg, #122846, #0D1D34 65%);}
   .slide-art-4{background:
-    radial-gradient(480px 480px at 78% 82%, rgba(201,162,39,0.3), transparent 70%),
-    radial-gradient(480px 480px at 15% 20%, rgba(27,94,99,0.55), transparent 70%),
-    linear-gradient(170deg, #0B2E33, #0E3A3F 70%);}
+    radial-gradient(480px 480px at 78% 82%, rgba(234,169,0,0.3), transparent 70%),
+    radial-gradient(480px 480px at 15% 20%, rgba(39,82,138,0.55), transparent 70%),
+    linear-gradient(170deg, #1B365D, #122846 70%);}
   .hero-icon-mark{
     position:absolute; right:6%; top:50%; transform:translateY(-50%);
     font-size:280px; color:rgba(248,244,233,0.05); z-index:0;
@@ -172,7 +172,7 @@
   .hero{
     background:var(--ink);
     color:var(--cream);
-    padding:84px 0 96px;
+    padding:100px 0 110px;
     position:relative;
     overflow:hidden;
   }
@@ -301,25 +301,25 @@
 
   /* Layanan */
   .layanan-band{background:var(--ink); color:var(--cream);}
-  .layanan-band .sec-head h2{color:var(--cream);}
-  .layanan-band .sec-head p{color:rgba(248,244,233,0.6);}
-  .layanan-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(248,244,233,0.12); border:1px solid rgba(248,244,233,0.12); border-radius:6px; overflow:hidden;}
+  .layanan-band .sec-head h2{color:#ffffff; font-size:38px; font-weight:700;}
+  .layanan-band .sec-head p{color:rgba(255,255,255,0.92); font-size:16.5px; font-weight:500;}
+  .layanan-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; background:transparent; border:none; border-radius:8px; overflow:visible;}
   .l-card{
-    background:var(--teal-deep); padding:26px 22px 24px; min-height:170px;
-    display:flex; flex-direction:column; gap:12px; position:relative;
-    transition:background .15s ease, transform .15s ease;
-    border-top:2px solid transparent;
+    background:rgba(18,40,70,0.85); border:1.5px solid rgba(248,244,233,0.22); border-radius:8px;
+    padding:28px 24px 26px; min-height:190px;
+    display:flex; flex-direction:column; gap:14px; position:relative;
+    transition:all .18s ease;
   }
-  .l-card:hover{background:#124347; transform:translateY(-3px); border-top-color:var(--gold);}
+  .l-card:hover{background:#143057; border-color:var(--gold-light); transform:translateY(-4px); box-shadow:0 10px 24px rgba(0,0,0,0.3);}
   .l-top{display:flex; align-items:center; justify-content:space-between;}
   .l-icon{
-    width:48px; height:48px; border-radius:10px; background:rgba(232,196,104,0.12);
-    border:1px solid rgba(232,196,104,0.22);
-    display:flex; align-items:center; justify-content:center; color:var(--gold-light); font-size:19px;
+    width:52px; height:52px; border-radius:12px; background:rgba(232,196,104,0.16);
+    border:1.5px solid rgba(232,196,104,0.35);
+    display:flex; align-items:center; justify-content:center; color:#F8D153; font-size:22px;
   }
-  .l-no{font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(248,244,233,0.3);}
-  .l-card h3{color:var(--cream); font-size:15.5px; font-weight:600; font-family:'Fraunces',serif;}
-  .l-card p{font-size:12.5px; color:rgba(248,244,233,0.55); line-height:1.55; margin:0;}
+  .l-no{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:rgba(255,255,255,0.5); font-weight:600;}
+  .l-card h3{color:#ffffff; font-size:19.5px; font-weight:700; font-family:'Fraunces',serif; margin-top:4px;}
+  .l-card p{font-size:14.5px; color:rgba(255,255,255,0.88); line-height:1.6; margin:0; font-weight:400;}
 
   /* Alur */
   .flow{display:grid; grid-template-columns:repeat(4,1fr); gap:0; row-gap:36px; position:relative;}
@@ -367,8 +367,8 @@
   }
   .mobile-panel.open{display:block;}
   .mobile-panel a{
-    display:block; padding:13px 32px; color:rgba(248,244,233,0.85);
-    font-size:15px; font-weight:500; border-bottom:1px solid rgba(248,244,233,0.06);
+    display:block; padding:13px 32px; color:rgba(248,244,233,0.9);
+    font-size:18px; font-weight:700; border-bottom:1px solid rgba(248,244,233,0.06);
   }
   .mobile-panel a.active{color:var(--gold-light);}
 
@@ -409,7 +409,7 @@
   .breadcrumb a{color:rgba(248,244,233,0.75);}
   .breadcrumb a:hover{color:var(--gold-light);}
   .page-header h1{position:relative; z-index:1; color:var(--cream); font-size:34px;}
-  .page-header p{position:relative; z-index:1; color:rgba(248,244,233,0.68); font-size:14.5px; margin-top:10px; max-width:560px; line-height:1.6;}
+  .page-header p{position:relative; z-index:1; color:rgba(255,255,255,0.92); font-size:15px; margin-top:10px; max-width:560px; line-height:1.6;}
 
   /* ===== FILTER PILLS (Pengumuman) ===== */
   .filter-bar{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:36px;}
@@ -491,33 +491,37 @@
     .form-row{grid-template-columns:1fr;}
   }
 
+
+
   /* ===== OFFLINE INFO BANNER ===== */
   .offline-banner{
-    display:flex; gap:20px; align-items:flex-start;
-    background:var(--cream); border:1px solid var(--line); border-left:5px solid var(--gold);
-    border-radius:8px; padding:24px 28px; margin-bottom:48px;
+    display:flex; gap:22px; align-items:flex-start;
+    background:var(--cream); border:2px solid var(--line); border-left:6px solid var(--gold);
+    border-radius:10px; padding:26px 30px; margin-bottom:36px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.04);
   }
   .offline-icon{
-    width:46px; height:46px; border-radius:50%; background:rgba(201,162,39,0.14); color:var(--gold);
-    display:flex; align-items:center; justify-content:center; font-size:19px; flex-shrink:0;
+    width:52px; height:52px; border-radius:50%; background:rgba(234,169,0,0.18); color:var(--gold);
+    display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;
   }
-  .offline-banner h3{font-size:16px; margin-bottom:6px;}
-  .offline-banner p{font-size:13.5px; line-height:1.7; color:#4a5751; margin:0; max-width:700px;}
-  .offline-banner p strong{color:var(--ink);}
+  .offline-banner h3{font-size:19px; font-weight:700; margin-bottom:8px; color:var(--ink);}
+  .offline-banner p{font-size:15.5px; line-height:1.75; color:#334155; margin:0; max-width:750px; font-weight:500;}
+  .offline-banner p strong{color:var(--ink); font-weight:700;}
   .offline-banner .ob-meta{
-    display:flex; gap:18px; margin-top:12px; flex-wrap:wrap;
+    display:flex; gap:20px; margin-top:14px; flex-wrap:wrap;
   }
   .offline-banner .ob-meta span{
-    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--teal); display:flex; align-items:center; gap:6px;
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px; font-weight:700; color:var(--teal); display:flex; align-items:center; gap:8px;
   }
 
-  /* ===== SERVICE CARDS ===== */
-  .svc-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  /* ===== SERVICE CARDS (3 COLUMNS - RAMAH LANSIA) ===== */
+  .svc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
 
   .staff-cta{
-    display:flex; align-items:center; gap:20px; text-decoration:none;
+    display:flex; align-items:center; gap:22px; text-decoration:none;
     background:linear-gradient(120deg, var(--ink), var(--teal-deep));
-    border-radius:10px; padding:24px 28px; margin-bottom:36px; position:relative; overflow:hidden;
+    border-radius:12px; padding:26px 32px; margin-bottom:36px; position:relative; overflow:hidden;
+    border:1.5px solid rgba(232,196,104,0.3);
     transition:transform .18s ease, box-shadow .18s ease;
   }
   .staff-cta::before{
@@ -529,36 +533,35 @@
   .staff-cta:hover{transform:translateY(-3px); box-shadow:var(--shadow);}
   .staff-cta-icon{
     position:relative; z-index:1; flex-shrink:0;
-    width:52px; height:52px; border-radius:50%; background:rgba(232,196,104,0.14);
-    border:1px solid rgba(232,196,104,0.3); color:var(--gold-light);
-    display:flex; align-items:center; justify-content:center; font-size:20px;
+    width:56px; height:56px; border-radius:50%; background:rgba(232,196,104,0.18);
+    border:1.5px solid rgba(232,196,104,0.4); color:var(--gold-light);
+    display:flex; align-items:center; justify-content:center; font-size:22px;
   }
   .staff-cta-text{position:relative; z-index:1; flex:1; min-width:200px;}
-  .staff-cta-text h3{color:var(--cream); font-size:16.5px; margin-bottom:5px; font-family:'Fraunces',serif; font-weight:600;}
-  .staff-cta-text p{color:rgba(248,244,233,0.65); font-size:13px; line-height:1.6; margin:0; max-width:560px;}
-  .staff-cta-text p strong{color:var(--gold-light); font-weight:600;}
+  .staff-cta-text h3{color:var(--cream); font-size:18.5px; margin-bottom:6px; font-family:'Fraunces',serif; font-weight:700;}
+  .staff-cta-text p{color:rgba(248,244,233,0.85); font-size:14.5px; line-height:1.65; margin:0; max-width:580px; font-weight:400;}
+  .staff-cta-text p strong{color:var(--gold-light); font-weight:700;}
   .staff-cta-btn{
     position:relative; z-index:1; flex-shrink:0;
     display:flex; align-items:center; gap:8px;
     background:linear-gradient(180deg, var(--gold-light), var(--gold)); color:var(--ink);
-    font-size:13.5px; font-weight:700; padding:11px 18px; border-radius:4px; white-space:nowrap;
+    font-size:14.5px; font-weight:800; padding:12px 22px; border-radius:6px; white-space:nowrap;
+    box-shadow:0 4px 14px rgba(234,169,0,0.3);
   }
-  .staff-cta-btn i{font-size:11px; transition:transform .15s ease;}
-  .staff-cta:hover .staff-cta-btn i{transform:translateX(4px);}
+  .staff-cta-btn i{font-size:12px; transition:transform .15s ease;}
+  .staff-cta:hover .staff-cta-btn i{transform:translateX(5px);}
 
-  @media (max-width:700px){
-    .staff-cta{flex-direction:column; align-items:flex-start; text-align:left;}
-    .staff-cta-btn{width:100%; justify-content:center;}
-  }
   .svc-card{
-    background:var(--cream); border:1px solid var(--line); border-radius:8px; overflow:hidden;
+    background:#FFFFFF; border:2px solid #CBD5E1; border-radius:12px; overflow:hidden;
     display:flex; flex-direction:column;
     transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    box-shadow:0 6px 18px rgba(0,0,0,0.05);
   }
-  .svc-card:hover{transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--gold);}
+  .svc-card:hover{transform:translateY(-5px); box-shadow:0 20px 40px -10px rgba(27,54,93,0.2); border-color:var(--teal);}
   .svc-head{
     background:linear-gradient(155deg, var(--teal-deep), var(--ink));
-    padding:20px 18px 16px; position:relative; overflow:hidden;
+    padding:22px 22px 18px; position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:space-between;
   }
   .svc-head::after{
     content:''; position:absolute; inset:0;
@@ -566,78 +569,92 @@
     background-size:18px 18px;
   }
   .svc-icon{
-    width:42px; height:42px; border-radius:10px; background:rgba(232,196,104,0.14); border:1px solid rgba(232,196,104,0.28);
-    color:var(--gold-light); display:flex; align-items:center; justify-content:center; font-size:17px;
-    position:relative; z-index:1; margin-bottom:14px;
+    width:48px; height:48px; border-radius:12px; background:rgba(232,196,104,0.18); border:1.5px solid rgba(232,196,104,0.35);
+    color:var(--gold-light); display:flex; align-items:center; justify-content:center; font-size:20px;
+    position:relative; z-index:1; margin-bottom:0;
   }
   .svc-tag{
-    position:relative; z-index:1; display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:9px;
-    letter-spacing:0.05em; text-transform:uppercase; background:var(--gold); color:var(--ink);
-    padding:4px 9px; border-radius:2px; font-weight:700;
+    position:relative; z-index:1; display:inline-block; font-family:'Plus Jakarta Sans',sans-serif; font-size:11.5px;
+    letter-spacing:0.04em; text-transform:uppercase; background:var(--gold); color:var(--ink);
+    padding:5px 12px; border-radius:4px; font-weight:800; box-shadow:0 2px 6px rgba(0,0,0,0.2);
   }
-  .svc-body{padding:16px 18px 18px; display:flex; flex-direction:column; gap:12px; flex:1;}
-  .svc-body h3{font-size:14.5px; line-height:1.35; min-height:38px;}
-  .svc-actions{display:flex; flex-direction:column; gap:8px; margin-top:auto;}
+  .svc-body{padding:24px 22px 24px; display:flex; flex-direction:column; gap:16px; flex:1;}
+  .svc-body h3{font-size:19.5px; line-height:1.4; font-weight:700; color:#0F172A; min-height:auto; font-family:'Fraunces',serif;}
+  .svc-actions{display:flex; flex-direction:column; gap:10px; margin-top:auto;}
   .svc-btn{
-    display:flex; align-items:center; justify-content:center; gap:7px;
-    font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.02em; font-weight:600;
-    padding:9px 8px; border-radius:20px; border:1.2px solid var(--line); color:var(--teal);
-    background:transparent; cursor:pointer; transition:all .15s ease;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px; font-weight:700;
+    padding:12px 14px; border-radius:6px; border:1.5px solid #CBD5E1; color:var(--ink);
+    background:#F8FAFC; cursor:pointer; transition:all .15s ease;
   }
-  .svc-btn:hover{border-color:var(--teal-soft); background:rgba(27,94,99,0.06);}
-  .svc-btn.primary{border-color:var(--ink); color:var(--ink); background:var(--paper-dark);}
-  .svc-btn.primary:hover{background:var(--ink); color:var(--cream); border-color:var(--ink);}
+  .svc-btn:hover{border-color:var(--teal); background:rgba(39,82,138,0.08); color:var(--ink);}
+  .svc-btn.primary{border-color:var(--ink); color:#FFFFFF; background:var(--ink); font-size:14px;}
+  .svc-btn.primary:hover{background:var(--gold); color:var(--ink); border-color:var(--gold);}
 
   @media (max-width:980px){
     .svc-grid{grid-template-columns:repeat(2,1fr);}
   }
-  @media (max-width:560px){
+  @media (max-width:640px){
     .svc-grid{grid-template-columns:1fr;}
     .offline-banner{flex-direction:column;}
   }
 
-  /* ===== MODAL: SYARAT & KETENTUAN ===== */
+  /* ===== MODAL: SYARAT & KETENTUAN (RAMAH LANSIA) ===== */
   .modal-overlay{
-    position:fixed; inset:0; background:rgba(11,46,51,0.55); backdrop-filter:blur(2px);
+    position:fixed; inset:0; background:rgba(11,46,51,0.65); backdrop-filter:blur(3px);
     display:none; align-items:center; justify-content:center; z-index:200; padding:20px;
   }
   .modal-overlay.open{display:flex;}
   .modal-box{
-    background:var(--cream); border-radius:10px; max-width:480px; width:100%;
-    max-height:85vh; overflow-y:auto; box-shadow:0 30px 70px -20px rgba(11,46,51,0.5);
+    background:#FFFFFF; border-radius:12px; max-width:620px; width:100%;
+    max-height:88vh; overflow-y:auto; box-shadow:0 35px 80px -20px rgba(11,46,51,0.6);
     animation:modalIn .22s ease both;
   }
   @keyframes modalIn{from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:translateY(0) scale(1);}}
   .modal-head{
-    background:linear-gradient(155deg, var(--teal-deep), var(--ink)); color:var(--cream);
-    padding:22px 26px; display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
-    position:sticky; top:0;
+    background:linear-gradient(155deg, var(--teal-deep), var(--ink)); color:#FFFFFF;
+    padding:24px 28px; display:flex; justify-content:space-between; align-items:flex-start; gap:14px;
+    position:sticky; top:0; z-index:10;
   }
-  .modal-head h3{color:var(--cream); font-size:18px; line-height:1.3;}
-  .modal-head span{display:block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px;}
+  .modal-head h3{color:#FFFFFF; font-size:22px; line-height:1.3; font-weight:700;}
+  .modal-head span{display:block; font-family:'Plus Jakarta Sans',sans-serif; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold-light); font-weight:800; margin-bottom:6px;}
   .modal-close{
-    background:rgba(248,244,233,0.12); border:none; color:var(--cream); width:30px; height:30px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;
+    background:rgba(248,244,233,0.15); border:none; color:var(--cream); width:36px; height:36px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; font-size:16px;
   }
-  .modal-close:hover{background:rgba(232,196,104,0.25); color:var(--gold-light);}
-  .modal-body{padding:22px 26px 26px;}
-  .modal-body p.modal-note{font-size:13px; color:#5b6a63; line-height:1.65; margin:0 0 16px;}
-  .req-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
-  .req-list li{display:flex; gap:10px; font-size:13.5px; color:#3f4c46; line-height:1.55;}
-  .req-list li i{color:var(--teal); margin-top:3px; flex-shrink:0; font-size:12px;}
-  .modal-foot{display:flex; gap:10px; margin-top:22px; flex-wrap:wrap;}
+  .modal-close:hover{background:var(--gold); color:var(--ink);}
+  .modal-body{padding:26px 28px 30px;}
+  .modal-body p.modal-note{font-size:14.5px; color:#334155; line-height:1.7; margin:0 0 20px; font-weight:500;}
+  .req-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .req-list li{
+    display:flex; gap:12px; font-size:15px; color:#1E293B; line-height:1.6; font-weight:500;
+    background:#F8FAFC; border:1.5px solid #E2E8F0; border-radius:8px; padding:12px 16px;
+  }
+  .req-list li i{color:var(--teal); margin-top:3px; flex-shrink:0; font-size:16px;}
+  .modal-foot{display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;}
 
   /* ===== TOAST ===== */
   .toast{
     position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px);
-    background:var(--ink); color:var(--cream); padding:13px 22px; border-radius:6px;
-    font-size:13.5px; display:flex; align-items:center; gap:10px; box-shadow:var(--shadow);
+    background:var(--ink); color:var(--cream); padding:14px 24px; border-radius:8px;
+    font-size:14.5px; font-weight:600; display:flex; align-items:center; gap:10px; box-shadow:var(--shadow);
     z-index:300; opacity:0; pointer-events:none; transition:opacity .22s ease, transform .22s ease;
-    border-left:3px solid var(--gold);
+    border-left:4px solid var(--gold);
   }
   .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
   .toast i{color:var(--gold-light);}
 
+  /* ===== HIGHLIGHT TARGET DARI URL PARAM ===== */
+  .svc-card.highlight-target {
+    border-color: var(--gold) !important;
+    box-shadow: 0 0 0 3px rgba(234,169,0,0.4), 0 20px 40px -10px rgba(27,54,93,0.35) !important;
+    animation: pulseHighlight 1.8s ease 3;
+  }
+  @keyframes pulseHighlight {
+    0%{box-shadow: 0 0 0 3px rgba(234,169,0,0.4), 0 20px 40px -10px rgba(27,54,93,0.35);}
+    50%{box-shadow: 0 0 0 9px rgba(234,169,0,0.18), 0 20px 40px -10px rgba(27,54,93,0.35);}
+    100%{box-shadow: 0 0 0 3px rgba(234,169,0,0.4), 0 20px 40px -10px rgba(27,54,93,0.35);}
+  }
 </style>
 </head>
 <body>
@@ -647,7 +664,7 @@
     <a href="index.html" class="brand" style="cursor:pointer;">
       <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
       <div class="name">
-        <b>SIPADU</b>
+        <b>SIKAP</b>
         <span>BKPSDM KOTA DUMAI</span>
       </div>
     </a>
@@ -657,11 +674,9 @@
       <a href="pengumuman.html">Pengumuman</a>
       <a href="kegiatan.html">Kegiatan</a>
       <a href="layanan.html" class="active">Layanan</a>
-      <a href="alur.html">Cara Mengajukan</a>
-      <a href="kontak.html">Kontak</a>
+      <a href="aplikasi.html">Aplikasi</a>
     </nav>
     <div style="display:flex; align-items:center; gap:14px;">
-      <a href="layanan.html" class="btn btn-gold"><i class="fa-solid fa-list-check"></i> Informasi Layanan</a>
       <button class="hamburger" id="hamburgerBtn" aria-label="Buka menu" aria-expanded="false">
         <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
       </button>
@@ -673,8 +688,7 @@
     <a href="pengumuman.html">Pengumuman</a>
     <a href="kegiatan.html">Kegiatan</a>
     <a href="layanan.html" class="active">Layanan</a>
-    <a href="alur.html">Cara Mengajukan</a>
-    <a href="kontak.html">Kontak</a>
+    <a href="aplikasi.html">Aplikasi</a>
   </div>
 </header>
 
@@ -685,8 +699,10 @@
     <p>Berikut jenis-jenis pelayanan yang disediakan oleh BKPSDM Kota Dumai. Pelajari syarat & ketentuan sebelum datang ke kantor.</p>
   </div>
 </section>
-<section id="layanan" style="padding-top:56px;">
+<section id="layanan" style="padding-top:40px;">
   <div class="wrap">
+
+
 
     <div class="offline-banner">
       <div class="offline-icon"><i class="fa-solid fa-building-flag"></i></div>
@@ -708,6 +724,20 @@
       </div>
       <div class="staff-cta-btn">Lihat Status Staff <i class="fa-solid fa-arrow-right"></i></div>
     </a>
+
+    <div id="filterBanner" style="display:none; margin-bottom:24px; background:linear-gradient(135deg, var(--teal-deep), var(--ink)); color:var(--cream); padding:16px 22px; border-radius:10px; border:1.5px solid var(--gold); justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; box-shadow:var(--shadow);">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <i class="fa-solid fa-layer-group" style="color:var(--gold-light); font-size:22px;"></i>
+        <div>
+          <div style="font-size:11px; font-family:'IBM Plex Mono',monospace; color:var(--gold-light); text-transform:uppercase; letter-spacing:0.06em;">Filter Layanan Menurut Bidang Staf</div>
+          <strong id="filterBannerText" style="font-size:16px; color:#fff; font-family:'Fraunces',serif;">-</strong>
+        </div>
+      </div>
+      <button onclick="resetLayananFilter()" class="btn btn-gold" style="font-size:12.5px; padding:8px 16px;">
+        <i class="fa-solid fa-rotate-left"></i> Tampilkan Semua Layanan
+      </button>
+    </div>
+
     <div id="svcGrid" class="svc-grid">
       <!-- Kartu layanan akan dirender oleh JS dari API -->
       <div style="grid-column:1/-1;text-align:center;padding:40px;color:#999;"><i class="fa-solid fa-spinner fa-spin"></i> Memuat layanan...</div>
@@ -715,24 +745,7 @@
   </div>
 </section>
 
-<section id="alur-mini">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="eyebrow">PANDUAN SINGKAT</div>
-        <h2>Prosedur pengajuan di kantor</h2>
-      </div>
-      <p>Empat langkah prosedur pelayanan fisik di kantor BKPSDM Kota Dumai.</p>
-    </div>
-    <div class="flow" id="flowStepsContainer">
-      <!-- Steps will be rendered by JS -->
-      <div style="text-align:center;padding:20px;color:#999;"><i class="fa-solid fa-spinner fa-spin"></i> Memuat panduan...</div>
-    </div>
-    <div class="preview-foot">
-      <a href="alur.html" class="btn btn-outline-ink"><i class="fa-solid fa-circle-question"></i> Panduan Lengkap & FAQ</a>
-    </div>
-  </div>
-</section>
+
 
 
 <div class="modal-overlay" id="syaratModal" aria-hidden="true">
@@ -745,10 +758,20 @@
       <button class="modal-close" onclick="closeSyarat()" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="modal-body">
-      <p class="modal-note">Lengkapi seluruh dokumen berikut sebelum datang ke loket BKPSDM Kota Dumai. Berkas yang tidak lengkap akan dikembalikan untuk dilengkapi.</p>
-      <ul class="req-list" id="syaratList"></ul>
+      <p class="modal-note">Lengkapi seluruh dokumen fisik dan ikuti alur tahapan prosedur khusus berikut sebelum datang ke loket BKPSDM Kota Dumai.</p>
+      
+      <div style="margin-bottom:20px;">
+        <h4 style="font-size:16px;font-weight:700;color:var(--ink);margin-bottom:12px;display:flex;align-items:center;gap:8px;"><i class="fa-solid fa-clipboard-check" style="color:var(--teal);font-size:18px;"></i> 1. Dokumen Persyaratan Berkas</h4>
+        <ul class="req-list" id="syaratList"></ul>
+      </div>
+
+      <div style="margin-bottom:24px;border-top:1.5px dashed var(--line);padding-top:20px;">
+        <h4 style="font-size:16px;font-weight:700;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:8px;"><i class="fa-solid fa-arrows-spin" style="color:var(--gold);font-size:18px;"></i> 2. Tahapan &amp; Prosedur Layanan Khusus</h4>
+        <div id="svcProcedureList" style="display:flex;flex-direction:column;gap:12px;"></div>
+      </div>
+
       <!-- Info staf tujuan -->
-      <div id="staffTargetBox" style="margin-top:18px;padding:14px 16px;background:rgba(27,94,99,0.07);border:1px solid rgba(27,94,99,0.18);border-radius:5px;display:none;">
+      <div id="staffTargetBox" style="margin-top:14px;padding:14px 16px;background:rgba(27,94,99,0.07);border:1px solid rgba(27,94,99,0.18);border-radius:6px;display:none;">
         <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;"><i class="fa-solid fa-user-tie" style="margin-right:6px;"></i>Hubungi Staf Pelaksana</div>
         <div id="staffTargetName" style="font-weight:600;font-size:14px;"></div>
         <a id="staffTargetLink" href="staf.html" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--teal);margin-top:5px;font-weight:600;">
@@ -760,7 +783,7 @@
         <button id="modalPdfBtn" class="btn btn-gold" style="display:none;" onclick="downloadPDF()">
           <i class="fa-solid fa-file-pdf"></i> Download Formulir PDF
         </button>
-        <a href="kontak.html" class="btn" style="background:var(--teal);color:var(--cream);text-decoration:none;"><i class="fa-solid fa-phone"></i> Tanya BKPSDM</a>
+        <a href="#kontak-footer" class="btn" style="background:var(--teal);color:var(--cream);text-decoration:none;"><i class="fa-solid fa-phone"></i> Tanya BKPSDM</a>
       </div>
     </div>
   </div>
@@ -774,7 +797,7 @@
       <div class="foot-brand">
         <div class="brand">
           <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
-          <div class="name"><b>SIPADU</b><span>BKPSDM KOTA DUMAI</span></div>
+          <div class="name"><b>SIKAP</b><span>BKPSDM KOTA DUMAI</span></div>
         </div>
         <p>Sistem Informasi Pengumuman dan Layanan Kepegawaian — melayani Aparatur Sipil Negara di lingkungan Pemerintah Kota Dumai secara transparan dan akuntabel.</p>
         <div class="social">
@@ -786,22 +809,34 @@
       <div class="foot-col">
         <h4>Kantor</h4>
         <p id="f-alamat">Jl. Tuanku Tambusai, Bagan Besar, Kec. Bukit Kapur, Kota Dumai, Riau 28825</p>
-        <p id="f-jam">Senin–Jumat, 08.00–16.00 WIB</p>
+        <p id="f-jam" style="margin-bottom:10px;">Senin–Jumat, 08.00–16.00 WIB</p>
+        <div style="width:100%;max-width:240px;height:110px;border-radius:8px;overflow:hidden;border:1px solid rgba(248,244,233,0.18);box-shadow:0 4px 12px rgba(0,0,0,0.25);margin-top:8px;">
+          <iframe
+            id="footerMap"
+            src="https://maps.google.com/maps?q=BKPSDM+Kota+Dumai+Jl+Tuanku+Tambusai+Bagan+Besar+Dumai&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="100%"
+            style="border:0;display:block;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Peta Lokasi Kantor BKPSDM Kota Dumai">
+          </iframe>
+        </div>
       </div>
       <div class="foot-col">
         <h4>Kontak</h4>
-        <a id="f-telp" href="kontak.html"><i class="fa-solid fa-phone" style="margin-right:8px;"></i>(0765) 123-456</a>
-        <a id="f-email" href="kontak.html"><i class="fa-solid fa-envelope" style="margin-right:8px;"></i>bkpsdm@dumaikota.go.id</a>
+        <a id="f-telp" href="tel:0765123000"><i class="fa-solid fa-phone" style="margin-right:8px;"></i>(0765) 123-456</a>
+        <a id="f-email" href="mailto:bkpsdm@dumaikota.go.id"><i class="fa-solid fa-envelope" style="margin-right:8px;"></i>bkpsdm@dumaikota.go.id</a>
       </div>
       <div class="foot-col">
         <h4>Tautan</h4>
         <a href="pengumuman.html">Pengumuman</a>
         <a href="kegiatan.html">Kegiatan</a>
         <a href="layanan.html">Layanan Kepegawaian</a>
-        <a href="alur.html">Panduan Pengajuan</a>
-        <a href="kontak.html">Kontak</a>
+        <a href="aplikasi.html">Aplikasi ASN</a>
         <a href="staf.html">Direktori Staf <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:9px; margin-left:3px;"></i></a>
-        <a href="admin.html" style="color:rgba(248,244,233,0.35);font-size:12px;margin-top:6px;"><i class="fa-solid fa-shield-halved" style="margin-right:6px;font-size:10px;"></i>Admin Web</a>
+        <a href="admin.html">Admin <i class="fa-solid fa-shield-halved" style="font-size:10px; margin-left:3px;"></i></a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -828,24 +863,42 @@
     });
   });
 
+  const DEFAULT_STEPS = [
+    { num:'01', title:'Cek Syarat & Formulir', desc:'Pelajari persyaratan layanan dan unduh formulir permohonan melalui website SIKAP.' },
+    { num:'02', title:'Lengkapi Berkas Fisik', desc:'Cetak dan isi formulir serta lengkapi seluruh dokumen persyaratan fisik yang dibutuhkan.' },
+    { num:'03', title:'Serahkan ke Loket BKPSDM', desc:'Datang langsung ke kantor BKPSDM Kota Dumai untuk verifikasi dan penyerahan berkas.' },
+    { num:'04', title:'Pengambilan Dokumen / SK', desc:'Ambil Surat Keputusan (SK) atau dokumen resmi langsung di loket layanan setelah diproses.' }
+  ];
+
+  function renderAlurSteps(steps) {
+    const container = document.getElementById('flowStepsContainer');
+    if (!container) return;
+    container.innerHTML = steps.map(step => `
+      <div class="f-step">
+        <div class="f-num">${step.num}</div>
+        <h3>${step.title}</h3>
+        <p>${step.desc}</p>
+      </div>
+    `).join('');
+  }
+
+  const API_BASE = (location.protocol === 'file:' || (location.port && location.port !== '3000')) 
+    ? 'http://localhost:3000' 
+    : '';
+
   function fetchAlur() {
-    fetch('/api/alur')
+    fetch(API_BASE + '/api/alur')
       .then(res => res.json())
       .then(data => {
-        if (data.steps) {
-          const stepsHtml = data.steps.map(step => `
-            <div class="f-step">
-              <div class="f-num">${step.num}</div>
-              <h3>${step.title}</h3>
-              <p>${step.desc}</p>
-            </div>
-          `).join('');
-          const container = document.getElementById('flowStepsContainer');
-          if (container) container.innerHTML = stepsHtml;
+        if (data && data.steps && data.steps.length) {
+          renderAlurSteps(data.steps);
+        } else {
+          renderAlurSteps(DEFAULT_STEPS);
         }
       })
       .catch(err => {
         console.error("Error loading alur data:", err);
+        renderAlurSteps(DEFAULT_STEPS);
       });
   }
   fetchAlur();
@@ -888,7 +941,7 @@
           <div class="svc-body">
             <h3>${l.title}</h3>
             <div class="svc-actions">
-              <button class="svc-btn primary" onclick="openSyarat(this)"><i class="fa-solid fa-circle-info"></i> Syarat &amp; Ketentuan</button>
+              <button class="svc-btn primary" onclick="openSyarat(this)"><i class="fa-solid fa-list-check"></i> Syarat &amp; Prosedur Layanan</button>
               ${actionBtn}
             </div>
           </div>
@@ -897,12 +950,90 @@
     }).join('');
   }
 
+  function applyLayananFilter(queryVal) {
+    if (!queryVal) return;
+    const qLower = queryVal.toLowerCase();
+    
+    // Pemetaan kata kunci bidang ke layanan
+    const bidangKeywords = {
+      'sekretariat': ['sekretariat', 'umum', 'persuratan', 'tata usaha', 'administrasi'],
+      'pengadaan': ['pengadaan', 'cpns', 'pppk', 'pensiun', 'pemberhentian', 'informasi', 'nip'],
+      'mutasi': ['mutasi', 'pangkat', 'kepangkatan', 'ijazah', 'karir', 'jabatan'],
+      'pengembangan': ['pengembangan', 'diklat', 'pelatihan', 'ukom', 'kompetensi', 'latsar'],
+      'pembinaan': ['pembinaan', 'disiplin', 'kesejahteraan', 'karpeg', 'karsu', 'karsi', 'penghargaan']
+    };
+
+    let keywords = [qLower];
+    for (const key in bidangKeywords) {
+      if (qLower.includes(key)) {
+        keywords = keywords.concat(bidangKeywords[key]);
+      }
+    }
+
+    const filtered = layananData.filter(l => {
+      const tag = (l.tag || '').toLowerCase();
+      const title = (l.title || '').toLowerCase();
+      const desc = (l.desc || '').toLowerCase();
+      const items = (l.items || []).join(' ').toLowerCase();
+      const staff = (l.contactPersonName || '').toLowerCase();
+      const target = (l.staffTarget || '').toLowerCase();
+      const combined = `${tag} ${title} ${desc} ${items} ${staff} ${target}`;
+
+      return keywords.some(kw => combined.includes(kw));
+    });
+
+    const filterBanner = document.getElementById('filterBanner');
+    const filterBannerText = document.getElementById('filterBannerText');
+    if (filterBanner && filterBannerText) {
+      filterBannerText.textContent = queryVal;
+      filterBanner.style.display = 'flex';
+    }
+
+    if (filtered.length > 0) {
+      renderCards(filtered);
+    } else {
+      renderCards(layananData);
+    }
+
+    // Scroll & highlight kartu lalu LANGSUNG BUKA MODAL DETAIL LAYANAN
+    setTimeout(() => {
+      const cards = document.querySelectorAll('.svc-card');
+      if (cards.length > 0) {
+        cards[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        cards.forEach(c => {
+          c.classList.add('highlight-target');
+          setTimeout(() => c.classList.remove('highlight-target'), 6000);
+        });
+
+        // Buka otomatis modal syarat & prosedur layanan pertama
+        const firstPrimaryBtn = cards[0].querySelector('.svc-btn.primary');
+        if (firstPrimaryBtn) {
+          openSyarat(firstPrimaryBtn);
+        }
+      }
+    }, 350);
+  }
+
+  function resetLayananFilter() {
+    const filterBanner = document.getElementById('filterBanner');
+    if (filterBanner) filterBanner.style.display = 'none';
+    window.history.replaceState({}, document.title, window.location.pathname);
+    renderCards(layananData);
+  }
+
   function fetchLayanan() {
-    fetch('/api/layanan')
+    fetch(API_BASE + '/api/layanan')
       .then(r => r.json())
       .then(data => {
         layananData = data;
         renderCards(data);
+
+        // ===== URL PARAM ?bidang= atau ?q= =====
+        const urlParams = new URLSearchParams(window.location.search);
+        const q = urlParams.get('bidang') || urlParams.get('q');
+        if (q && q.trim()) {
+          applyLayananFilter(q.trim());
+        }
       })
       .catch(() => {
         // Fallback: render statik dari data lokal
@@ -928,6 +1059,24 @@
     currentLayanan = data;
     syaratTitle.textContent = data.title;
     syaratList.innerHTML = (data.items || []).map(item => `<li><i class="fa-solid fa-circle-check"></i> ${item}</li>`).join('');
+
+    // Render Prosedur Khusus Layanan Ini
+    const procList = document.getElementById('svcProcedureList');
+    const defaultProc = [
+      "Pengusulan & penyiapan berkas dokumen persyaratan fisik.",
+      "Penyerahan berkas ke Loket BKPSDM Kota Dumai.",
+      "Verifikasi administrasi & teknis oleh tim pengelola.",
+      "Penetapan dan pengambilan Surat Keputusan (SK) / dokumen resmi."
+    ];
+    const steps = (data.procedure && data.procedure.length) ? data.procedure : defaultProc;
+    if (procList) {
+      procList.innerHTML = steps.map((st, idx) => `
+        <div style="display:flex;align-items:flex-start;gap:14px;background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:8px;padding:14px 18px;">
+          <div style="width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--gold-light);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${idx + 1}</div>
+          <div style="font-size:15px;color:#1e293b;line-height:1.6;font-weight:600;">${st}</div>
+        </div>
+      `).join('');
+    }
 
     // Tampilkan info staf tujuan
     if (data.contactPersonName && data.contactPersonName.trim()) {
@@ -976,9 +1125,24 @@
     a.download = data.pdfName || 'formulir.pdf';
     a.click();
   }
+
+
 </script>
 <script>
-  fetch('/api/kontak').then(r=>r.json()).then(d=>{
+  function parseMapSrc(src, alamat) {
+    if (!src || !src.trim()) {
+      const q = encodeURIComponent(alamat || "BKPSDM Kota Dumai Jl Tuanku Tambusai Bagan Besar Dumai");
+      return "https://maps.google.com/maps?q=" + q + "&t=&z=16&ie=UTF8&iwloc=&output=embed";
+    }
+    let s = src.trim();
+    const match = s.match(/src=["']([^"']+)["']/i);
+    if (match && match[1]) s = match[1];
+    if (s.startsWith('http://') || s.startsWith('https://')) return s;
+    const q = encodeURIComponent(s);
+    return "https://maps.google.com/maps?q=" + q + "&t=&z=16&ie=UTF8&iwloc=&output=embed";
+  }
+
+  fetch(API_BASE + '/api/kontak').then(r=>r.json()).then(d=>{
     if(d.alamat) { const el = document.getElementById('f-alamat'); if(el) el.textContent = d.alamat; }
     if(d.jam) { const el = document.getElementById('f-jam'); if(el) el.textContent = d.jam; }
     if(d.telp) { const el = document.getElementById('f-telp'); if(el) el.innerHTML = '<i class="fa-solid fa-phone" style="margin-right:8px;"></i>' + d.telp; }
@@ -986,6 +1150,8 @@
     if(d.fb) { const el = document.getElementById('f-fb'); if(el) el.href = d.fb; }
     if(d.ig) { const el = document.getElementById('f-ig'); if(el) el.href = d.ig; }
     if(d.yt) { const el = document.getElementById('f-yt'); if(el) el.href = d.yt; }
+    const fMap = document.getElementById('footerMap');
+    if(fMap) { fMap.src = parseMapSrc(d.mapIframeSrc, d.alamat); }
   }).catch(()=>{});
 </script>
 </body>

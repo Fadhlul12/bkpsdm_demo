@@ -132,6 +132,59 @@ app.delete('/api/pengumuman/:id', (req, res) => {
   res.json({ success: true });
 });
 
+// Pengumuman Categories APIs
+const DEFAULT_PENGUMUMAN_CATS = [
+  { id: 'cpns', name: 'CPNS/PPPK' },
+  { id: 'kepangkatan', name: 'Kepangkatan' },
+  { id: 'diklat', name: 'Pendidikan & Latihan' },
+  { id: 'mutasi', name: 'Mutasi' },
+  { id: 'pensiun', name: 'Pensiun' }
+];
+
+app.get('/api/pengumuman-categories', (req, res) => {
+  const db = readDb();
+  if (!db.pengumumanCategories || !db.pengumumanCategories.length) {
+    db.pengumumanCategories = DEFAULT_PENGUMUMAN_CATS;
+    writeDb(db);
+  }
+  res.json(db.pengumumanCategories);
+});
+
+app.post('/api/pengumuman-categories', (req, res) => {
+  const db = readDb();
+  if (!db.pengumumanCategories || !db.pengumumanCategories.length) {
+    db.pengumumanCategories = [...DEFAULT_PENGUMUMAN_CATS];
+  }
+  const { id, name } = req.body;
+  if (!name || !name.trim()) {
+    return res.status(400).json({ error: 'Nama kategori harus diisi' });
+  }
+
+  const catId = (id && id.trim()) 
+    ? id.trim().toLowerCase().replace(/\s+/g, '-')
+    : name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+  const existingIdx = db.pengumumanCategories.findIndex(c => c.id === catId);
+  if (existingIdx !== -1) {
+    db.pengumumanCategories[existingIdx].name = name.trim();
+  } else {
+    db.pengumumanCategories.push({ id: catId, name: name.trim() });
+  }
+  writeDb(db);
+  res.json({ success: true, data: db.pengumumanCategories });
+});
+
+app.delete('/api/pengumuman-categories/:id', (req, res) => {
+  const db = readDb();
+  if (!db.pengumumanCategories) {
+    db.pengumumanCategories = [...DEFAULT_PENGUMUMAN_CATS];
+  }
+  const catId = req.params.id;
+  db.pengumumanCategories = db.pengumumanCategories.filter(c => c.id !== catId);
+  writeDb(db);
+  res.json({ success: true, data: db.pengumumanCategories });
+});
+
 // Kegiatan APIs
 app.get('/api/kegiatan', (req, res) => {
   const db = readDb();
@@ -395,6 +448,99 @@ app.post('/api/board', (req, res) => {
   db.board = { ...DEFAULT_BOARD, ...db.board, ...req.body, updatedAt: new Date().toISOString() };
   writeDb(db);
   res.json({ success: true, data: db.board });
+});
+
+// Aplikasi APIs (Layanan Sistem Informasi ASN)
+const DEFAULT_APLIKASI = [
+  {
+    id: 1,
+    title: "SIASN",
+    desc: "SIASN adalah Layanan Perencanaan Kebutuhan ASN.",
+    url: "https://siasn.bkn.go.id",
+    logo: ""
+  },
+  {
+    id: 2,
+    title: "Simpeg Kota Dumai",
+    desc: "SIMPEG adalah Sistem Informasi Manajemen Kepegawaian. Sistem yang mengelola seluruh data pegawai di Pemerintahan Kota Dumai.",
+    url: "https://simpeg.dumaikota.go.id",
+    logo: "/uploads/logo-bkpsdm.jpg"
+  },
+  {
+    id: 3,
+    title: "SSCASN",
+    desc: "SSCASN adalah Sistem Seleksi Calon ASN 2026.",
+    url: "https://sscasn.bkn.go.id",
+    logo: ""
+  },
+  {
+    id: 4,
+    title: "E-Kinerja",
+    desc: "eKinerja adalah sistem online untuk mengelola kinerja ASN di Indonesia.",
+    url: "https://kinerja.bkn.go.id",
+    logo: ""
+  },
+  {
+    id: 5,
+    title: "MyASN",
+    desc: "MyASN adalah Layanan perorangan ASN ditujukan untuk seluruh user ASN baik PNS maupun PPPK.",
+    url: "https://myasn.bkn.go.id",
+    logo: ""
+  }
+];
+
+app.get('/api/aplikasi', (req, res) => {
+  const db = readDb();
+  if (!db.aplikasi || !db.aplikasi.length) {
+    db.aplikasi = DEFAULT_APLIKASI;
+    writeDb(db);
+  }
+  res.json(db.aplikasi);
+});
+
+app.post('/api/aplikasi', (req, res) => {
+  const db = readDb();
+  if (!db.aplikasi) db.aplikasi = [...DEFAULT_APLIKASI];
+  
+  const item = req.body;
+  if (item.id && parseInt(item.id) !== -1) {
+    const idx = db.aplikasi.findIndex(x => x.id === parseInt(item.id));
+    if (idx !== -1) {
+      db.aplikasi[idx] = { ...db.aplikasi[idx], ...item, id: parseInt(item.id) };
+    } else {
+      item.id = Date.now();
+      db.aplikasi.push(item);
+    }
+  } else {
+    item.id = Date.now();
+    db.aplikasi.push(item);
+  }
+  writeDb(db);
+  res.json({ success: true, data: item });
+});
+
+app.put('/api/aplikasi/:id', (req, res) => {
+  const db = readDb();
+  if (!db.aplikasi) db.aplikasi = [...DEFAULT_APLIKASI];
+  const id = parseInt(req.params.id);
+  const item = req.body;
+  const idx = db.aplikasi.findIndex(x => x.id === id);
+  if (idx !== -1) {
+    db.aplikasi[idx] = { ...db.aplikasi[idx], ...item, id: id };
+    writeDb(db);
+    res.json({ success: true, data: db.aplikasi[idx] });
+  } else {
+    res.status(404).json({ error: 'Aplikasi not found' });
+  }
+});
+
+app.delete('/api/aplikasi/:id', (req, res) => {
+  const db = readDb();
+  if (db.aplikasi) {
+    db.aplikasi = db.aplikasi.filter(x => x.id !== parseInt(req.params.id));
+    writeDb(db);
+  }
+  res.json({ success: true });
 });
 
 

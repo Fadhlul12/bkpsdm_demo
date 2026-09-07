@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIPADU — Beranda | BKPSDM Kota Dumai</title>
+<title>SIKAP — Beranda | BKPSDM Kota Dumai</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root{
-    --ink:#0B2E33;
-    --teal-deep:#0E3A3F;
-    --teal:#1B5E63;
-    --teal-soft:#2C7A80;
-    --gold:#C9A227;
-    --gold-light:#E8C468;
-    --paper:#F6F1E4;
-    --paper-dark:#ECE2CA;
-    --cream:#F8F4E9;
-    --charcoal:#182420;
-    --line: rgba(11,46,51,0.14);
-    --shadow: 0 20px 50px -25px rgba(11,46,51,0.45);
+    --ink:#1B365D;
+    --teal-deep:#122846;
+    --teal:#27528A;
+    --teal-soft:#3B6CA8;
+    --gold:#EAA900;
+    --gold-light:#FFC82E;
+    --paper:#F4F6F9;
+    --paper-dark:#E2E8F0;
+    --cream:#FFFFFF;
+    --charcoal:#1E293B;
+    --line: rgba(27,54,93,0.12);
+    --shadow: 0 20px 50px -25px rgba(27,54,93,0.35);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -79,10 +79,10 @@
   .brand .name{color:var(--cream);}
   .brand .name b{display:block; font-family:'Fraunces',serif; font-size:16.5px; letter-spacing:0.01em;}
   .brand .name span{display:block; font-size:11px; color:var(--gold-light); letter-spacing:0.05em; margin-top:2px; font-family:'IBM Plex Mono',monospace;}
-  nav.links{display:flex; align-items:center; gap:34px;}
+  nav.links{display:flex; align-items:center; gap:28px;}
   nav.links a{
-    color:rgba(248,244,233,0.82); font-size:14.5px; font-weight:500;
-    position:relative; padding:4px 0;
+    color:rgba(248,244,233,0.9); font-size:18px; font-weight:700;
+    position:relative; padding:4px 0; letter-spacing:0.01em;
   }
   nav.links a:hover{color:var(--cream);}
   nav.links a.active{color:var(--gold-light);}
@@ -111,7 +111,7 @@
   }
   .hero-slide::before{
     content:''; position:absolute; inset:0;
-    background:linear-gradient(100deg, rgba(11,46,51,0.94) 0%, rgba(11,46,51,0.82) 38%, rgba(14,58,63,0.55) 68%, rgba(14,58,63,0.35) 100%);
+    background:linear-gradient(100deg, rgba(16,35,65,0.96) 0%, rgba(16,35,65,0.82) 45%, rgba(16,35,65,0.35) 75%, rgba(16,35,65,0.15) 100%);
   }
   .hero-slide.active{opacity:1; z-index:1;}
   .hero-slide.active .hero-slide-art{animation:kenburns 7s ease-out forwards;}
@@ -126,21 +126,21 @@
     background-repeat:no-repeat;
   }
   .slide-art-1{background:
-    radial-gradient(420px 420px at 88% 18%, rgba(232,196,104,0.35), transparent 70%),
-    radial-gradient(600px 600px at 70% 85%, rgba(44,122,128,0.55), transparent 70%),
-    linear-gradient(160deg, #0E3A3F, #0B2E33 70%);}
+    radial-gradient(420px 420px at 88% 18%, rgba(255,200,46,0.35), transparent 70%),
+    radial-gradient(600px 600px at 70% 85%, rgba(59,108,168,0.55), transparent 70%),
+    linear-gradient(160deg, #122846, #1B365D 70%);}
   .slide-art-2{background:
-    radial-gradient(500px 500px at 82% 75%, rgba(201,162,39,0.3), transparent 70%),
-    radial-gradient(500px 500px at 20% 15%, rgba(27,94,99,0.6), transparent 70%),
-    linear-gradient(200deg, #0B2E33, #123B40 60%);}
+    radial-gradient(500px 500px at 82% 75%, rgba(234,169,0,0.3), transparent 70%),
+    radial-gradient(500px 500px at 20% 15%, rgba(39,82,138,0.6), transparent 70%),
+    linear-gradient(200deg, #1B365D, #163259 60%);}
   .slide-art-3{background:
-    radial-gradient(460px 460px at 25% 80%, rgba(232,196,104,0.28), transparent 70%),
-    radial-gradient(520px 520px at 85% 25%, rgba(44,122,128,0.5), transparent 70%),
-    linear-gradient(140deg, #0E3A3F, #0A2226 65%);}
+    radial-gradient(460px 460px at 25% 80%, rgba(255,200,46,0.28), transparent 70%),
+    radial-gradient(520px 520px at 85% 25%, rgba(59,108,168,0.5), transparent 70%),
+    linear-gradient(140deg, #122846, #0D1D34 65%);}
   .slide-art-4{background:
-    radial-gradient(480px 480px at 78% 82%, rgba(201,162,39,0.3), transparent 70%),
-    radial-gradient(480px 480px at 15% 20%, rgba(27,94,99,0.55), transparent 70%),
-    linear-gradient(170deg, #0B2E33, #0E3A3F 70%);}
+    radial-gradient(480px 480px at 78% 82%, rgba(234,169,0,0.3), transparent 70%),
+    radial-gradient(480px 480px at 15% 20%, rgba(39,82,138,0.55), transparent 70%),
+    linear-gradient(170deg, #1B365D, #122846 70%);}
   .hero-icon-mark{
     position:absolute; right:6%; top:50%; transform:translateY(-50%);
     font-size:280px; color:rgba(248,244,233,0.05); z-index:0;
@@ -168,15 +168,21 @@
   .hero-arrow.next{right:24px;}
   @media (max-width:980px){
     .hero-arrow{display:none;}
+    .hero-grid{margin-left:0;}
   }
 
   /* ===== HERO ===== */
   .hero{
     background:var(--ink);
     color:var(--cream);
-    padding:84px 0 96px;
+    padding:0;
     position:relative;
     overflow:hidden;
+    width:100%;
+    height:600px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
   .hero::after{
     content:'';
@@ -188,21 +194,32 @@
   }
   .hero-grid{
     position:relative; z-index:1;
-    display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;
+    max-width:680px; margin-left:64px;
+    text-align:left; display:flex; flex-direction:column; align-items:flex-start;
+  }
+  .hero .eyebrow{
+    color:#F5D77F; font-size:12px; font-weight:700; letter-spacing:0.08em;
+    margin:0 0 16px 0; justify-content:flex-start; display:flex; align-items:center; gap:10px;
+  }
+  .hero .eyebrow::before{
+    content:''; width:24px; height:2px; background:#F8D153; display:inline-block;
   }
   .hero h1{
-    font-size:44px; line-height:1.14; color:var(--cream); max-width:560px;
+    font-size:46px; line-height:1.15; color:#ffffff; max-width:640px;
+    margin:0 0 20px 0; text-align:left; text-shadow:0 2px 8px rgba(0,0,0,0.6);
   }
-  .hero h1 em{font-style:italic; color:var(--gold-light);}
+  .hero h1 em{font-style:italic; color:#F8D153; text-shadow:0 2px 8px rgba(0,0,0,0.6);}
   .hero p.lead{
-    margin:22px 0 30px; font-size:16.5px; line-height:1.65; color:rgba(248,244,233,0.9); max-width:480px;
+    margin:0 0 28px 0; font-size:17.5px; line-height:1.7;
+    color:rgba(255,255,255,0.96); max-width:560px; text-align:left;
+    text-shadow:0 1px 4px rgba(0,0,0,0.5);
   }
-  .hero-cta{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:34px;}
   .search-box{
     display:flex; align-items:center; gap:10px;
     background:rgba(248,244,233,0.07);
     border:1px solid rgba(248,244,233,0.22);
-    border-radius:4px; padding:13px 16px; max-width:460px;
+    border-radius:4px; padding:12px 16px; width:100%; max-width:480px;
+    margin-bottom:20px;
   }
   .search-box i{color:var(--gold-light);}
   .search-box input{
@@ -210,72 +227,23 @@
     font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; width:100%;
   }
   .search-box input::placeholder{color:rgba(248,244,233,0.45);}
-  .visitor-counter{
-    display:inline-flex; align-items:center; gap:9px; margin-top:14px;
-    background:rgba(248,244,233,0.06); border:1px solid rgba(248,244,233,0.18);
-    border-radius:20px; padding:8px 16px 8px 14px; font-size:12.5px; color:rgba(248,244,233,0.72);
-  }
-  .visitor-counter i{color:var(--gold-light); font-size:12px;}
-  .visitor-counter strong{
-    color:var(--gold-light); font-weight:600; font-size:13px; letter-spacing:0.02em;
-  }
   .search-box button{
     background:var(--gold); color:var(--ink); border:none; border-radius:3px;
-    padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap;
+    padding:8px 16px; font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap;
   }
+  .visitor-counter{
+    display:inline-flex; align-items:center; gap:9px; margin:0 0 24px 0;
+    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.22);
+    backdrop-filter:blur(4px);
+    border-radius:20px; padding:8px 18px; font-size:13.5px; color:rgba(255,255,255,0.95);
+  }
+  .visitor-counter i{color:#F8D153; font-size:13px;}
+  .visitor-counter strong{color:#F8D153; font-weight:700; font-size:14px; letter-spacing:0.02em;}
+  .hero-dots{justify-content:flex-start; margin-top:0;}
 
-  /* Flip board signature */
-  .board{
-    background:linear-gradient(180deg,#0A2226,#081A1D);
-    border:1px solid rgba(232,196,104,0.25);
-    border-radius:6px; padding:22px 22px 20px;
-    box-shadow: var(--shadow);
-  }
-  .board-head{
-    display:flex; align-items:center; justify-content:space-between;
-    padding-bottom:14px; margin-bottom:16px; border-bottom:1px dashed rgba(232,196,104,0.25);
-  }
-  .board-head .label{
-    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em;
-    color:var(--gold-light); text-transform:uppercase; display:flex; gap:8px; align-items:center;
-  }
-  .dot-live{width:7px; height:7px; border-radius:50%; background:#7CD98A; box-shadow:0 0 0 3px rgba(124,217,138,0.18); animation:pulse 2s infinite;}
-  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.4;}}
-  .board-time{font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(248,244,233,0.5);}
-  .flip-row{display:flex; align-items:center; gap:12px; padding:9px 0; border-bottom:1px solid rgba(248,244,233,0.06);}
-  .flip-row:last-child{border-bottom:none;}
-  .flip-tag{
-    font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:0.06em;
-    padding:3px 7px; border-radius:2px; white-space:nowrap; text-transform:uppercase;
-    background:rgba(232,196,104,0.14); color:var(--gold-light); border:1px solid rgba(232,196,104,0.3);
-  }
-  .flip-text{display:flex; gap:3px; flex-wrap:wrap;}
-  .flip-char{
-    width:15px; height:22px; background:#0F2C30; border-radius:2px;
-    display:flex; align-items:center; justify-content:center;
-    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--cream);
-    box-shadow: inset 0 1px 0 rgba(248,244,233,0.08), inset 0 -1px 0 rgba(0,0,0,0.4);
-    animation: flipin 0.5s ease both;
-  }
-  .flip-char.space{background:transparent; box-shadow:none;}
-  @keyframes flipin{
-    0%{transform:rotateX(90deg); opacity:0;}
-    60%{transform:rotateX(-12deg);}
-    100%{transform:rotateX(0deg); opacity:1;}
-  }
 
-  /* ===== STATS ===== */
-  .stats{
-    background:var(--gold); color:var(--ink);
-  }
-  .stats-grid{
-    display:grid; grid-template-columns:repeat(4,1fr);
-    padding:26px 0;
-  }
-  .stat{padding:6px 28px; border-left:1px solid rgba(11,46,51,0.35);}
-  .stat:first-child{border-left:none;}
-  .stat .num{font-family:'IBM Plex Mono',monospace; font-size:28px; font-weight:600;}
-  .stat .lbl{font-size:12.5px; margin-top:4px; color:rgba(11,46,51,0.75);}
+
+
 
   /* ===== SECTION GENERIC ===== */
   section{padding:88px 0;}
@@ -283,54 +251,57 @@
     display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
     margin-bottom:44px; flex-wrap:wrap;
   }
-  .sec-head h2{font-size:32px; margin-top:10px; max-width:480px;}
-  .sec-head p{color:#5b6a63; font-size:14.5px; max-width:360px; line-height:1.6;}
+  .sec-head h2{font-size:38px; font-weight:700; color:var(--ink); margin-top:10px; max-width:520px; line-height:1.2;}
+  .sec-head p{color:#334155; font-size:16.5px; font-weight:500; max-width:420px; line-height:1.65;}
 
   /* Pengumuman */
-  .announce-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .announce-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
   .a-card{
-    background:var(--cream); border:1px solid var(--line); border-radius:6px;
-    padding:26px; display:flex; flex-direction:column; gap:14px;
+    background:#ffffff; border:1.5px solid #d1d5db; border-radius:8px;
+    padding:30px 26px; display:flex; flex-direction:column; gap:16px;
     transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    box-shadow:0 4px 14px rgba(0,0,0,0.05);
   }
-  .a-card:hover{transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--gold);}
-  .a-top{display:flex; justify-content:space-between; align-items:flex-start;}
+  .a-card:hover{transform:translateY(-5px); box-shadow:0 12px 24px -6px rgba(27,54,93,0.15); border-color:var(--teal);}
+  .a-top{display:flex; justify-content:space-between; align-items:center;}
   .a-cat{
-    font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.08em;
-    padding:4px 9px; border-radius:2px; background:rgba(27,94,99,0.09); color:var(--teal);
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;
+    padding:6px 12px; border-radius:4px; background:rgba(27,54,93,0.08); color:var(--teal-deep);
   }
-  .a-cat.urgent{background:#C0392B; color:#FBEAE7; display:inline-flex; align-items:center; gap:5px; box-shadow:0 0 0 1px rgba(192,57,43,0.35);}
-  .a-cat.urgent::before{content:'\f0f3'; font-family:'Font Awesome 6 Free'; font-weight:900; font-size:9px;}
-  .a-card.is-urgent{border-color:rgba(192,57,43,0.35);}
-  .a-card.is-urgent:hover{border-color:#C0392B;}
-  .a-date{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#8a978f; text-align:right;}
-  .a-card h3{font-size:18px; line-height:1.35; font-weight:600;}
-  .a-card p{font-size:13.5px; color:#5b6a63; line-height:1.6; margin:0;}
-  .a-link{font-size:13px; font-weight:700; color:var(--teal); display:flex; align-items:center; gap:6px; margin-top:auto;}
-  .a-link i{font-size:11px; transition:transform .15s ease;}
-  .a-card:hover .a-link i{transform:translateX(4px);}
+  .a-cat.urgent{background:#dc2626; color:#ffffff; font-weight:800; padding:6px 12px; box-shadow:0 2px 6px rgba(220,38,38,0.3); display:inline-flex; align-items:center; gap:6px;}
+  .a-cat.urgent::before{content:'\f0f3'; font-family:'Font Awesome 6 Free'; font-weight:900; font-size:10px;}
+  .a-card.is-urgent{border-color:rgba(220,38,38,0.5);}
+  .a-card.is-urgent:hover{border-color:#dc2626;}
+  .a-date{font-family:'IBM Plex Mono',monospace; font-size:13.5px; font-weight:600; color:#475569; text-align:right;}
+  .a-card h3{font-size:21px; line-height:1.4; font-weight:700; color:#0f172a; font-family:'Fraunces',serif; letter-spacing:-0.01em; transition:color .15s ease;}
+  .a-card h3:hover{color:var(--teal);}
+  .a-card p{font-size:15.5px; color:#334155; line-height:1.65; margin:0; font-weight:400;}
+  .a-link{font-size:15px; font-weight:700; color:var(--ink); display:flex; align-items:center; gap:8px; margin-top:auto; padding-top:6px;}
+  .a-link i{font-size:13px; transition:transform .15s ease;}
+  .a-card:hover .a-link{color:var(--gold-light);}
+  .a-card:hover .a-link i{transform:translateX(6px);}
 
   /* Layanan */
   .layanan-band{background:var(--ink); color:var(--cream);}
-  .layanan-band .sec-head h2{color:var(--cream);}
-  .layanan-band .sec-head p{color:rgba(248,244,233,0.6);}
-  .layanan-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(248,244,233,0.12); border:1px solid rgba(248,244,233,0.12); border-radius:6px; overflow:hidden;}
+  .layanan-band .sec-head h2{color:#ffffff; font-size:38px; font-weight:700;}
+  .layanan-band .sec-head p{color:rgba(255,255,255,0.92); font-size:16.5px; font-weight:500;}
+  .layanan-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; background:transparent; border:none; border-radius:8px; overflow:visible;}
   .l-card{
-    background:var(--teal-deep); padding:26px 22px 24px; min-height:170px;
-    display:flex; flex-direction:column; gap:12px; position:relative;
-    transition:background .15s ease, transform .15s ease;
-    border-top:2px solid transparent;
+    background:rgba(18,40,70,0.85); border:1.5px solid rgba(248,244,233,0.22); border-radius:8px;
+    padding:28px 24px 26px; min-height:190px;
+    display:flex; flex-direction:column; gap:14px; position:relative;
+    transition:all .18s ease;
   }
-  .l-card:hover{background:#124347; transform:translateY(-3px); border-top-color:var(--gold);}
+  .l-card:hover{background:#143057; border-color:var(--gold-light); transform:translateY(-4px); box-shadow:0 10px 24px rgba(0,0,0,0.3);}
   .l-top{display:flex; align-items:center; justify-content:space-between;}
   .l-icon{
-    width:48px; height:48px; border-radius:10px; background:rgba(232,196,104,0.12);
-    border:1px solid rgba(232,196,104,0.22);
-    display:flex; align-items:center; justify-content:center; color:var(--gold-light); font-size:19px;
+    width:52px; height:52px; border-radius:12px; background:rgba(232,196,104,0.16);
+    border:1.5px solid rgba(232,196,104,0.35);
+    display:flex; align-items:center; justify-content:center; color:#F8D153; font-size:22px;
   }
-  .l-no{font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(248,244,233,0.3);}
-  .l-card h3{color:var(--cream); font-size:15.5px; font-weight:600; font-family:'Fraunces',serif;}
-  .l-card p{font-size:12.5px; color:rgba(248,244,233,0.55); line-height:1.55; margin:0;}
+  .l-no{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:rgba(255,255,255,0.5); font-weight:600;}
+  .l-card h3{color:#ffffff; font-size:19.5px; font-weight:700; font-family:'Fraunces',serif; margin-top:4px;}
+  .l-card p{font-size:14.5px; color:rgba(255,255,255,0.88); line-height:1.6; margin:0; font-weight:400;}
 
   /* Alur */
   .flow{display:grid; grid-template-columns:repeat(4,1fr); gap:0; row-gap:36px; position:relative;}
@@ -378,13 +349,21 @@
   }
   .mobile-panel.open{display:block;}
   .mobile-panel a{
-    display:block; padding:13px 32px; color:rgba(248,244,233,0.85);
-    font-size:15px; font-weight:500; border-bottom:1px solid rgba(248,244,233,0.06);
+    display:block; padding:13px 32px; color:rgba(248,244,233,0.9);
+    font-size:18px; font-weight:700; border-bottom:1px solid rgba(248,244,233,0.06);
   }
   .mobile-panel a.active{color:var(--gold-light);}
 
   @media (max-width:980px){
+    .hero{ height:350px; }
     .hero-grid{grid-template-columns:1fr;}
+    .hero h1{ font-size:24px; line-height:1.25; margin-bottom:10px; }
+    .hero p.lead{ font-size:13px; line-height:1.55; margin-bottom:14px; }
+    .hero .eyebrow{ font-size:10px; margin-bottom:10px; }
+    .visitor-counter{ font-size:11.5px; padding:6px 12px; margin-bottom:12px; }
+    .hero-dots button{ width:18px; height:3px; }
+    .hero-dots button.active{ width:28px; }
+    .hero-dots{ margin-top:0; gap:6px; }
     nav.links{display:none;}
     .hamburger{display:flex;}
     .stats-grid{grid-template-columns:repeat(2,1fr);}
@@ -511,7 +490,7 @@
     <a href="index.html" class="brand" style="cursor:pointer;">
       <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
       <div class="name">
-        <b>SIPADU</b>
+        <b>SIKAP</b>
         <span>BKPSDM KOTA DUMAI</span>
       </div>
     </a>
@@ -521,11 +500,9 @@
       <a href="pengumuman.html">Pengumuman</a>
       <a href="kegiatan.html">Kegiatan</a>
       <a href="layanan.html">Layanan</a>
-      <a href="alur.html">Cara Mengajukan</a>
-      <a href="kontak.html">Kontak</a>
+      <a href="aplikasi.html">Aplikasi</a>
     </nav>
     <div style="display:flex; align-items:center; gap:14px;">
-      <a href="layanan.html" class="btn btn-gold"><i class="fa-solid fa-arrow-right-to-bracket"></i> Portal Layanan</a>
       <button class="hamburger" id="hamburgerBtn" aria-label="Buka menu" aria-expanded="false">
         <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
       </button>
@@ -537,8 +514,7 @@
     <a href="pengumuman.html">Pengumuman</a>
     <a href="kegiatan.html">Kegiatan</a>
     <a href="layanan.html">Layanan</a>
-    <a href="alur.html">Cara Mengajukan</a>
-    <a href="kontak.html">Kontak</a>
+    <a href="aplikasi.html">Aplikasi</a>
   </div>
 </header>
 
@@ -555,17 +531,11 @@
       <div class="hero-slide-content" id="heroContent">
         <div class="eyebrow" id="heroEyebrow">PEMERINTAH KOTA DUMAI · BADAN KEPEGAWAIAN & PSDM</div>
         <h1 style="margin-top:16px;" id="heroTitle">Satu pintu untuk <em>pengumuman</em> dan <em>layanan kepegawaian</em> ASN Kota Dumai</h1>
-        <p class="lead" id="heroLead">SIPADU menghimpun seluruh informasi kepegawaian — dari pengumuman CPNS/PPPK, kenaikan pangkat, hingga pengajuan layanan administrasi — dalam satu papan informasi digital yang bisa diakses kapan saja.</p>
-        <div class="hero-cta" id="heroCta">
-          <a href="pengumuman.html" class="btn btn-gold"><i class="fa-solid fa-bullhorn"></i> Lihat Pengumuman</a>
-          <a href="layanan.html" class="btn btn-ghost"><i class="fa-solid fa-folder-open"></i> Informasi Layanan</a>
-        </div>
+        <p class="lead" id="heroLead">SIKAP menghimpun seluruh informasi kepegawaian — dari pengumuman CPNS/PPPK, kenaikan pangkat, hingga pengajuan layanan administrasi — dalam satu papan informasi digital yang bisa diakses kapan saja.</p>
       </div>
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Cari pengumuman, formulir, atau jenis layanan…">
-        <button>Cari</button>
-      </div>
+
+
+
       <div class="visitor-counter">
         <i class="fa-solid fa-eye"></i>
         <span>Total Pengunjung Website</span>
@@ -575,40 +545,10 @@
         <!-- Dots dibangun dinamis oleh JS -->
       </div>
     </div>
-
-    <div class="board" aria-label="Papan pengumuman digital">
-      <div class="board-head">
-        <span class="label"><span class="dot-live"></span> Papan Pengumuman Aktif</span>
-        <span class="board-time" id="boardTime">Memuat...</span>
-      </div>
-      <div class="flip-row">
-        <span class="flip-tag" id="tag1">CPNS</span>
-        <div class="flip-text" id="row1"></div>
-      </div>
-      <div class="flip-row">
-        <span class="flip-tag" id="tag2">PANGKAT</span>
-        <div class="flip-text" id="row2"></div>
-      </div>
-      <div class="flip-row">
-        <span class="flip-tag" id="tag3">DIKLAT</span>
-        <div class="flip-text" id="row3"></div>
-      </div>
-      <div class="flip-row">
-        <span class="flip-tag" id="tag4">PENSIUN</span>
-        <div class="flip-text" id="row4"></div>
-      </div>
-    </div>
   </div>
 </section>
 
-<div class="stats">
-  <div class="wrap stats-grid" id="statsGrid">
-    <div class="stat"><div class="num">3.412</div><div class="lbl">ASN Terdaftar</div></div>
-    <div class="stat"><div class="num">8</div><div class="lbl">Pengumuman Bulan Ini</div></div>
-    <div class="stat"><div class="num">14</div><div class="lbl">Jenis Layanan</div></div>
-    <div class="stat"><div class="num">2–5</div><div class="lbl">Hari Kerja Proses Layanan</div></div>
-  </div>
-</div>
+
 
 <section id="pengumuman">
   <div class="wrap">
@@ -649,24 +589,7 @@
   </div>
 </section>
 
-<section id="alur">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="eyebrow">PANDUAN SINGKAT</div>
-        <h2>Prosedur pengajuan layanan</h2>
-      </div>
-      <p>Empat langkah mudah pengajuan permohonan kepegawaian luring di kantor BKPSDM Kota Dumai.</p>
-    </div>
-    <div class="flow" id="flowStepsContainer">
-      <!-- Steps will be rendered by JS -->
-      <div style="text-align:center;padding:20px;color:#999;"><i class="fa-solid fa-spinner fa-spin"></i> Memuat panduan...</div>
-    </div>
-    <div class="preview-foot">
-      <a href="alur.html" class="btn btn-outline-ink"><i class="fa-solid fa-circle-question"></i> Panduan Lengkap & FAQ</a>
-    </div>
-  </div>
-</section>
+
 
 <footer id="kontak-footer">
   <div class="wrap">
@@ -674,7 +597,7 @@
       <div class="foot-brand">
         <div class="brand">
           <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
-          <div class="name"><b>SIPADU</b><span>BKPSDM KOTA DUMAI</span></div>
+          <div class="name"><b>SIKAP</b><span>BKPSDM KOTA DUMAI</span></div>
         </div>
         <p>Sistem Informasi Pengumuman dan Layanan Kepegawaian — melayani Aparatur Sipil Negara di lingkungan Pemerintah Kota Dumai secara transparan dan akuntabel.</p>
         <div class="social">
@@ -686,22 +609,34 @@
         <div class="foot-col">
           <h4>Kantor</h4>
           <p id="f-alamat">Jl. Tuanku Tambusai, Bagan Besar, Kec. Bukit Kapur, Kota Dumai, Riau 28825</p>
-          <p id="f-jam">Senin–Jumat, 08.00–16.00 WIB</p>
+          <p id="f-jam" style="margin-bottom:10px;">Senin–Jumat, 08.00–16.00 WIB</p>
+          <div style="width:100%;max-width:240px;height:110px;border-radius:8px;overflow:hidden;border:1px solid rgba(248,244,233,0.18);box-shadow:0 4px 12px rgba(0,0,0,0.25);margin-top:8px;">
+            <iframe
+              id="footerMap"
+              src="https://maps.google.com/maps?q=BKPSDM+Kota+Dumai+Jl+Tuanku+Tambusai+Bagan+Besar+Dumai&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="100%"
+              style="border:0;display:block;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Peta Lokasi Kantor BKPSDM Kota Dumai">
+            </iframe>
+          </div>
         </div>
         <div class="foot-col">
           <h4>Kontak</h4>
-          <a id="f-telp" href="kontak.html"><i class="fa-solid fa-phone" style="margin-right:8px;"></i>(0765) 123-456</a>
-          <a id="f-email" href="kontak.html"><i class="fa-solid fa-envelope" style="margin-right:8px;"></i>bkpsdm@dumaikota.go.id</a>
+          <a id="f-telp" href="tel:0765123000"><i class="fa-solid fa-phone" style="margin-right:8px;"></i>(0765) 123-000</a>
+          <a id="f-email" href="mailto:bkpsdm@dumaikota.go.id"><i class="fa-solid fa-envelope" style="margin-right:8px;"></i>bkpsdm@dumaikota.go.id</a>
         </div>
       <div class="foot-col">
         <h4>Tautan</h4>
         <a href="pengumuman.html">Pengumuman</a>
         <a href="kegiatan.html">Kegiatan</a>
         <a href="layanan.html">Layanan Kepegawaian</a>
-        <a href="alur.html">Panduan Pengajuan</a>
-        <a href="kontak.html">Kontak</a>
+        <a href="aplikasi.html">Aplikasi ASN</a>
         <a href="staf.html">Direktori Staf <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:9px; margin-left:3px;"></i></a>
-        <a href="admin.html" style="color:rgba(248,244,233,0.35);font-size:12px;margin-top:6px;"><i class="fa-solid fa-shield-halved" style="margin-right:6px;font-size:10px;"></i>Admin Web</a>
+        <a href="admin.html">Admin <i class="fa-solid fa-shield-halved" style="font-size:10px; margin-left:3px;"></i></a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -728,30 +663,48 @@
     });
   });
 
+  const DEFAULT_STEPS = [
+    { num:'01', title:'Cek Syarat & Formulir', desc:'Pelajari persyaratan layanan dan unduh formulir permohonan melalui website SIKAP.' },
+    { num:'02', title:'Lengkapi Berkas Fisik', desc:'Cetak dan isi formulir serta lengkapi seluruh dokumen persyaratan fisik yang dibutuhkan.' },
+    { num:'03', title:'Serahkan ke Loket BKPSDM', desc:'Datang langsung ke kantor BKPSDM Kota Dumai untuk verifikasi dan penyerahan berkas.' },
+    { num:'04', title:'Pengambilan Dokumen / SK', desc:'Ambil Surat Keputusan (SK) atau dokumen resmi langsung di loket layanan setelah diproses.' }
+  ];
+
+  function renderAlurSteps(steps) {
+    const container = document.getElementById('flowStepsContainer');
+    if (!container) return;
+    container.innerHTML = steps.map(step => `
+      <div class="f-step">
+        <div class="f-num">${step.num}</div>
+        <h3>${step.title}</h3>
+        <p>${step.desc}</p>
+      </div>
+    `).join('');
+  }
+
+  const API_BASE = (location.protocol === 'file:' || (location.port && location.port !== '3000')) 
+    ? 'http://localhost:3000' 
+    : '';
+
   function fetchAlur() {
-    fetch('/api/alur')
+    fetch(API_BASE + '/api/alur')
       .then(res => res.json())
       .then(data => {
-        if (data.steps) {
-          const stepsHtml = data.steps.map(step => `
-            <div class="f-step">
-              <div class="f-num">${step.num}</div>
-              <h3>${step.title}</h3>
-              <p>${step.desc}</p>
-            </div>
-          `).join('');
-          const container = document.getElementById('flowStepsContainer');
-          if (container) container.innerHTML = stepsHtml;
+        if (data && data.steps && data.steps.length) {
+          renderAlurSteps(data.steps);
+        } else {
+          renderAlurSteps(DEFAULT_STEPS);
         }
       })
       .catch(err => {
         console.error("Error loading alur data:", err);
+        renderAlurSteps(DEFAULT_STEPS);
       });
   }
   fetchAlur();
   // ===== Pengumuman Terbaru di Beranda — dari API Backend =====
   (function(){
-    const catLabelMap = { cpns:'CPNS/PPPK', kepangkatan:'Kepangkatan', diklat:'Pendidikan & Latihan', mutasi:'Mutasi', pensiun:'Pensiun' };
+    let catMap = { cpns:'CPNS/PPPK', kepangkatan:'Kepangkatan', diklat:'Pendidikan & Latihan', mutasi:'Mutasi', pensiun:'Pensiun' };
     
     function fmtDate(d) {
       if (!d) return '';
@@ -759,102 +712,57 @@
       return dt.toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
     }
     
-    fetch('/api/pengumuman')
+    fetch(API_BASE + '/api/pengumuman-categories')
       .then(res => res.json())
-      .then(data => {
-        const published = (data || []).filter(p => p.status === 'terbit').slice(0, 3);
-        const grid = document.getElementById('homeAnnounceGrid');
-        if (!grid) return;
-        if (!published.length) {
-          grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:20px;color:#999;">Tidak ada pengumuman terbaru.</div>';
-          return;
+      .then(cats => {
+        if (cats && cats.length) {
+          cats.forEach(c => { catMap[c.id] = c.name; });
         }
-        grid.innerHTML = published.map(p => {
-          const isUrgent = p.urgent === 'urgent';
-          return `<div class="a-card${isUrgent ? ' is-urgent' : ''}">
-            <div class="a-top">
-              <span class="a-cat${isUrgent ? ' urgent' : ''}">${isUrgent ? 'PENTING — ' : ''}${catLabelMap[p.cat] || p.cat}</span>
-              <span class="a-date">${fmtDate(p.date)}</span>
-            </div>
-            <h3 style="cursor:pointer;" onclick="location.href='pengumuman-detail.html?id=${p.id}'">${p.title}</h3>
-            <p>${(p.body || '').slice(0, 110)}${(p.body || '').length > 110 ? '…' : ''}</p>
-            <a class="a-link" href="pengumuman-detail.html?id=${p.id}">Baca selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
-          </div>`;
-        }).join('');
       })
-      .catch(err => {
-        console.error("Error loading home announcements:", err);
+      .catch(() => {})
+      .finally(() => {
+        fetch(API_BASE + '/api/pengumuman')
+          .then(res => res.json())
+          .then(data => {
+            const published = (data || []).filter(p => p.status === 'terbit').slice(0, 3);
+            const grid = document.getElementById('homeAnnounceGrid');
+            if (!grid) return;
+            if (!published.length) {
+              grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:20px;color:#999;">Tidak ada pengumuman terbaru.</div>';
+              return;
+            }
+            grid.innerHTML = published.map(p => {
+              const isUrgent = p.urgent === 'urgent';
+              return `<div class="a-card${isUrgent ? ' is-urgent' : ''}">
+                <div class="a-top">
+                  <span class="a-cat${isUrgent ? ' urgent' : ''}">${isUrgent ? 'PENTING — ' : ''}${catMap[p.cat] || p.cat}</span>
+                  <span class="a-date">${fmtDate(p.date)}</span>
+                </div>
+                <h3 style="cursor:pointer;" onclick="location.href='pengumuman-detail.html?id=${p.id}'">${p.title}</h3>
+                <p>${(p.body || '').slice(0, 110)}${(p.body || '').length > 110 ? '…' : ''}</p>
+                <a class="a-link" href="pengumuman-detail.html?id=${p.id}">Baca selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
+              </div>`;
+            }).join('');
+          })
+          .catch(err => {
+            console.error("Error loading home announcements:", err);
+          });
       });
   })();
 
-  // ===== Papan Pengumuman (ambil dari API) =====
-  function buildRow(id, text) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.innerHTML = '';
-    [...text].forEach((ch, i) => {
-      const div = document.createElement('div');
-      div.className = 'flip-char' + (ch === ' ' ? ' space' : '');
-      div.textContent = ch === ' ' ? '' : ch;
-      div.style.animationDelay = (i * 0.035) + 's';
-      el.appendChild(div);
-    });
-  }
 
-  (function loadBoard() {
-    fetch('/api/board')
-      .then(r => r.json())
-      .then(data => {
-        buildRow('row1', data.row1 || '');
-        buildRow('row2', data.row2 || '');
-        buildRow('row3', data.row3 || '');
-        buildRow('row4', data.row4 || '');
-        // Update labels/tags dynamically
-        const t1 = document.getElementById('tag1'); if (t1 && data.tag1) t1.textContent = data.tag1;
-        const t2 = document.getElementById('tag2'); if (t2 && data.tag2) t2.textContent = data.tag2;
-        const t3 = document.getElementById('tag3'); if (t3 && data.tag3) t3.textContent = data.tag3;
-        const t4 = document.getElementById('tag4'); if (t4 && data.tag4) t4.textContent = data.tag4;
-        const timeEl = document.getElementById('boardTime');
-        if (timeEl) {
-          if (data.updatedAt) {
-            const d = new Date(data.updatedAt);
-            const now = new Date();
-            const diffMs = now - d;
-            const diffHrs = Math.floor(diffMs / 3600000);
-            const diffDays = Math.floor(diffMs / 86400000);
-            let label;
-            if (diffHrs < 1) label = 'Diperbarui baru saja';
-            else if (diffHrs < 24) label = `Diperbarui ${diffHrs} jam lalu`;
-            else if (diffDays === 1) label = 'Diperbarui kemarin';
-            else label = 'Diperbarui ' + d.toLocaleDateString('id-ID', { day:'numeric', month:'short' });
-            timeEl.textContent = label;
-          } else {
-            timeEl.textContent = 'Diperbarui hari ini';
-          }
-        }
-      })
-      .catch(() => {
-        // fallback ke data default jika API gagal
-        buildRow('row1', 'SKD DIMULAI 18 AGUSTUS');
-        buildRow('row2', 'USULAN DIBUKA S/D 20 AGT');
-        buildRow('row3', 'PENDAFTARAN DIKLATPIM XII');
-        buildRow('row4', 'CEK STATUS MPP ANDA');
-        const timeEl = document.getElementById('boardTime');
-        if (timeEl) timeEl.textContent = 'Diperbarui hari ini';
-      });
-  })();
 
   // ===== Hero Slider — membaca dari localStorage (dikelola admin.html) =====
   const SKEY_SLIDES = 'sipadu_hero_slides';
   const DEFAULT_SLIDES = [
     { eyebrow: 'PEMERINTAH KOTA DUMAI · BADAN KEPEGAWAIAN & PSDM',
       title: 'Satu pintu untuk <em>pengumuman</em> dan <em>layanan kepegawaian</em> ASN Kota Dumai',
-      lead: 'SIPADU menghimpun seluruh informasi kepegawaian — dari pengumuman CPNS/PPPK, kenaikan pangkat, hingga pengajuan layanan administrasi — dalam satu papan informasi digital yang bisa diakses kapan saja.',
+      lead: 'SIKAP menghimpun seluruh informasi kepegawaian — dari pengumuman CPNS/PPPK, kenaikan pangkat, hingga pengajuan layanan administrasi — dalam satu papan informasi digital yang bisa diakses kapan saja.',
       btn1Label:'Lihat Pengumuman', btn1Href:'pengumuman.html',
       btn2Label:'Informasi Layanan', btn2Href:'layanan.html', bgImage:'/uploads/gedung-bkpsdm.jpg' },
     { eyebrow: 'PENERIMAAN CPNS & PPPK 2026',
       title: 'Pantau setiap tahap <em>seleksi CASN</em> tanpa ketinggalan jadwal',
-      lead: 'Hasil seleksi administrasi, jadwal SKD, hingga pengumuman kelulusan tersedia real-time di papan pengumuman digital SIPADU.',
+      lead: 'Hasil seleksi administrasi, jadwal SKD, hingga pengumuman kelulusan tersedia real-time di papan pengumuman digital SIKAP.',
       btn1Label:'Cek Hasil Seleksi', btn1Href:'pengumuman.html',
       btn2Label:'Syarat Pendaftaran', btn2Href:'pengumuman.html', bgImage:'' },
     { eyebrow: 'LAYANAN KEPEGAWAIAN LURING',
@@ -886,7 +794,7 @@
     // Rebuild background slides
     heroBg.innerHTML = heroSlidesData.map((s, i) => {
       const bgStyle = s.bgImage
-        ? `background-image:linear-gradient(180deg, rgba(11,46,51,0.85) 0%, rgba(11,46,51,0.55) 50%, rgba(11,46,51,0.92) 100%), url('${s.bgImage}');background-size:cover;background-position:center 25%;background-repeat:no-repeat;`
+        ? `background-image:linear-gradient(100deg, rgba(27,54,93,0.88) 0%, rgba(27,54,93,0.6) 40%, rgba(18,40,70,0.3) 70%, rgba(18,40,70,0.15) 100%), url('${s.bgImage}');background-size:cover;background-position:center 25%;background-repeat:no-repeat;`
         : '';
       const artClass = `slide-art-${(i % 4) + 1}${s.bgImage ? ' has-custom-bg' : ''}`;
       return `<div class="hero-slide${i===0?' active':''}" data-slide="${i}">`
@@ -907,12 +815,10 @@
     const data = heroSlidesData[index];
     heroContent.classList.add('switching');
     setTimeout(() => {
-      heroEyebrow.textContent = data.eyebrow;
-      heroTitle.innerHTML = data.title;
-      heroLead.textContent = data.lead;
-      const btn1 = data.btn1Label ? `<a href="${data.btn1Href||'#'}" class="btn btn-gold"><i class="fa-solid fa-arrow-right-to-bracket"></i> ${data.btn1Label}</a>` : '';
-      const btn2 = data.btn2Label ? `<a href="${data.btn2Href||'#'}" class="btn btn-ghost"><i class="fa-solid fa-folder-open"></i> ${data.btn2Label}</a>` : '';
-      heroCta.innerHTML = btn1 + btn2;
+      heroEyebrow.textContent = data.eyebrow || 'PEMERINTAH KOTA DUMAI · BADAN KEPEGAWAIAN & PSDM';
+      heroTitle.innerHTML = data.title || '';
+      heroLead.textContent = data.lead || '';
+      if (heroCta) heroCta.innerHTML = '';
       heroContent.classList.remove('switching');
     }, 220);
   }
@@ -936,7 +842,7 @@
   document.querySelector('.hero').addEventListener('mouseleave', () => { startAutoplay(); });
 
   function fetchSlides() {
-    fetch('/api/slides')
+    fetch(API_BASE + '/api/slides')
       .then(res => res.json())
       .then(data => {
         if (data && data.length) {
@@ -967,7 +873,7 @@
     const endpoint = hasVisited ? '/api/visitor' : '/api/visitor/increment';
     const method = hasVisited ? 'GET' : 'POST';
     
-    fetch(endpoint, { method: method })
+    fetch(API_BASE + endpoint, { method: method })
       .then(res => res.json())
       .then(data => {
         if (!hasVisited) {
@@ -990,25 +896,23 @@
         el.textContent = '47.820'; // Fallback
       });
   })();
-
 </script>
 
 <script>
-  fetch('/api/stats').then(r=>r.json()).then(data=>{
-    if(Array.isArray(data) && data.length){
-      const grid = document.getElementById('statsGrid');
-      if(grid){
-        grid.innerHTML = data.map(s=>`
-          <div class="stat">
-            <div class="num">${s.num || ''}</div>
-            <div class="lbl">${s.lbl || ''}</div>
-          </div>
-        `).join('');
-      }
+  function parseMapSrc(src, alamat) {
+    if (!src || !src.trim()) {
+      const q = encodeURIComponent(alamat || "BKPSDM Kota Dumai Jl Tuanku Tambusai Bagan Besar Dumai");
+      return "https://maps.google.com/maps?q=" + q + "&t=&z=16&ie=UTF8&iwloc=&output=embed";
     }
-  }).catch(()=>{});
+    let s = src.trim();
+    const match = s.match(/src=["']([^"']+)["']/i);
+    if (match && match[1]) s = match[1];
+    if (s.startsWith('http://') || s.startsWith('https://')) return s;
+    const q = encodeURIComponent(s);
+    return "https://maps.google.com/maps?q=" + q + "&t=&z=16&ie=UTF8&iwloc=&output=embed";
+  }
 
-  fetch('/api/kontak').then(r=>r.json()).then(d=>{
+  fetch(API_BASE + '/api/kontak').then(r=>r.json()).then(d=>{
     if(d.alamat) { const el = document.getElementById('f-alamat'); if(el) el.textContent = d.alamat; }
     if(d.jam) { const el = document.getElementById('f-jam'); if(el) el.textContent = d.jam; }
     if(d.telp) { const el = document.getElementById('f-telp'); if(el) el.innerHTML = '<i class="fa-solid fa-phone" style="margin-right:8px;"></i>' + d.telp; }
@@ -1016,6 +920,8 @@
     if(d.fb) { const el = document.getElementById('f-fb'); if(el) el.href = d.fb; }
     if(d.ig) { const el = document.getElementById('f-ig'); if(el) el.href = d.ig; }
     if(d.yt) { const el = document.getElementById('f-yt'); if(el) el.href = d.yt; }
+    const fMap = document.getElementById('footerMap');
+    if(fMap) { fMap.src = parseMapSrc(d.mapIframeSrc, d.alamat); }
   }).catch(()=>{});
 </script>
 </body>

@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIPADU — Cara Mengajukan | BKPSDM Kota Dumai</title>
+<title>SIKAP — Cara Mengajukan | BKPSDM Kota Dumai</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root{
-    --ink:#0B2E33;
-    --teal-deep:#0E3A3F;
-    --teal:#1B5E63;
-    --teal-soft:#2C7A80;
-    --gold:#C9A227;
-    --gold-light:#E8C468;
-    --paper:#F6F1E4;
-    --paper-dark:#ECE2CA;
-    --cream:#F8F4E9;
-    --charcoal:#182420;
-    --line: rgba(11,46,51,0.14);
-    --shadow: 0 20px 50px -25px rgba(11,46,51,0.45);
+    --ink:#1B365D;
+    --teal-deep:#122846;
+    --teal:#27528A;
+    --teal-soft:#3B6CA8;
+    --gold:#EAA900;
+    --gold-light:#FFC82E;
+    --paper:#F4F6F9;
+    --paper-dark:#E2E8F0;
+    --cream:#FFFFFF;
+    --charcoal:#1E293B;
+    --line: rgba(27,54,93,0.12);
+    --shadow: 0 20px 50px -25px rgba(27,54,93,0.35);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -79,9 +79,9 @@
   .brand .name{color:var(--cream);}
   .brand .name b{display:block; font-family:'Fraunces',serif; font-size:16.5px; letter-spacing:0.01em;}
   .brand .name span{display:block; font-size:11px; color:var(--gold-light); letter-spacing:0.05em; margin-top:2px; font-family:'IBM Plex Mono',monospace;}
-  nav.links{display:flex; align-items:center; gap:34px;}
+  nav.links{display:flex; align-items:center; gap:28px;}
   nav.links a{
-    color:rgba(248,244,233,0.82); font-size:14.5px; font-weight:500;
+    color:rgba(248,244,233,0.9); font-size:18px; font-weight:700;
     position:relative; padding:4px 0;
   }
   nav.links a:hover{color:var(--cream);}
@@ -111,7 +111,7 @@
   }
   .hero-slide::before{
     content:''; position:absolute; inset:0;
-    background:linear-gradient(100deg, rgba(11,46,51,0.94) 0%, rgba(11,46,51,0.82) 38%, rgba(14,58,63,0.55) 68%, rgba(14,58,63,0.35) 100%);
+    background:linear-gradient(100deg, rgba(16,35,65,0.96) 0%, rgba(16,35,65,0.82) 45%, rgba(16,35,65,0.35) 75%, rgba(16,35,65,0.15) 100%);
   }
   .hero-slide.active{opacity:1; z-index:1;}
   .hero-slide.active .hero-slide-art{animation:kenburns 7s ease-out forwards;}
@@ -124,21 +124,21 @@
     background-repeat:no-repeat;
   }
   .slide-art-1{background:
-    radial-gradient(420px 420px at 88% 18%, rgba(232,196,104,0.35), transparent 70%),
-    radial-gradient(600px 600px at 70% 85%, rgba(44,122,128,0.55), transparent 70%),
-    linear-gradient(160deg, #0E3A3F, #0B2E33 70%);}
+    radial-gradient(420px 420px at 88% 18%, rgba(255,200,46,0.35), transparent 70%),
+    radial-gradient(600px 600px at 70% 85%, rgba(59,108,168,0.55), transparent 70%),
+    linear-gradient(160deg, #122846, #1B365D 70%);}
   .slide-art-2{background:
-    radial-gradient(500px 500px at 82% 75%, rgba(201,162,39,0.3), transparent 70%),
-    radial-gradient(500px 500px at 20% 15%, rgba(27,94,99,0.6), transparent 70%),
-    linear-gradient(200deg, #0B2E33, #123B40 60%);}
+    radial-gradient(500px 500px at 82% 75%, rgba(234,169,0,0.3), transparent 70%),
+    radial-gradient(500px 500px at 20% 15%, rgba(39,82,138,0.6), transparent 70%),
+    linear-gradient(200deg, #1B365D, #163259 60%);}
   .slide-art-3{background:
-    radial-gradient(460px 460px at 25% 80%, rgba(232,196,104,0.28), transparent 70%),
-    radial-gradient(520px 520px at 85% 25%, rgba(44,122,128,0.5), transparent 70%),
-    linear-gradient(140deg, #0E3A3F, #0A2226 65%);}
+    radial-gradient(460px 460px at 25% 80%, rgba(255,200,46,0.28), transparent 70%),
+    radial-gradient(520px 520px at 85% 25%, rgba(59,108,168,0.5), transparent 70%),
+    linear-gradient(140deg, #122846, #0D1D34 65%);}
   .slide-art-4{background:
-    radial-gradient(480px 480px at 78% 82%, rgba(201,162,39,0.3), transparent 70%),
-    radial-gradient(480px 480px at 15% 20%, rgba(27,94,99,0.55), transparent 70%),
-    linear-gradient(170deg, #0B2E33, #0E3A3F 70%);}
+    radial-gradient(480px 480px at 78% 82%, rgba(234,169,0,0.3), transparent 70%),
+    radial-gradient(480px 480px at 15% 20%, rgba(39,82,138,0.55), transparent 70%),
+    linear-gradient(170deg, #1B365D, #122846 70%);}
   .hero-icon-mark{
     position:absolute; right:6%; top:50%; transform:translateY(-50%);
     font-size:280px; color:rgba(248,244,233,0.05); z-index:0;
@@ -172,7 +172,7 @@
   .hero{
     background:var(--ink);
     color:var(--cream);
-    padding:84px 0 96px;
+    padding:100px 0 110px;
     position:relative;
     overflow:hidden;
   }
@@ -367,8 +367,8 @@
   }
   .mobile-panel.open{display:block;}
   .mobile-panel a{
-    display:block; padding:13px 32px; color:rgba(248,244,233,0.85);
-    font-size:15px; font-weight:500; border-bottom:1px solid rgba(248,244,233,0.06);
+    display:block; padding:13px 32px; color:rgba(248,244,233,0.9);
+    font-size:18px; font-weight:700; border-bottom:1px solid rgba(248,244,233,0.06);
   }
   .mobile-panel a.active{color:var(--gold-light);}
 
@@ -409,7 +409,7 @@
   .breadcrumb a{color:rgba(248,244,233,0.75);}
   .breadcrumb a:hover{color:var(--gold-light);}
   .page-header h1{position:relative; z-index:1; color:var(--cream); font-size:34px;}
-  .page-header p{position:relative; z-index:1; color:rgba(248,244,233,0.68); font-size:14.5px; margin-top:10px; max-width:560px; line-height:1.6;}
+  .page-header p{position:relative; z-index:1; color:rgba(255,255,255,0.92); font-size:15px; margin-top:10px; max-width:560px; line-height:1.6;}
 
   /* ===== FILTER PILLS (Pengumuman) ===== */
   .filter-bar{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:36px;}
@@ -500,7 +500,7 @@
     <a href="index.html" class="brand" style="cursor:pointer;">
       <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
       <div class="name">
-        <b>SIPADU</b>
+        <b>SIKAP</b>
         <span>BKPSDM KOTA DUMAI</span>
       </div>
     </a>
@@ -510,11 +510,9 @@
       <a href="pengumuman.html">Pengumuman</a>
       <a href="kegiatan.html">Kegiatan</a>
       <a href="layanan.html">Layanan</a>
-      <a href="alur.html" class="active">Cara Mengajukan</a>
-      <a href="kontak.html">Kontak</a>
+      <a href="aplikasi.html">Aplikasi</a>
     </nav>
     <div style="display:flex; align-items:center; gap:14px;">
-      <a href="layanan.html" class="btn btn-gold"><i class="fa-solid fa-arrow-right-to-bracket"></i> Portal Layanan</a>
       <button class="hamburger" id="hamburgerBtn" aria-label="Buka menu" aria-expanded="false">
         <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
       </button>
@@ -526,8 +524,7 @@
     <a href="pengumuman.html">Pengumuman</a>
     <a href="kegiatan.html">Kegiatan</a>
     <a href="layanan.html">Layanan</a>
-    <a href="alur.html" class="active">Cara Mengajukan</a>
-    <a href="kontak.html">Kontak</a>
+    <a href="aplikasi.html">Aplikasi</a>
   </div>
 </header>
 
@@ -548,8 +545,26 @@
       <p>Seluruh proses permohonan diajukan dan diproses secara fisik di loket pelayanan kantor BKPSDM Kota Dumai.</p>
     </div>
     <div class="flow" id="flowStepsContainer">
-      <!-- Steps will be rendered by JS -->
-      <div style="text-align:center;padding:20px;color:#999;"><i class="fa-solid fa-spinner fa-spin"></i> Memuat panduan...</div>
+      <div class="f-step">
+        <div class="f-num">01</div>
+        <h3>Cek Syarat & Formulir</h3>
+        <p>Pelajari persyaratan layanan dan unduh formulir permohonan melalui website SIKAP.</p>
+      </div>
+      <div class="f-step">
+        <div class="f-num">02</div>
+        <h3>Lengkapi Berkas Fisik</h3>
+        <p>Cetak dan isi formulir serta lengkapi seluruh dokumen persyaratan fisik yang dibutuhkan.</p>
+      </div>
+      <div class="f-step">
+        <div class="f-num">03</div>
+        <h3>Serahkan ke Loket BKPSDM</h3>
+        <p>Datang langsung ke kantor BKPSDM Kota Dumai untuk verifikasi dan penyerahan berkas.</p>
+      </div>
+      <div class="f-step">
+        <div class="f-num">04</div>
+        <h3>Pengambilan Dokumen / SK</h3>
+        <p>Ambil Surat Keputusan (SK) atau dokumen resmi langsung di loket layanan setelah diproses.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -577,7 +592,7 @@
       <div class="foot-brand">
         <div class="brand">
           <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
-          <div class="name"><b>SIPADU</b><span>BKPSDM KOTA DUMAI</span></div>
+          <div class="name"><b>SIKAP</b><span>BKPSDM KOTA DUMAI</span></div>
         </div>
         <p>Sistem Informasi Pengumuman dan Layanan Kepegawaian — melayani Aparatur Sipil Negara di lingkungan Pemerintah Kota Dumai secara transparan dan akuntabel.</p>
         <div class="social">
@@ -593,18 +608,17 @@
       </div>
       <div class="foot-col">
         <h4>Kontak</h4>
-        <a id="f-telp" href="kontak.html"><i class="fa-solid fa-phone" style="margin-right:8px;"></i>(0765) 123-456</a>
-        <a id="f-email" href="kontak.html"><i class="fa-solid fa-envelope" style="margin-right:8px;"></i>bkpsdm@dumaikota.go.id</a>
+        <a id="f-telp" href="tel:0765123000"><i class="fa-solid fa-phone" style="margin-right:8px;"></i>(0765) 123-456</a>
+        <a id="f-email" href="mailto:bkpsdm@dumaikota.go.id"><i class="fa-solid fa-envelope" style="margin-right:8px;"></i>bkpsdm@dumaikota.go.id</a>
       </div>
       <div class="foot-col">
         <h4>Tautan</h4>
         <a href="pengumuman.html">Pengumuman</a>
         <a href="kegiatan.html">Kegiatan</a>
         <a href="layanan.html">Layanan Kepegawaian</a>
-        <a href="alur.html">Panduan Pengajuan</a>
-        <a href="kontak.html">Kontak</a>
+        <a href="aplikasi.html">Aplikasi ASN</a>
         <a href="staf.html">Direktori Staf <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:9px; margin-left:3px;"></i></a>
-        <a href="admin.html" style="color:rgba(248,244,233,0.35);font-size:12px;margin-top:6px;"><i class="fa-solid fa-shield-halved" style="margin-right:6px;font-size:10px;"></i>Admin Web</a>
+        <a href="admin.html">Admin <i class="fa-solid fa-shield-halved" style="font-size:10px; margin-left:3px;"></i></a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -631,11 +645,15 @@
     });
   });
 
+  const API_BASE = (location.protocol === 'file:' || (location.port && location.port !== '3000')) 
+    ? 'http://localhost:3000' 
+    : '';
+
   function fetchAlur() {
-    fetch('/api/alur')
+    fetch(API_BASE + '/api/alur')
       .then(res => res.json())
       .then(data => {
-        if (data.steps) {
+        if (data && data.steps && data.steps.length) {
           const stepsHtml = data.steps.map(step => `
             <div class="f-step">
               <div class="f-num">${step.num}</div>
@@ -643,16 +661,18 @@
               <p>${step.desc}</p>
             </div>
           `).join('');
-          document.getElementById('flowStepsContainer').innerHTML = stepsHtml;
+          const container = document.getElementById('flowStepsContainer');
+          if (container) container.innerHTML = stepsHtml;
         }
-        if (data.faq) {
+        if (data && data.faq && data.faq.length) {
           const faqHtml = data.faq.map((item, idx) => `
             <details class="faq-item" ${idx === 0 ? 'open' : ''}>
               <summary>${item.q}<span class="faq-icon"><i class="fa-solid fa-plus" style="font-size:11px;"></i></span></summary>
               <p>${item.a}</p>
             </details>
           `).join('');
-          document.getElementById('faqContainer').innerHTML = faqHtml;
+          const container = document.getElementById('faqContainer');
+          if (container) container.innerHTML = faqHtml;
         }
       })
       .catch(err => {
@@ -663,7 +683,7 @@
 </script>
 
 <script>
-  fetch('/api/kontak').then(r=>r.json()).then(d=>{
+  fetch(API_BASE + '/api/kontak').then(r=>r.json()).then(d=>{
     if(d.alamat) { const el = document.getElementById('f-alamat'); if(el) el.textContent = d.alamat; }
     if(d.jam) { const el = document.getElementById('f-jam'); if(el) el.textContent = d.jam; }
     if(d.telp) { const el = document.getElementById('f-telp'); if(el) el.innerHTML = '<i class="fa-solid fa-phone" style="margin-right:8px;"></i>' + d.telp; }

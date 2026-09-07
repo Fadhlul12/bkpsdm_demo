@@ -6,7 +6,9 @@
       "cat": "cpns",
       "date": "2026-08-03",
       "status": "terbit",
-      "urgent": "urgent",
+      "urgent": "normal",
+      "linkUrl": "https://sscasn.bkn.go.id",
+      "linkLabel": "Portal Pendaftaran SSCASN BKN",
       "body": "Berdasarkan hasil verifikasi berkas administrasi calon Pegawai Negeri Sipil (CPNS) di lingkungan Pemerintah Kota Dumai Tahun Anggaran 2026, Panitia Seleksi Daerah mengumumkan daftar peserta yang dinyatakan Lulus Seleksi Administrasi.\n\nBagi peserta yang nomor registrasi dan namanya tercantum dalam lampiran pengumuman ini berhak mengikuti tahap seleksi selanjutnya, yaitu Seleksi Kompetensi Dasar (SKD) menggunakan sistem CAT (Computer Assisted Test) BKN.\n\nKetentuan Pelaksanaan SKD:\n1. Peserta wajib mencetak Kartu Tanda Peserta Ujian melalui portal SSCASN BKN.\n2. Ujian dilaksanakan di Gedung Pusdiklat Regional dengan membawa KTP Asli dan Kartu Ujian.\n3. Peserta wajib hadir 60 menit sebelum sesi ujian dimulai untuk proses registrasi dan pin sesi.\n\nDokumen resmi Pengumuman lengkap dan daftar nama peserta dapat diunduh melalui tombol lampiran PDF di bawah.",
       "pdfPath": "",
       "pdfName": ""
@@ -108,7 +110,12 @@
       "date": "2026-07-28",
       "loc": "Aula BKPSDM Kota Dumai",
       "desc": "Sosialisasi kebijakan pengelolaan kinerja pegawai baru.",
-      "image": "/uploads/1785846516675-238083324.jpg"
+      "image": "/uploads/1788235709499-675576353.jpg",
+      "images": [
+        "/uploads/1788235709499-675576353.jpg",
+        "/uploads/1788235984598-560926039.jpg",
+        "/uploads/1788763480963-541464699.png"
+      ]
     },
     {
       "id": 2,
@@ -117,7 +124,11 @@
       "date": "2026-07-22",
       "loc": "Ruang Rapat Sekretariat",
       "desc": "Rapat koordinasi teknis CPNS 2026.",
-      "image": "/uploads/1786312368878-471240704.webp"
+      "image": "/uploads/1786312368878-471240704.webp",
+      "images": [
+        "/uploads/1786312368878-471240704.webp",
+        "/uploads/1788235709499-675576353.jpg"
+      ]
     },
     {
       "id": 3,
@@ -139,7 +150,7 @@
       "btn1Href": "pengumuman.html",
       "btn2Label": "Informasi Layanan",
       "btn2Href": "layanan.html",
-      "bgImage": "/uploads/1788235709499-675576353.jpg"
+      "bgImage": "/uploads/1788746973638-135529354.jpg"
     },
     {
       "id": 2,
@@ -150,7 +161,7 @@
       "btn1Href": "pengumuman.html",
       "btn2Label": "Syarat Pendaftaran",
       "btn2Href": "pengumuman.html",
-      "bgImage": ""
+      "bgImage": "/uploads/1788763495271-867805190.jpg"
     },
     {
       "id": 3,
@@ -180,11 +191,12 @@
       "id": 1,
       "name": "Drs. H. Ahmad Fadillah, M.Si.",
       "role": "Kepala Badan",
-      "bidang": "Sekretariat",
+      "bidang": "Bidang Mutasi & Kepangkatan",
       "status": "dikantor",
       "wa": "6281234560100",
       "email": "ahmad.fadillah@dumaikota.go.id",
-      "photo": ""
+      "photo": "/uploads/1788763367859-857168572.png",
+      "desc": "menangani urusan surat menyurat"
     },
     {
       "id": 2,
@@ -211,7 +223,7 @@
       "name": "Siti Rahmawati, S.E., M.M.",
       "role": "Kabid. Mutasi & Kepangkatan",
       "bidang": "Bidang Mutasi & Kepangkatan",
-      "status": "dikantor",
+      "status": "cuti",
       "wa": "6281234560103",
       "email": "siti.rahmawati@dumaikota.go.id",
       "photo": ""
@@ -350,6 +362,13 @@
         "Surat pengantar dari perangkat daerah asal",
         "Fotokopi Karpeg / KPE yang masih berlaku"
       ],
+      "procedure": [
+        "Pengusulan Berkas Fisik & Input Data oleh Pengelola Kepegawaian OPD asal.",
+        "Verifikasi berkas fisik dan sinkronisasi data SIASN oleh Tim Bidang Mutasi BKPSDM.",
+        "Penerbitan Pertimbangan Teknis (Pertek) oleh Kantor Regional XII BKN Pekanbaru.",
+        "Penetapan Surat Keputusan (SK) Kenaikan Pangkat & penyerahan di Loket BKPSDM.",
+        "Penetapan Surat Keputusan (SK) Kenaikan Pangkat & penyerahan di Loket BKPSDM."
+      ],
       "pdfName": "",
       "pdfPath": "",
       "staffTarget": "Siti Rahmawati, S.E., M.M.",
@@ -365,6 +384,12 @@
         "Fotokopi SK Pangkat dan SK Jabatan terakhir",
         "Surat persetujuan dari perangkat daerah asal dan tujuan",
         "Fotokopi hasil evaluasi kinerja 1 tahun terakhir"
+      ],
+      "procedure": [
+        "Pengajuan Surat Rekomendasi/Permohonan dari Perangkat Daerah asal & tujuan.",
+        "Pemeriksaan kelengkapan dokumen dan verifikasi anjab/abk formasi oleh Bidang Mutasi.",
+        "Penerbitan Surat Rekomendasi Pertimbangan Mutasi Wali Kota Dumai / BKN.",
+        "Penerbitan Surat Keputusan (SK) Mutasi resmi dan penyerahan fisik di Loket BKPSDM."
       ],
       "pdfName": "",
       "pdfPath": "",
@@ -382,6 +407,11 @@
         "Surat pernyataan tidak mengganggu jam kerja",
         "Fotokopi akreditasi program studi minimal B"
       ],
+      "procedure": [
+        "Pengajuan surat permohonan izin belajar melalui atasan langsung di Perangkat Daerah.",
+        "Verifikasi akreditasi program studi & kesesuaian formasi oleh Bidang Pengembangan Aparatur.",
+        "Penerbitan Surat Izin Belajar resmi yang ditandatangani Kepala BKPSDM Kota Dumai."
+      ],
       "pdfName": "",
       "pdfPath": "",
       "staffTarget": "Budi Setiawan, S.IP. (Kabid Pengembangan Aparatur)",
@@ -398,6 +428,11 @@
         "Surat keterangan lulus dari perguruan tinggi",
         "Penyesuaian ijazah sesuai formasi jabatan"
       ],
+      "procedure": [
+        "Penyerahan ijazah & transkrip nilai asli yang telah dilegalisasi ke Loket BKPSDM.",
+        "Ujian Penyesuaian Ijazah (UPI) / verifikasi keabsahan data ijazah di PD-Dikti & BKN.",
+        "Pencantuman Gelar & Penyesuaian Ijazah pada Sistem Informasi Kepegawaian."
+      ],
       "pdfName": "",
       "pdfPath": "",
       "staffTarget": "Budi Setiawan, S.IP. (Kabid Pengembangan Aparatur)",
@@ -413,6 +448,11 @@
         "Surat penerimaan/LoA dari perguruan tinggi tujuan",
         "Fotokopi SK Pangkat dan Jabatan terakhir",
         "Surat pernyataan bersedia kembali bertugas setelah lulus"
+      ],
+      "procedure": [
+        "Pengusulan nama calon peserta tugas belajar oleh Kepala Perangkat Daerah.",
+        "Seleksi administrasi & perolehan Surat Penerimaan (LoA) dari Perguruan Tinggi.",
+        "Penandatanganan Surat Perjanjian Ikatan Dinas & Penerbitan SK Tugas Belajar Wali Kota."
       ],
       "pdfName": "",
       "pdfPath": "",
@@ -431,6 +471,11 @@
         "Pas foto terbaru ukuran 3x4 (6 lembar)",
         "Fotokopi buku nikah dan akta kelahiran anak (jika ada tunjangan)"
       ],
+      "procedure": [
+        "Pengusulan berkas permohonan pensiun paling lambat 1 tahun sebelum Batas Usia Pensiun (BUP).",
+        "Verifikasi kelengkapan berkas fisik & pengusulan Pertek Pensiun ke BKN.",
+        "Penetapan SK Pensiun Wali Kota / BKN & penyerahan berkas klaim Asuransi Taspen di Loket BKPSDM."
+      ],
       "pdfName": "",
       "pdfPath": "",
       "staffTarget": "M. Reza Pratama, S.Sos. (Kabid Pengadaan & Informasi)",
@@ -445,6 +490,11 @@
         "Pas foto terbaru latar belakang merah ukuran 3x4",
         "Fotokopi SK Pangkat dan Jabatan terakhir",
         "Fotokopi KTP yang masih berlaku"
+      ],
+      "procedure": [
+        "Penyerahan pasfoto latar merah & fotokopi SK Pangkat di Loket BKPSDM.",
+        "Proses penginputan data & pencetakan Kartu Identitas Pegawai / Badge digital.",
+        "Pengambilan fisik Badge resmi di Loket Pelayanan BKPSDM Kota Dumai."
       ],
       "pdfName": "",
       "pdfPath": "",
@@ -462,6 +512,11 @@
         "Pas foto berpasangan ukuran 3x4",
         "Fotokopi SK Pangkat terakhir pegawai"
       ],
+      "procedure": [
+        "Pengumpulan fotokopi SK PNS, Buku Nikah legalisir, dan pasfoto berpasangan.",
+        "Penginputan data usulan Karis/Karsu ke Kantor Regional XII BKN Pekanbaru.",
+        "Penerbitan fisik Karis/Karsu & pengambilan di Loket BKPSDM Kota Dumai."
+      ],
       "pdfName": "",
       "pdfPath": "",
       "staffTarget": "Dewi Anggraini, S.Psi., M.Psi. (Kabid Pembinaan & Kesejahteraan)",
@@ -477,6 +532,11 @@
         "Surat keterangan dari atasan langsung",
         "Fotokopi KTP kedua belah pihak",
         "Dokumen pendukung sesuai peraturan perkawinan ASN yang berlaku"
+      ],
+      "procedure": [
+        "Pengajuan surat permohonan tertulis & pembinaan oleh atasan langsung di Perangkat Daerah.",
+        "Pemeriksaan berkas & Berita Acara Pemeriksaan (BAP) oleh Bidang Pembinaan & Kesejahteraan.",
+        "Penerbitan Surat Izin Perkawinan/Perceraian resmi oleh Wali Kota / Kepala BKPSDM."
       ],
       "pdfName": "",
       "pdfPath": "",
@@ -494,6 +554,11 @@
         "Surat keterangan lulus dari perguruan tinggi",
         "Fotokopi SK Pangkat terakhir"
       ],
+      "procedure": [
+        "Penyerahan ijazah, SK Izin Belajar, & transkrip nilai ke Bidang Mutasi BKPSDM.",
+        "Verifikasi keabsahan data ijazah di pangkalan PD-Dikti & pengusulan Pertek BKN.",
+        "Penerbitan Surat Keputusan (SK) Pencantuman Gelar resmi."
+      ],
       "pdfName": "",
       "pdfPath": "",
       "staffTarget": "Siti Rahmawati, S.E., M.M. (Kabid Mutasi & Kepangkatan)",
@@ -510,6 +575,11 @@
         "Fotokopi Karpeg / KPE lama",
         "Surat pengantar dari perangkat daerah"
       ],
+      "procedure": [
+        "Penyerahan SK CPNS/PNS pertama & dokumen kependudukan ke Loket BKPSDM.",
+        "Sinkronisasi data NIP baru dengan Kantor Regional XII BKN Pekanbaru.",
+        "Penerbitan Surat Konversi NIP resmi."
+      ],
       "pdfName": "",
       "pdfPath": "",
       "staffTarget": "M. Reza Pratama, S.Sos. (Kabid Pengadaan & Informasi)",
@@ -525,6 +595,11 @@
         "Surat permohonan/keterangan alasan pemutusan hubungan kerja",
         "Fotokopi SK Pengangkatan PPPK",
         "Surat keterangan bebas tanggungan dari perangkat daerah"
+      ],
+      "procedure": [
+        "Pengajuan surat permohonan pengunduran diri / evaluasi kontrak PPPK.",
+        "Verifikasi bebas tanggungan dinas & pemeriksaan oleh Bidang Pengadaan & Informasi.",
+        "Penerbitan SK Pemutusan Hubungan Kerja PPPK."
       ],
       "pdfName": "",
       "pdfPath": "",
@@ -628,7 +703,7 @@
     "telp": "(0765) 123-000",
     "email": "bkpsdm@dumaikota.go.id",
     "emailPenerima": "",
-    "jam": "Senin–Jumat, 08.00–16.00 WIB",
+    "jam": "Senin–Kamis, 08.00–16.00 WIB Jumat libur",
     "mapIframeSrc": "1.6065346384917711, 101.39238399502482",
     "fb": "#",
     "ig": "https://www.instagram.com/bkpsdmdumai?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==",
@@ -716,12 +791,64 @@
       }
     ]
   },
-  "visitorCount": 47833,
+  "visitorCount": 47838,
   "board": {
     "row1": "SKD DIMULAI 18 AGUSTUS",
     "row2": "ASN PERIODE AGUSTUS 2026",
     "row3": "PENDAFTARAN DIKLATPIM XII",
     "row4": "CEK STATUS MPP ANDA",
     "updatedAt": "2026-08-12T04:03:02.416Z"
-  }
+  },
+  "pengumumanCategories": [
+    {
+      "id": "cpns",
+      "name": "CPNS/PPPK"
+    },
+    {
+      "id": "kepangkatan",
+      "name": "Kepangkatan"
+    },
+    {
+      "id": "diklat",
+      "name": "Pendidikan & Latihan"
+    },
+    {
+      "id": "mutasi",
+      "name": "Mutasi"
+    },
+    {
+      "id": "pensiun",
+      "name": "Pensiun"
+    }
+  ],
+  "aplikasi": [
+    {
+      "title": "SIMPEGNAS Kota Dumai",
+      "desc": "Akses Portal SIMPEGNAS a,sbkjfajfgwgfjwsgfjgjawsgfjhsgfjagufkdhkgvgedkkdbfjds\nslfhslf\ndsfskl",
+      "url": "https://simpeg.dumaikota.go.id/",
+      "logo": "/uploads/1788751109226-889940195.png",
+      "id": 1788751286791
+    },
+    {
+      "title": "SIMPEGNAS Kota Dumai",
+      "desc": "jaagk",
+      "url": "https://simpeg.dumaikota.go.id/",
+      "logo": "/uploads/1788751315339-384579406.png",
+      "id": 1788751316330
+    },
+    {
+      "title": "asjdhajs",
+      "desc": "akjsgda",
+      "url": "https://simpeg.dumaikota.go.id/",
+      "logo": "/uploads/1788751500520-573080755.webp",
+      "id": 1788751502201
+    },
+    {
+      "title": "SIMPEGNAS Kota Dumai",
+      "desc": "sbdskj",
+      "url": "https://siasn.bkn.go.id",
+      "logo": "/uploads/1788751315339-384579406.png",
+      "id": 1788763536291
+    }
+  ]
 }
