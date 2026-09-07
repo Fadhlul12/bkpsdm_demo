@@ -145,8 +145,18 @@
     position:absolute; right:6%; top:50%; transform:translateY(-50%);
     font-size:280px; color:rgba(248,244,233,0.05); z-index:0;
   }
-  .hero-grid{position:relative; z-index:2;}
-  .hero-slide-content{transition:opacity .5s ease, transform .5s ease;}
+  /* ===== HERO SLIDER — RAMAH LANSIA HIGH CONTRAST CARD ===== */
+  .hero-slide-content{
+    transition:opacity .5s ease, transform .5s ease;
+    background: linear-gradient(145deg, rgba(11, 28, 48, 0.88), rgba(16, 35, 65, 0.92));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid rgba(248, 209, 83, 0.45);
+    border-radius: 16px;
+    padding: 30px 34px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(248, 209, 83, 0.1);
+    max-width: 680px;
+  }
   .hero-slide-content.switching{opacity:0; transform:translateY(8px);}
   .hero-dots{
     position:relative; z-index:2; display:flex; gap:8px; margin-top:44px;
@@ -198,21 +208,23 @@
     text-align:left; display:flex; flex-direction:column; align-items:flex-start;
   }
   .hero .eyebrow{
-    color:#F5D77F; font-size:12px; font-weight:700; letter-spacing:0.08em;
-    margin:0 0 16px 0; justify-content:flex-start; display:flex; align-items:center; gap:10px;
+    color:#F8D153; font-size:13px; font-weight:800; letter-spacing:0.08em;
+    margin:0 0 14px 0; justify-content:flex-start; display:flex; align-items:center; gap:10px;
+    text-shadow:0 2px 4px rgba(0,0,0,0.8);
   }
   .hero .eyebrow::before{
-    content:''; width:24px; height:2px; background:#F8D153; display:inline-block;
+    content:''; width:24px; height:3px; background:#F8D153; display:inline-block; border-radius:2px;
   }
   .hero h1{
-    font-size:46px; line-height:1.15; color:#ffffff; max-width:640px;
-    margin:0 0 20px 0; text-align:left; text-shadow:0 2px 8px rgba(0,0,0,0.6);
+    font-size:42px; line-height:1.2; color:#FFFFFF; max-width:620px;
+    margin:0 0 16px 0; text-align:left; font-weight:800;
+    text-shadow:0 2px 8px rgba(0,0,0,0.9);
   }
-  .hero h1 em{font-style:italic; color:#F8D153; text-shadow:0 2px 8px rgba(0,0,0,0.6);}
+  .hero h1 em{font-style:italic; color:#F8D153; text-shadow:0 2px 8px rgba(0,0,0,0.9);}
   .hero p.lead{
-    margin:0 0 28px 0; font-size:17.5px; line-height:1.7;
-    color:rgba(255,255,255,0.96); max-width:560px; text-align:left;
-    text-shadow:0 1px 4px rgba(0,0,0,0.5);
+    margin:0; font-size:18px; line-height:1.75; font-weight:600;
+    color:#F8F4E9; max-width:600px; text-align:left;
+    text-shadow:0 1px 3px rgba(0,0,0,0.8);
   }
   .search-box{
     display:flex; align-items:center; gap:10px;
@@ -757,7 +769,7 @@
   const DEFAULT_SLIDES = [
     { eyebrow: 'PEMERINTAH KOTA DUMAI · BADAN KEPEGAWAIAN & PSDM',
       title: 'Satu pintu untuk <em>pengumuman</em> dan <em>layanan kepegawaian</em> ASN Kota Dumai',
-      lead: 'SIKAP menghimpun seluruh informasi kepegawaian — dari pengumuman CPNS/PPPK, kenaikan pangkat, hingga pengajuan layanan administrasi — dalam satu papan informasi digital yang bisa diakses kapan saja.',
+      lead: 'SIKAP (Sistem Informasi Kepegawaian dan Administrasi Pegawai) Kota Dumai merupakan pusat informasi terpadu yang memfasilitasi pegawai dan masyarakat dalam mengakses layanan, data, serta informasi kepegawaian secara cepat, akurat, dan transparan.',
       btn1Label:'Lihat Pengumuman', btn1Href:'pengumuman.html',
       btn2Label:'Informasi Layanan', btn2Href:'layanan.html', bgImage:'/uploads/gedung-bkpsdm.jpg' },
     { eyebrow: 'PENERIMAAN CPNS & PPPK 2026',
@@ -817,7 +829,8 @@
     setTimeout(() => {
       heroEyebrow.textContent = data.eyebrow || 'PEMERINTAH KOTA DUMAI · BADAN KEPEGAWAIAN & PSDM';
       heroTitle.innerHTML = data.title || '';
-      heroLead.textContent = data.lead || '';
+      let cleanLead = (data.lead || '').replace(/SIKAP\s+SIKAP/gi, 'SIKAP');
+      heroLead.textContent = cleanLead;
       if (heroCta) heroCta.innerHTML = '';
       heroContent.classList.remove('switching');
     }, 220);
