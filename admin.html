@@ -1426,31 +1426,6 @@
     }
   }
 
-    if (isValid && loggedUserObj) {
-      sessionStorage.setItem(SESSION_KEY, JSON.stringify(loggedUserObj));
-      errBox.classList.remove('show');
-
-      if (loggedUserObj.role === 'admin_web') {
-        document.getElementById('loginOverlay').style.display = 'none';
-        document.getElementById('dashboard').style.display = 'block';
-        document.getElementById('adminUserLabel').textContent = `${loggedUserObj.user} (${loggedUserObj.title})`;
-        initDashboard();
-        showToast('Berhasil masuk sebagai Admin Web');
-      } else if (loggedUserObj.role === 'admin_staf') {
-        showToast('Berhasil masuk sebagai Admin Staff. Mengalihkan...');
-        setTimeout(() => {
-          window.location.href = 'staf.html?admin=true';
-        }, 500);
-      }
-    } else {
-      const roleTitle = currentRole === 'admin_web' ? 'Admin Web' : 'Admin Staff';
-      errBox.textContent = `Username atau password untuk ${roleTitle} salah.`;
-      errBox.classList.add('show');
-      document.getElementById('loginPass').value = '';
-      generateCaptcha();
-    }
-  }
-
   function logout() {
     sessionStorage.removeItem(SESSION_KEY);
     location.reload();
