@@ -218,6 +218,9 @@
     color: #475569;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     user-select: none;
+    font-family: inherit;
+    width: 100%;
+    outline: none;
   }
   .role-option * {
     pointer-events: none;
@@ -446,18 +449,16 @@
         <div class="field">
           <label><span class="lbl-badge">1</span> PILIH PERAN (ROLE)</label>
           <div class="role-selector" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-            <div class="role-option active" id="roleLabelWeb" onclick="selectRole('admin_web')" role="button" tabindex="0">
-              <input type="radio" name="loginRole" value="admin_web" checked style="display:none;">
+            <button type="button" class="role-option active" id="roleLabelWeb" onclick="selectRole(event, 'admin_web')">
               <i class="fa-solid fa-globe"></i>
               <strong>Admin Web</strong>
               <small>Konten Web Utama</small>
-            </div>
-            <div class="role-option" id="roleLabelStaff" onclick="selectRole('admin_staf')" role="button" tabindex="0">
-              <input type="radio" name="loginRole" value="admin_staf" style="display:none;">
+            </button>
+            <button type="button" class="role-option" id="roleLabelStaff" onclick="selectRole(event, 'admin_staf')">
               <i class="fa-solid fa-users-gear"></i>
               <strong>Admin Staff</strong>
               <small>Direktori Staf</small>
-            </div>
+            </button>
           </div>
         </div>
 
@@ -1308,7 +1309,11 @@
   let currentRole = 'admin_web';
   let captchaAnswerNum = 0;
 
-  function selectRole(role) {
+  function selectRole(e, role) {
+    if (e) {
+      if (typeof e.preventDefault === 'function') e.preventDefault();
+      if (typeof e.stopPropagation === 'function') e.stopPropagation();
+    }
     currentRole = role;
     const webLbl = document.getElementById('roleLabelWeb');
     const staffLbl = document.getElementById('roleLabelStaff');
@@ -1316,15 +1321,13 @@
     const userInp = document.getElementById('loginUser');
 
     if (role === 'admin_web') {
-      webLbl.classList.add('active');
-      staffLbl.classList.remove('active');
-      webLbl.querySelector('input').checked = true;
+      if (webLbl) webLbl.classList.add('active');
+      if (staffLbl) staffLbl.classList.remove('active');
       if (subtitle) subtitle.textContent = 'Panel Pengelolaan Konten Web Utama';
       if (userInp) userInp.placeholder = 'Masukkan username';
     } else {
-      staffLbl.classList.add('active');
-      webLbl.classList.remove('active');
-      staffLbl.querySelector('input').checked = true;
+      if (staffLbl) staffLbl.classList.add('active');
+      if (webLbl) webLbl.classList.remove('active');
       if (subtitle) subtitle.textContent = 'Panel Pengelolaan Direktori Staf';
       if (userInp) userInp.placeholder = 'Masukkan username';
     }
