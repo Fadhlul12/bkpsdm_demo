@@ -96,7 +96,7 @@
 
   /* Card image area — gradient placeholder */
   .k-img{
-    height:200px;position:relative;overflow:hidden;
+    height:220px;position:relative;overflow:hidden;
     display:flex;align-items:center;justify-content:center;
   }
   .k-img .k-img-icon{font-size:48px;color:rgba(255,255,255,0.35);position:relative;z-index:1;}
@@ -192,11 +192,13 @@
   .lightbox-close:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
 
   .lightbox-main {
-    position: relative; flex: 1; display: flex; align-items: center; justify-content: center;
-    min-height: 380px; max-height: 560px; background: #081424; overflow: hidden; user-select: none;
+    position: relative; width: 100%; height: 480px; max-height: 55vh; min-height: 250px;
+    background: #081424; overflow: hidden; user-select: none;
+    display: flex; align-items: center; justify-content: center; padding: 20px;
   }
   .lightbox-main img {
-    max-width: 100%; max-height: 540px; object-fit: contain;
+    max-width: 100%; max-height: 100%; width: auto; height: auto;
+    object-fit: contain; display: block; margin: auto;
     transition: transform .25s ease, opacity .2s ease;
   }
 
@@ -534,7 +536,9 @@
         : '';
 
       const imgContent = k.image
-        ? `<div class="k-img" style="background-image:url('${k.image}');background-size:cover;background-position:center;">
+        ? `<div class="k-img" style="position:relative;background:#0d1d34;overflow:hidden;">
+             <div style="position:absolute;inset:0;background-image:url('${k.image}');background-size:cover;background-position:center;filter:blur(12px);opacity:0.4;transform:scale(1.15);"></div>
+             <img src="${k.image}" alt="${k.title}" style="position:relative;z-index:1;width:100%;height:100%;object-fit:contain;display:block;">
              <span class="k-cat-badge ${k.cat}">${getCatLabel(k.cat)}</span>
              ${photoBadge}
            </div>`

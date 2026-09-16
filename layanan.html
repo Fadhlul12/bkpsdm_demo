@@ -937,7 +937,7 @@
       }
       return `
         <div class="svc-card" data-svc="${l.id}">
-          <div class="svc-head"><div class="svc-icon"><i class="fa-solid ${l.icon}"></i></div><span class="svc-tag">${l.tag}</span></div>
+          <div class="svc-head"><div class="svc-icon">${(l.icon && (l.icon.startsWith('/') || l.icon.startsWith('http'))) ? `<img src="${l.icon}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">` : `<i class="fa-solid ${l.icon||'fa-file'}"></i>`}</div><span class="svc-tag">${l.tag}</span></div>
           <div class="svc-body">
             <h3>${l.title}</h3>
             <div class="svc-actions">

@@ -539,6 +539,14 @@
     border:none; background:transparent; outline:none; width:100%;
     font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; color:var(--charcoal);
   }
+  .search-clear-btn{
+    display:none; align-items:center; justify-content:center;
+    width:24px; height:24px; border-radius:50%; border:none; flex-shrink:0;
+    background:rgba(27,54,93,0.1); color:var(--teal); cursor:pointer;
+    font-size:12px; transition:all .15s ease; padding:0;
+  }
+  .search-clear-btn:hover{background:var(--ink); color:var(--cream);}
+  .search-clear-btn.visible{display:inline-flex;}
   .status-filters{display:flex; gap:8px; flex-wrap:wrap;}
   .status-pill{
     font-family:'IBM Plex Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.03em;
@@ -792,7 +800,12 @@
         <span><span class="portal-badge">Internal</span> BKPSDM Kota Dumai</span>
       </div>
     </div>
-    <a href="index.html" class="btn btn-gold"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button id="logoutAdminStafBtn" onclick="logoutAdminStaf()" style="display:none;align-items:center;gap:8px;padding:10px 18px;border-radius:3px;font-size:14px;font-weight:600;cursor:pointer;border:1.4px solid rgba(248,244,233,0.45);background:rgba(192,57,43,0.18);color:#f8f4e9;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s ease;">
+        <i class="fa-solid fa-right-from-bracket"></i> Keluar Admin
+      </button>
+      <a href="index.html" class="btn btn-gold"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+    </div>
   </div>
 </div>
 
@@ -815,7 +828,10 @@
     <div class="staff-toolbar">
       <div class="staff-search">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="staffSearch" placeholder="Cari nama staf…">
+        <input type="text" id="staffSearch" placeholder="Cari nama staf…" autocomplete="off">
+        <button class="search-clear-btn" id="searchClearBtn" onclick="clearStaffSearch()" title="Hapus pencarian" aria-label="Hapus pencarian">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
       <div class="status-filters" id="statusFilters">
         <button class="status-pill active" data-status="semua"><span class="dot"></span> Semua</button>
@@ -840,9 +856,7 @@
   </div>
 </section>
 
-<div class="wrap" style="padding:40px 32px 48px; text-align:center; display:flex; justify-content:center; gap:16px; align-items:center; flex-wrap:wrap;">
-  <button class="admin-link" id="adminToggle"><i class="fa-solid fa-user-shield"></i> <span id="adminLinkText">Login Admin Staf</span></button>
-</div>
+
 
 <div class="modal-overlay" id="staffModal" aria-hidden="true">
   <div class="modal-box" role="dialog" aria-labelledby="modalTitle">
@@ -936,7 +950,7 @@
       <form id="loginForm" onsubmit="handleLogin(event)">
         <div class="field">
           <label>Username</label>
-          <input type="text" id="login-user" required placeholder="admin" autocomplete="username">
+          <input type="text" id="login-user" required placeholder="Masukkan username" autocomplete="username">
         </div>
         <div class="field">
           <label>Password</label>
@@ -1026,6 +1040,7 @@
         const q = urlParams.get('q');
         if(q) {
           document.getElementById('staffSearch').value = q;
+          document.getElementById('searchClearBtn').classList.add('visible');
         }
         applyFilter();
       })
@@ -1267,6 +1282,8 @@
 
   document.getElementById('staffSearch').addEventListener('input', (e) => {
     currentQuery = e.target.value.trim().toLowerCase();
+    const clearBtn = document.getElementById('searchClearBtn');
+    if (clearBtn) clearBtn.classList.toggle('visible', e.target.value.length > 0);
     applyFilter();
   });
 
@@ -1278,6 +1295,19 @@
     currentStatus = btn.dataset.status;
     applyFilter();
   });
+
+  function clearStaffSearch() {
+    const input = document.getElementById('staffSearch');
+    const clearBtn = document.getElementById('searchClearBtn');
+    if (input) { input.value = ''; input.focus(); }
+    if (clearBtn) clearBtn.classList.remove('visible');
+    currentQuery = '';
+    // Hapus param ?q= dari URL tanpa reload
+    const url = new URL(window.location.href);
+    url.searchParams.delete('q');
+    window.history.replaceState({}, document.title, url.pathname);
+    applyFilter();
+  }
 
   // ===== TOAST =====
   const toast = document.getElementById('toast');
@@ -1291,13 +1321,41 @@
   }
 
   // ===== ADMIN MODE (SIKAP ROLE AUTHENTICATION) =====
-  const CREDS_ADMIN_STAF = { username: "adminstaf", password: "staf2026" };
+  let CREDS_ADMIN_STAF = { username: "", password: "" };
+  
+  function fetchStafCredentials() {
+    const local = localStorage.getItem('sipadu_admin_creds');
+    if (local) {
+      try {
+        const data = JSON.parse(local);
+        if (data.admin_staf) {
+          CREDS_ADMIN_STAF.username = data.admin_staf.username;
+          CREDS_ADMIN_STAF.password = data.admin_staf.password;
+        }
+      } catch(e) {}
+    }
+  }
+  fetchStafCredentials();
   const SESSION_KEY = "sipadu_admin_session";
   const adminToggle = document.getElementById('adminToggle');
   const adminLinkText = document.getElementById('adminLinkText');
   const loginModal = document.getElementById('loginModal');
   const loginForm = document.getElementById('loginForm');
   const loginError = document.getElementById('loginError');
+
+  function showLogoutBtn(show) {
+    const btn = document.getElementById('logoutAdminStafBtn');
+    if (btn) btn.style.display = show ? 'inline-flex' : 'none';
+  }
+
+  function logoutAdminStaf() {
+    sessionStorage.removeItem(SESSION_KEY);
+    document.body.classList.remove('admin-on');
+    if (adminToggle) adminToggle.classList.remove('on');
+    if (adminLinkText) adminLinkText.textContent = "Login Admin Staf";
+    showLogoutBtn(false);
+    showToast("Berhasil keluar dari Mode Admin Staf.");
+  }
 
   function checkAdminSession() {
     const sessStr = sessionStorage.getItem(SESSION_KEY);
@@ -1308,9 +1366,9 @@
           document.body.classList.add('admin-on');
           if (adminToggle) adminToggle.classList.add('on');
           if (adminLinkText) adminLinkText.textContent = "Mode Admin Staff Aktif — Keluar";
+          showLogoutBtn(true);
           return true;
         } else if (sess.role === 'admin_web') {
-          // If logged in as admin_web, keep public view and show link to web admin
           if (adminLinkText) adminLinkText.textContent = "Portal Admin Web";
           return false;
         }
@@ -1319,26 +1377,27 @@
     return false;
   }
 
-  adminToggle.addEventListener('click', () => {
-    if(document.body.classList.contains('admin-on')){
-      sessionStorage.removeItem(SESSION_KEY);
-      document.body.classList.remove('admin-on');
-      adminToggle.classList.remove('on');
-      adminLinkText.textContent = "Login Admin Staf";
-      showToast("Mode Admin Staf dimatikan.");
-      return;
-    }
-    const sessStr = sessionStorage.getItem(SESSION_KEY);
-    if (sessStr) {
-      const sess = JSON.parse(sessStr);
-      if (sess.role === 'admin_web') {
-        window.location.href = 'admin.html';
+  if (adminToggle) {
+    adminToggle.addEventListener('click', () => {
+      if(document.body.classList.contains('admin-on')){
+        sessionStorage.removeItem(SESSION_KEY);
+        document.body.classList.remove('admin-on');
+        adminToggle.classList.remove('on');
+        if (adminLinkText) adminLinkText.textContent = "Login Admin Staf";
+        showToast("Mode Admin Staf dimatikan.");
         return;
       }
-    }
-    // Redirect to central login portal or open login modal
-    window.location.href = 'admin.html';
-  });
+      const sessStr = sessionStorage.getItem(SESSION_KEY);
+      if (sessStr) {
+        const sess = JSON.parse(sessStr);
+        if (sess.role === 'admin_web') {
+          window.location.href = 'admin.html';
+          return;
+        }
+      }
+      window.location.href = 'admin.html';
+    });
+  }
 
   function closeLogin(){
     loginModal.classList.remove('open');
@@ -1348,15 +1407,38 @@
     loginModal.addEventListener('click', (e) => { if(e.target === loginModal) closeLogin(); });
   }
 
-  function handleLogin(e){
+  async function handleLogin(e){
     e.preventDefault();
     const u = document.getElementById('login-user').value.trim();
     const p = document.getElementById('login-pass').value;
-    if((u === CREDS_ADMIN_STAF.username && p === CREDS_ADMIN_STAF.password) || (u === "admin" && p === "admin123")){
+
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role: 'admin_staf', username: u, password: p })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        sessionStorage.setItem(SESSION_KEY, JSON.stringify({ user: data.user.username, role: 'admin_staf', title: 'Admin Staff', time: Date.now() }));
+        document.body.classList.add('admin-on');
+        if (adminToggle) adminToggle.classList.add('on');
+        if (adminLinkText) adminLinkText.textContent = "Mode Admin Staff Aktif — Keluar";
+        showLogoutBtn(true);
+        closeLogin();
+        showToast("Berhasil masuk sebagai Admin Staff.");
+        return;
+      }
+    } catch(err) {
+      console.warn('Backend server offline, trying local storage auth fallback');
+    }
+
+    if(u && p && CREDS_ADMIN_STAF.username && u === CREDS_ADMIN_STAF.username && p === CREDS_ADMIN_STAF.password){
       sessionStorage.setItem(SESSION_KEY, JSON.stringify({ user: u, role: 'admin_staf', title: 'Admin Staff', time: Date.now() }));
       document.body.classList.add('admin-on');
-      adminToggle.classList.add('on');
-      adminLinkText.textContent = "Mode Admin Staff Aktif — Keluar";
+      if (adminToggle) adminToggle.classList.add('on');
+      if (adminLinkText) adminLinkText.textContent = "Mode Admin Staff Aktif — Keluar";
+      showLogoutBtn(true);
       closeLogin();
       showToast("Berhasil masuk sebagai Admin Staff.");
     } else {

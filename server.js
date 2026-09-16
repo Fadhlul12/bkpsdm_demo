@@ -75,14 +75,26 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
 // Visitor Count APIs
 app.get('/api/visitor', (req, res) => {
   const db = readDb();
-  res.json({ count: db.visitorCount || 47820 });
+  const showCounter = db.showVisitorCounter !== undefined ? db.showVisitorCounter : true;
+  res.json({ count: db.visitorCount || 47820, showCounter: showCounter });
 });
 
 app.post('/api/visitor/increment', (req, res) => {
   const db = readDb();
   db.visitorCount = (db.visitorCount || 47820) + 1;
   writeDb(db);
-  res.json({ count: db.visitorCount });
+  const showCounter = db.showVisitorCounter !== undefined ? db.showVisitorCounter : true;
+  res.json({ count: db.visitorCount, showCounter: showCounter });
+});
+
+app.post('/api/visitor/settings', (req, res) => {
+  const db = readDb();
+  if (req.body && typeof req.body.showCounter !== 'undefined') {
+    db.showVisitorCounter = Boolean(req.body.showCounter);
+    writeDb(db);
+  }
+  const showCounter = db.showVisitorCounter !== undefined ? db.showVisitorCounter : true;
+  res.json({ success: true, showCounter: showCounter });
 });
 
 // Pengumuman APIs
@@ -542,6 +554,65 @@ app.delete('/api/aplikasi/:id', (req, res) => {
   }
   res.json({ success: true });
 });
+
+// --- SECURE AUTH & CREDENTIALS API ---
+const DEFAULT_CREDS = {
+  admin_web: { username: 'adminweb', password: 'sipadu2026' },
+  admin_staf: { username: 'adminstaf', password: 'staf2026' }
+};
+
+function getStoredCreds() {
+  const db = readDb();
+  if (!db.credentials) {
+    db.credentials = { ...DEFAULT_CREDS };
+    writeDb(db);
+  }
+  return db.credentials;
+}
+
+// POST /api/login -> Secure login verification on backend
+app.post('/api/login', (req, res) => {
+  const { role, username, password } = req.body;
+  const creds = getStoredCreds();
+  const roleKey = (role === 'admin_staf' || role === 'staf') ? 'admin_staf' : 'admin_web';
+  const target = creds[roleKey] || DEFAULT_CREDS[roleKey];
+
+  if (username && password && username === target.username && password === target.password) {
+    return res.json({
+      success: true,
+      user: { username: target.username, role: roleKey, title: roleKey === 'admin_web' ? 'Admin Web' : 'Admin Staff' }
+    });
+  } else {
+    return res.status(401).json({ success: false, error: 'Username atau password salah.' });
+  }
+});
+
+// POST /api/credentials/update -> Secure credential update on backend
+app.post('/api/credentials/update', (req, res) => {
+  const { role, currentPassword, newUsername, newPassword } = req.body;
+  const db = readDb();
+  if (!db.credentials) db.credentials = { ...DEFAULT_CREDS };
+
+  const roleKey = (role === 'admin_staf' || role === 'staf') ? 'admin_staf' : 'admin_web';
+  const currentCreds = db.credentials[roleKey] || DEFAULT_CREDS[roleKey];
+
+  if (!currentPassword || currentPassword !== currentCreds.password) {
+    return res.status(400).json({ error: 'Kata sandi saat ini salah!' });
+  }
+
+  if (!newUsername || !newUsername.trim() || !newPassword) {
+    return res.status(400).json({ error: 'Username dan Password baru wajib diisi!' });
+  }
+
+  db.credentials[roleKey] = {
+    username: newUsername.trim(),
+    password: newPassword
+  };
+
+  writeDb(db);
+  res.json({ success: true, message: 'Username dan kata sandi berhasil diperbarui!' });
+});
+
 
 
 // Catch-all route to serve index.html for undefined routes

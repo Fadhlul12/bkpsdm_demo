@@ -45,29 +45,305 @@
   .btn-danger:hover{background:var(--danger);color:#fff;}
   .btn-sm{padding:7px 13px;font-size:12px;}
 
-  /* ===== LOGIN OVERLAY ===== */
-  .login-overlay{position:fixed;inset:0;background:linear-gradient(135deg,var(--teal-deep),var(--ink));display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;}
-  .login-card{background:var(--cream);border-radius:14px;max-width:400px;width:100%;box-shadow:0 40px 80px -20px rgba(0,0,0,0.5);overflow:hidden;animation:fadeUp .3s ease both;}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-  .login-head{background:linear-gradient(155deg,var(--teal-deep),var(--ink));padding:28px 28px 22px;text-align:center;}
-  .login-head .icon{width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 32% 30%,var(--gold-light),var(--gold) 60%,#9c7d1c 100%);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:24px;color:var(--ink);}
-  .login-head h2{color:var(--cream);font-size:22px;}
-  .login-head p{color:rgba(248,244,233,0.6);font-size:13px;margin-top:6px;}
-  .login-body{padding:28px;}
-  .field{margin-bottom:18px;}
-  .field label{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.06em;color:var(--teal);margin-bottom:6px;}
-  .field input,.field select,.field textarea{width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:6px;background:var(--paper);font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;color:var(--charcoal);outline:none;transition:border-color .15s ease;}
-  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);}
-  .field textarea{resize:vertical;min-height:90px;}
-  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .login-error{display:none;font-size:12.5px;color:var(--danger);background:rgba(192,57,43,0.08);border:1px solid rgba(192,57,43,0.2);border-radius:5px;padding:8px 12px;margin:-6px 0 14px;}
-  .login-error.show{display:block;}
+  /* ===== LOGIN OVERLAY & CARD ===== */
+  .login-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 50% 35%, #1e3a60 0%, #0d1b2e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+  }
+  .login-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 30px 70px -15px rgba(5, 15, 30, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+    animation: fadeUp .35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .login-head {
+    background: linear-gradient(155deg, var(--teal-deep), var(--ink));
+    padding: 34px 28px 26px;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .login-head .icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #FFD54F 0%, #EAA900 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    font-size: 26px;
+    color: var(--ink);
+    box-shadow: 0 10px 24px -4px rgba(234, 169, 0, 0.45);
+  }
+  .login-head h2 {
+    color: #FFFFFF;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .login-head p {
+    color: rgba(248, 244, 233, 0.75);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 6px;
+    margin-bottom: 0;
+  }
+  .login-body {
+    padding: 30px 28px 32px;
+  }
+  .login-body .field {
+    margin-bottom: 20px;
+  }
+  .login-body .field label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  .lbl-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    background: rgba(39, 82, 138, 0.1);
+    color: var(--teal);
+    font-size: 10.5px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 10px;
+    background: #F8FAFC;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13.5px;
+    color: var(--charcoal);
+    font-weight: 500;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+  .field input:hover, .field select:hover, .field textarea:hover {
+    border-color: #CBD5E1;
+    background: #FFFFFF;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--teal);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(39, 82, 138, 0.12);
+  }
+  .input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .input-with-icon .input-icon {
+    position: absolute;
+    left: 14px;
+    color: #94A3B8;
+    font-size: 14px;
+    pointer-events: none;
+    transition: color 0.2s ease;
+    z-index: 2;
+  }
+  .input-with-icon input {
+    padding-left: 42px !important;
+  }
+  .input-with-icon:focus-within .input-icon {
+    color: var(--teal);
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 90px;
+  }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .login-error {
+    display: none;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--danger);
+    background: rgba(192, 57, 43, 0.08);
+    border: 1px solid rgba(192, 57, 43, 0.25);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin: 4px 0 16px;
+    animation: fadeUp 0.2s ease both;
+  }
+  .login-error.show {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
   /* ===== ROLE SELECTOR & CAPTCHA STYLES ===== */
-  .role-option{background:var(--paper); border:2px solid var(--line); border-radius:8px; padding:10px 8px; text-align:center; cursor:pointer; color:var(--charcoal); transition:all 0.15s ease; user-select:none;}
-  .role-option:hover{border-color:var(--teal);}
-  .role-option.active{background:rgba(27,67,50,0.08); border-color:var(--teal); color:var(--teal);}
-  .captcha-box{background:var(--ink); color:var(--gold-light); font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:15px; padding:9px 14px; border-radius:6px; letter-spacing:1px; flex-shrink:0;}
+  .role-option {
+    background: #F8FAFC;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 12px 10px;
+    text-align: center;
+    cursor: pointer;
+    color: #475569;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+  }
+  .role-option:hover {
+    border-color: #3B6CA8;
+    background: #F1F5F9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(27, 54, 93, 0.06);
+  }
+  .role-option.active {
+    background: rgba(39, 82, 138, 0.05);
+    border-color: var(--teal);
+    color: var(--teal);
+    box-shadow: 0 4px 14px rgba(39, 82, 138, 0.15);
+  }
+  .role-option i {
+    font-size: 20px;
+    margin-bottom: 6px;
+    display: block;
+    color: #64748B;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  .role-option.active i {
+    color: var(--teal);
+    transform: scale(1.1);
+  }
+  .role-option strong {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--charcoal);
+  }
+  .role-option.active strong {
+    color: var(--ink);
+  }
+  .role-option small {
+    display: block;
+    font-size: 11px;
+    opacity: 0.8;
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  .captcha-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .captcha-box {
+    background: linear-gradient(145deg, var(--teal-deep), var(--ink));
+    color: var(--gold-light);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    padding: 0 16px;
+    height: 44px;
+    border-radius: 10px;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2), 0 2px 6px rgba(27, 54, 93, 0.15);
+    border: 1px solid rgba(255, 200, 46, 0.25);
+  }
+  .captcha-refresh-btn {
+    height: 44px;
+    width: 44px;
+    flex-shrink: 0;
+    background: #F1F5F9;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--teal);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .captcha-refresh-btn:hover {
+    background: #E2E8F0;
+    color: var(--ink);
+    border-color: #CBD5E1;
+    transform: rotate(90deg);
+  }
+  .login-submit-btn {
+    width: 100%;
+    height: 48px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #FFC82E 0%, #EAA900 100%);
+    color: var(--ink);
+    border: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 20px -4px rgba(234, 169, 0, 0.4);
+    margin-top: 22px;
+  }
+  .login-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px -4px rgba(234, 169, 0, 0.55);
+    filter: brightness(1.04);
+  }
+  .login-submit-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px -2px rgba(234, 169, 0, 0.4);
+  }
+  .login-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748B;
+    transition: all 0.2s ease;
+    padding: 6px 14px;
+    border-radius: 8px;
+  }
+  .login-back-link:hover {
+    color: var(--teal);
+    background: #F1F5F9;
+  }
 
 
   /* ===== DASHBOARD ===== */
@@ -160,57 +436,75 @@
     <div class="login-head">
       <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
       <h2>Portal Admin SIKAP</h2>
-      <p id="loginSubtitle">Pilih Peran &amp; Masukkan Kredensial</p>
+      <p id="loginSubtitle">Panel Pengelolaan Konten Web Utama</p>
     </div>
     <div class="login-body">
       <form id="loginForm" onsubmit="handleLogin(event)">
         <div class="field">
-          <label>1. PILIH PERAN (ROLE)</label>
-          <div class="role-selector" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <label><span class="lbl-badge">1</span> PILIH PERAN (ROLE)</label>
+          <div class="role-selector" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
             <label class="role-option active" id="roleLabelWeb" onclick="selectRole('admin_web')">
               <input type="radio" name="loginRole" value="admin_web" checked style="display:none;">
-              <i class="fa-solid fa-globe" style="font-size:18px; margin-bottom:4px; display:block;"></i>
+              <i class="fa-solid fa-globe"></i>
               <strong>Admin Web</strong>
-              <small style="display:block; font-size:10.5px; opacity:0.8; font-weight:normal;">Konten Web Utama</small>
+              <small>Konten Web Utama</small>
             </label>
             <label class="role-option" id="roleLabelStaff" onclick="selectRole('admin_staf')">
               <input type="radio" name="loginRole" value="admin_staf" style="display:none;">
-              <i class="fa-solid fa-users-gear" style="font-size:18px; margin-bottom:4px; display:block;"></i>
+              <i class="fa-solid fa-users-gear"></i>
               <strong>Admin Staff</strong>
-              <small style="display:block; font-size:10.5px; opacity:0.8; font-weight:normal;">Direktori Staf</small>
+              <small>Direktori Staf</small>
             </label>
           </div>
         </div>
 
         <div class="field">
-          <label>2. USERNAME</label>
-          <input type="text" id="loginUser" required placeholder="Masukkan username" autocomplete="username">
-        </div>
-        <div class="field">
-          <label>3. PASSWORD</label>
-          <input type="password" id="loginPass" required placeholder="••••••••" autocomplete="current-password">
+          <label><span class="lbl-badge">2</span> USERNAME</label>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-user input-icon"></i>
+            <input type="text" id="loginUser" required placeholder="Masukkan username" autocomplete="username">
+          </div>
         </div>
 
         <div class="field">
-          <label>4. CAPTCHA KEAMANAN (PENJUMLAHAN)</label>
-          <div style="display:flex; gap:8px; align-items:center;">
+          <label><span class="lbl-badge">3</span> PASSWORD</label>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="loginPass" required placeholder="••••••••" autocomplete="current-password">
+          </div>
+        </div>
+
+        <div class="field">
+          <label><span class="lbl-badge">4</span> CAPTCHA KEAMANAN (PENJUMLAHAN)</label>
+          <div class="captcha-row">
             <div class="captcha-box" id="captchaBox">
               <span id="captchaQuestion">7 + 12 = ?</span>
             </div>
-            <input type="number" id="captchaAnswer" required placeholder="Hasil" style="flex:1;">
-            <button type="button" onclick="generateCaptcha()" title="Acak Captcha" style="background:var(--paper); border:1.5px solid var(--line); border-radius:6px; padding:9px 12px; cursor:pointer; color:var(--teal);">
+            <div class="input-with-icon" style="flex:1;">
+              <i class="fa-solid fa-calculator input-icon"></i>
+              <input type="number" id="captchaAnswer" required placeholder="Hasil">
+            </div>
+            <button type="button" class="captcha-refresh-btn" onclick="generateCaptcha()" title="Acak Captcha">
               <i class="fa-solid fa-arrows-rotate"></i>
             </button>
           </div>
         </div>
 
-        <div class="login-error" id="loginError">Username atau password salah.</div>
-        <button type="submit" class="btn btn-gold" style="width:100%;">
+        <div class="login-error" id="loginError">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>Username atau password salah.</span>
+        </div>
+
+        <button type="submit" class="login-submit-btn">
           <i class="fa-solid fa-right-to-bracket"></i> Masuk ke Dashboard
         </button>
       </form>
-      <div style="text-align:center;margin-top:18px;">
-        <a href="index.html" style="font-size:12.5px;color:#8a978f;"><i class="fa-solid fa-arrow-left" style="margin-right:5px;"></i>Kembali ke Web Utama</a>
+
+      <div style="text-align:center; margin-top:20px;">
+        <a href="index.html" class="login-back-link">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Kembali ke Web Utama</span>
+        </a>
       </div>
     </div>
   </div>
@@ -230,6 +524,7 @@
       </div>
       <div style="display:flex;align-items:center;gap:12px;">
         <span style="font-size:13px;color:rgba(248,244,233,0.6);" id="adminUserLabel"></span>
+        <button class="btn btn-outline btn-sm" onclick="openAccountModal()"><i class="fa-solid fa-key"></i> Ubah Password</button>
         <a href="index.html" class="btn btn-outline btn-sm"><i class="fa-solid fa-eye"></i> Lihat Web</a>
         <button class="btn btn-outline btn-sm" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
       </div>
@@ -325,6 +620,17 @@
 
     <!-- TAB: HERO SLIDER / BANNER -->
     <div class="tab-content" id="tab-slides">
+      <div style="background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:20px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <div>
+          <h4 style="margin:0 0 4px 0;font-size:15px;color:var(--ink);"><i class="fa-solid fa-eye" style="margin-right:8px;color:var(--teal);"></i>Tampilkan Jumlah Pengunjung Website</h4>
+          <p style="margin:0;font-size:13px;color:#5b6a63;">Atur apakah badge "Total Pengunjung Website" ditampilkan atau disembunyikan di bagian Hero Banner halaman utama.</p>
+        </div>
+        <label style="display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-weight:600;font-size:14px;background:var(--paper);padding:8px 14px;border:1px solid var(--line);border-radius:6px;">
+          <input type="checkbox" id="toggleVisitorCounter" onchange="handleSaveVisitorSetting(this.checked)" style="width:18px;height:18px;cursor:pointer;accent-color:var(--teal);">
+          <span id="labelVisitorCounterStatus">Sembunyikan / Tampilkan</span>
+        </label>
+      </div>
+
       <div class="admin-toolbar">
         <h3>Kelola Banner Hero Slider</h3>
         <button class="btn btn-gold" onclick="openModal('slides')"><i class="fa-solid fa-plus"></i> Tambah Slide Banner</button>
@@ -675,35 +981,15 @@
         </div>
         <div class="field">
           <label>Sub-Judul Atas (Eyebrow)</label>
-          <input type="text" id="s-eyebrow" required placeholder="PEMERINTAH KOTA DUMAI Â· BKPSDM">
+          <input type="text" id="s-eyebrow" placeholder="PEMERINTAH KOTA DUMAI Â· BKPSDM">
         </div>
         <div class="field">
           <label>Judul Utama (Gunakan &lt;em&gt;kata&lt;/em&gt; untuk cetak miring emas)</label>
-          <input type="text" id="s-title" required placeholder="Satu pintu untuk <em>pengumuman</em> dan <em>layanan</em>">
+          <input type="text" id="s-title" placeholder="Satu pintu untuk <em>pengumuman</em> dan <em>layanan</em>">
         </div>
         <div class="field">
           <label>Deskripsi Singkat (Lead)</label>
-          <textarea id="s-lead" required placeholder="Penjelasan singkat bannerâ€¦"></textarea>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label>Tombol 1 (Teks)</label>
-            <input type="text" id="s-btn1-label" placeholder="Lihat Pengumuman">
-          </div>
-          <div class="field">
-            <label>Tombol 1 (Link URL)</label>
-            <input type="text" id="s-btn1-href" placeholder="pengumuman.html">
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label>Tombol 2 (Teks)</label>
-            <input type="text" id="s-btn2-label" placeholder="Ajukan Layanan">
-          </div>
-          <div class="field">
-            <label>Tombol 2 (Link URL)</label>
-            <input type="text" id="s-btn2-href" placeholder="layanan.html">
-          </div>
+          <textarea id="s-lead" placeholder="Penjelasan singkat banner…"></textarea>
         </div>
         <input type="hidden" id="s-id" value="">
         <div class="modal-foot">
@@ -737,8 +1023,43 @@
           <input type="text" id="l-tag" placeholder="Kenaikan Pangkat">
         </div>
         <div class="field">
-          <label>Ikon Font Awesome (e.g. fa-arrow-trend-up)</label>
-          <input type="text" id="l-icon" placeholder="fa-arrow-trend-up">
+          <label>Ikon Layanan</label>
+          <input type="hidden" id="l-icon">
+          <!-- Icon Picker UI -->
+          <div id="icon-picker-wrap" style="border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:var(--paper);">
+            <!-- Mode Tabs -->
+            <div style="display:flex;border-bottom:1.5px solid var(--line);">
+              <button type="button" id="icon-tab-fa" onclick="switchIconTab('fa')" style="flex:1;padding:10px 14px;border:none;background:var(--teal);color:#fff;font-size:12.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s;"><i class="fa-solid fa-icons"></i> Pilih Ikon</button>
+              <button type="button" id="icon-tab-img" onclick="switchIconTab('img')" style="flex:1;padding:10px 14px;border:none;background:transparent;color:#5b6a63;font-size:12.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s;"><i class="fa-solid fa-image"></i> Upload Gambar</button>
+            </div>
+            <!-- Panel: FA Icon Picker -->
+            <div id="icon-panel-fa" style="padding:12px;">
+              <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;">
+                <input type="text" id="icon-search" placeholder="Cari ikon... (mis: file, user, star)" oninput="filterIcons(this.value)" style="flex:1;padding:8px 12px;border:1.5px solid var(--line);border-radius:6px;font-size:13px;outline:none;">
+                <button type="button" onclick="clearIconSelection()" title="Hapus pilihan" style="padding:8px 10px;border:1.5px solid var(--line);border-radius:6px;background:transparent;color:#888;cursor:pointer;font-size:13px;"><i class="fa-solid fa-xmark"></i></button>
+              </div>
+              <div id="icon-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(46px,1fr));gap:6px;max-height:220px;overflow-y:auto;padding-right:2px;"></div>
+            </div>
+            <!-- Panel: Upload Gambar -->
+            <div id="icon-panel-img" style="padding:14px;display:none;">
+              <div style="display:flex;gap:10px;align-items:center;">
+                <label for="l-icon-img-file" class="btn btn-sm" style="cursor:pointer;border:1.5px solid var(--teal);color:var(--teal);background:transparent;display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:6px;font-size:13px;font-weight:700;white-space:nowrap;"><i class="fa-solid fa-upload"></i> Pilih Gambar</label>
+                <input type="file" id="l-icon-img-file" accept="image/*" style="display:none;" onchange="handleIconImageUpload(event)">
+                <span id="l-icon-img-info" style="font-size:12px;color:#8a978f;">Belum ada gambar dipilih.</span>
+              </div>
+              <p style="font-size:11.5px;color:#8a978f;margin-top:8px;margin-bottom:0;">Gambar akan digunakan sebagai ikon layanan. Format: JPG, PNG, SVG, WebP.</p>
+            </div>
+            <!-- Preview Area -->
+            <div id="icon-preview-bar" style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(27,94,99,0.06);border-top:1.5px solid var(--line);">
+              <div id="icon-preview-box" style="width:44px;height:44px;border-radius:10px;background:rgba(232,196,104,0.18);border:1.5px solid rgba(232,196,104,0.35);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;overflow:hidden;">
+                <i class="fa-solid fa-question" style="opacity:.4;"></i>
+              </div>
+              <div>
+                <div id="icon-preview-label" style="font-size:12px;color:#5b6a63;">Belum ada ikon dipilih</div>
+                <div id="icon-preview-value" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#aaa;"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="field">
           <label>Persyaratan / Dokumen (pisahkan per baris)</label>
@@ -827,14 +1148,159 @@
   </div>
 </div>
 
+<!-- ===== MODAL UBAH USERNAME & PASSWORD ===== -->
+<div class="modal-overlay" id="modalAccount" style="display:none;">
+  <div class="modal-box" style="max-width:440px;">
+    <div class="modal-head">
+      <h3><i class="fa-solid fa-user-shield" style="margin-right:8px;color:var(--gold);"></i> Ubah Username & Password</h3>
+      <button type="button" class="modal-close" onclick="closeAccountModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="accountForm" onsubmit="handleAccountUpdate(event)">
+        <div class="field">
+          <label>Pilih Akun Admin</label>
+          <select id="accTargetRole" style="width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:6px;font-size:13.5px;outline:none;background:#fff;font-family:inherit;">
+            <option value="admin_web">Admin Web (Konten Utama)</option>
+            <option value="admin_staf">Admin Staff (Direktori Staf)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Password Saat Ini</label>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="accCurrentPass" required placeholder="Masukkan password saat ini">
+          </div>
+        </div>
+        <div class="field">
+          <label>Username Baru</label>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-user input-icon"></i>
+            <input type="text" id="accNewUser" required placeholder="Masukkan username baru">
+          </div>
+        </div>
+        <div class="field">
+          <label>Password Baru</label>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-key input-icon"></i>
+            <input type="password" id="accNewPass" required placeholder="Masukkan password baru">
+          </div>
+        </div>
+        <div class="field">
+          <label>Konfirmasi Password Baru</label>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-shield-halved input-icon"></i>
+            <input type="password" id="accConfirmPass" required placeholder="Ulangi password baru">
+          </div>
+        </div>
+        <div id="accError" style="display:none;color:#c0392b;font-size:13px;margin-bottom:14px;padding:9px 12px;background:#fdf2f2;border-radius:6px;border:1px solid #f8d7da;"></div>
+        <div class="modal-foot">
+          <button type="button" class="btn btn-outline btn-ink" style="border:1.4px solid var(--ink);color:var(--ink);background:transparent;" onclick="closeAccountModal()">Batal</button>
+          <button type="submit" class="btn btn-gold"><i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- ===== TOAST ===== -->
 <div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toastMsg"></span></div>
 
 <script>
   // ===== AUTH & CAPTCHA =====
-  const CREDS_ADMIN_WEB = { username: 'adminweb', password: 'sipadu2026', role: 'admin_web', name: 'Admin Web' };
-  const CREDS_ADMIN_STAF = { username: 'adminstaf', password: 'staf2026', role: 'admin_staf', name: 'Admin Staff' };
+  let CREDS_ADMIN_WEB = { username: '', password: '', role: 'admin_web', name: 'Admin Web' };
+  let CREDS_ADMIN_STAF = { username: '', password: '', role: 'admin_staf', name: 'Admin Staff' };
   const SESSION_KEY = 'sipadu_admin_session';
+
+  function fetchCredentials() {
+    const local = localStorage.getItem('sipadu_admin_creds');
+    if (local) {
+      try {
+        const data = JSON.parse(local);
+        if (data.admin_web) { CREDS_ADMIN_WEB.username = data.admin_web.username; CREDS_ADMIN_WEB.password = data.admin_web.password; }
+        if (data.admin_staf) { CREDS_ADMIN_STAF.username = data.admin_staf.username; CREDS_ADMIN_STAF.password = data.admin_staf.password; }
+      } catch(e) {}
+    }
+  }
+  fetchCredentials();
+
+  function openAccountModal() {
+    const errBox = document.getElementById('accError');
+    if (errBox) errBox.style.display = 'none';
+    const form = document.getElementById('accountForm');
+    if (form) form.reset();
+    const modal = document.getElementById('modalAccount');
+    if (modal) {
+      modal.style.display = 'flex';
+      setTimeout(() => modal.classList.add('open'), 10);
+    }
+  }
+
+  function closeAccountModal() {
+    const modal = document.getElementById('modalAccount');
+    if (modal) {
+      modal.classList.remove('open');
+      setTimeout(() => { modal.style.display = 'none'; }, 150);
+    }
+  }
+
+  async function handleAccountUpdate(e) {
+    e.preventDefault();
+    const role = document.getElementById('accTargetRole').value;
+    const currentPassword = document.getElementById('accCurrentPass').value;
+    const newUsername = document.getElementById('accNewUser').value.trim();
+    const newPassword = document.getElementById('accNewPass').value;
+    const confirmPassword = document.getElementById('accConfirmPass').value;
+    const errBox = document.getElementById('accError');
+
+    errBox.style.display = 'none';
+
+    if (newPassword !== confirmPassword) {
+      errBox.textContent = 'Konfirmasi password baru tidak cocok!';
+      errBox.style.display = 'block';
+      return;
+    }
+
+    const targetCreds = (role === 'admin_web') ? CREDS_ADMIN_WEB : CREDS_ADMIN_STAF;
+
+    // Send update request to secure backend API first
+    let isSuccess = false;
+    try {
+      const res = await fetch('/api/credentials/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role, currentPassword, newUsername, newPassword })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        isSuccess = true;
+      } else if (data && data.error) {
+        errBox.textContent = data.error;
+        errBox.style.display = 'block';
+        return;
+      }
+    } catch(err) {
+      console.warn('Server offline, updating in local storage mode');
+      if (targetCreds.password && currentPassword !== targetCreds.password) {
+        errBox.textContent = 'Kata sandi saat ini salah!';
+        errBox.style.display = 'block';
+        return;
+      }
+      isSuccess = true;
+    }
+
+    if (isSuccess) {
+      targetCreds.username = newUsername;
+      targetCreds.password = newPassword;
+      const saveObj = {
+        admin_web: { username: CREDS_ADMIN_WEB.username, password: CREDS_ADMIN_WEB.password },
+        admin_staf: { username: CREDS_ADMIN_STAF.username, password: CREDS_ADMIN_STAF.password }
+      };
+      localStorage.setItem('sipadu_admin_creds', JSON.stringify(saveObj));
+
+      showToast(`Username & Password ${role === 'admin_web' ? 'Admin Web' : 'Admin Staff'} berhasil diperbarui!`);
+      closeAccountModal();
+    }
+  }
 
   let currentRole = 'admin_web';
   let captchaAnswerNum = 0;
@@ -851,13 +1317,13 @@
       staffLbl.classList.remove('active');
       webLbl.querySelector('input').checked = true;
       if (subtitle) subtitle.textContent = 'Panel Pengelolaan Konten Web Utama';
-      if (userInp) userInp.placeholder = 'adminweb';
+      if (userInp) userInp.placeholder = 'Masukkan username';
     } else {
       staffLbl.classList.add('active');
       webLbl.classList.remove('active');
       staffLbl.querySelector('input').checked = true;
       if (subtitle) subtitle.textContent = 'Panel Pengelolaan Direktori Staf';
-      if (userInp) userInp.placeholder = 'adminstaf';
+      if (userInp) userInp.placeholder = 'Masukkan username';
     }
   }
 
@@ -871,7 +1337,7 @@
     if (ansInp) ansInp.value = '';
   }
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
     const u = document.getElementById('loginUser').value.trim();
     const p = document.getElementById('loginPass').value;
@@ -886,21 +1352,67 @@
       return;
     }
 
-    // 2. Verify Credentials based on role
+    // 2. Try Secure Backend Auth API
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role: currentRole, username: u, password: p })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        const loggedUserObj = { user: data.user.username, role: currentRole, title: currentRole === 'admin_web' ? 'Admin Web' : 'Admin Staff', time: Date.now() };
+        sessionStorage.setItem(SESSION_KEY, JSON.stringify(loggedUserObj));
+        errBox.classList.remove('show');
+
+        if (currentRole === 'admin_web') {
+          document.getElementById('loginOverlay').style.display = 'none';
+          document.getElementById('dashboard').style.display = 'block';
+          document.getElementById('adminUserLabel').textContent = `${loggedUserObj.user} (${loggedUserObj.title})`;
+          initDashboard();
+          showToast('Berhasil masuk sebagai Admin Web');
+        } else {
+          showToast('Berhasil masuk sebagai Admin Staff. Mengalihkan...');
+          setTimeout(() => { window.location.href = 'staf.html?admin=true'; }, 500);
+        }
+        return;
+      }
+    } catch(err) {
+      console.warn('Backend server offline, trying local storage auth fallback');
+    }
+
+    // 3. Fallback Auth check (if server offline)
     let isValid = false;
     let loggedUserObj = null;
+    const targetCreds = (currentRole === 'admin_web') ? CREDS_ADMIN_WEB : CREDS_ADMIN_STAF;
 
-    if (currentRole === 'admin_web') {
-      if ((u === CREDS_ADMIN_WEB.username && p === CREDS_ADMIN_WEB.password) || (u === 'admin' && p === 'sipadu2026')) {
-        isValid = true;
-        loggedUserObj = { user: u, role: 'admin_web', title: 'Admin Web', time: Date.now() };
-      }
-    } else if (currentRole === 'admin_staf') {
-      if ((u === CREDS_ADMIN_STAF.username && p === CREDS_ADMIN_STAF.password) || (u === 'admin' && p === 'admin123')) {
-        isValid = true;
-        loggedUserObj = { user: u, role: 'admin_staf', title: 'Admin Staff', time: Date.now() };
-      }
+    if (u && p && targetCreds.username && u === targetCreds.username && p === targetCreds.password) {
+      isValid = true;
+      loggedUserObj = { user: u, role: currentRole, title: currentRole === 'admin_web' ? 'Admin Web' : 'Admin Staff', time: Date.now() };
     }
+
+    if (isValid && loggedUserObj) {
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(loggedUserObj));
+      errBox.classList.remove('show');
+
+      if (loggedUserObj.role === 'admin_web') {
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('adminUserLabel').textContent = `${loggedUserObj.user} (${loggedUserObj.title})`;
+        initDashboard();
+        showToast('Berhasil masuk sebagai Admin Web');
+      } else {
+        showToast('Berhasil masuk sebagai Admin Staff. Mengalihkan...');
+        setTimeout(() => { window.location.href = 'staf.html?admin=true'; }, 500);
+      }
+    } else {
+      const roleTitle = currentRole === 'admin_web' ? 'Admin Web' : 'Admin Staff';
+      errBox.textContent = `Username atau password untuk ${roleTitle} salah.`;
+      errBox.classList.add('show');
+      document.getElementById('loginPass').value = '';
+      generateCaptcha();
+    }
+  }
 
     if (isValid && loggedUserObj) {
       sessionStorage.setItem(SESSION_KEY, JSON.stringify(loggedUserObj));
@@ -1089,6 +1601,31 @@
     loadKontak();
     loadAlur();
     loadHomeStats();
+    loadVisitorSetting();
+  }
+
+  function loadVisitorSetting() {
+    api('/api/visitor').then(d => {
+      const toggle = document.getElementById('toggleVisitorCounter');
+      const label = document.getElementById('labelVisitorCounterStatus');
+      const isVisible = d && d.showCounter !== false;
+      if (toggle) toggle.checked = isVisible;
+      if (label) label.textContent = isVisible ? 'Ditampilkan' : 'Disembunyikan';
+    }).catch(err => console.error('Error loading visitor setting:', err));
+  }
+
+  function handleSaveVisitorSetting(showCounter) {
+    const label = document.getElementById('labelVisitorCounterStatus');
+    if (label) label.textContent = showCounter ? 'Ditampilkan' : 'Disembunyikan';
+    api('/api/visitor/settings', 'POST', { showCounter: showCounter })
+      .then(res => {
+        if (res && res.success) {
+          showToast(showCounter ? 'Jumlah pengunjung sekarang DITAMPILKAN di Hero Banner.' : 'Jumlah pengunjung sekarang DISEMBUYIKAN dari Hero Banner.', 'success');
+        } else {
+          showToast('Gagal mengubah pengaturan pengunjung.', 'danger');
+        }
+      })
+      .catch(() => showToast('Gagal mengubah pengaturan pengunjung.', 'danger'));
   }
 
   function updateStats() {
@@ -1484,10 +2021,10 @@
     document.getElementById('s-eyebrow').value = s.eyebrow;
     document.getElementById('s-title').value = s.title;
     document.getElementById('s-lead').value = s.lead;
-    document.getElementById('s-btn1-label').value = s.btn1Label||'';
-    document.getElementById('s-btn1-href').value = s.btn1Href||'';
-    document.getElementById('s-btn2-label').value = s.btn2Label||'';
-    document.getElementById('s-btn2-href').value = s.btn2Href||'';
+    const b1l = document.getElementById('s-btn1-label'); if (b1l) b1l.value = s.btn1Label||'';
+    const b1h = document.getElementById('s-btn1-href'); if (b1h) b1h.value = s.btn1Href||'';
+    const b2l = document.getElementById('s-btn2-label'); if (b2l) b2l.value = s.btn2Label||'';
+    const b2h = document.getElementById('s-btn2-href'); if (b2h) b2h.value = s.btn2Href||'';
     document.getElementById('s-image').value = s.bgImage||'';
     document.getElementById('s-preview').innerHTML = s.bgImage ? `<img src="${s.bgImage}">` : '<span>Kosong (menggunakan gradien latar bawaan)</span>';
     document.getElementById('modalSlides').classList.add('open');
@@ -1502,6 +2039,7 @@
     document.getElementById('l-title').value = l.title;
     document.getElementById('l-tag').value = l.tag||'';
     document.getElementById('l-icon').value = l.icon||'';
+    setIconPickerValue(l.icon||'');
     document.getElementById('l-items').value = (l.items||[]).join('\n');
     document.getElementById('l-procedure').value = (l.procedure||[]).join('\n');
     document.getElementById('l-contact').value = l.contactPersonName||'';
@@ -1575,15 +2113,19 @@
   function saveSlide(e) {
     e.preventDefault();
     const id = document.getElementById('s-id').value;
+    const b1l = document.getElementById('s-btn1-label');
+    const b1h = document.getElementById('s-btn1-href');
+    const b2l = document.getElementById('s-btn2-label');
+    const b2h = document.getElementById('s-btn2-href');
     const item = {
       id: id ? parseInt(id) : nextId(_slides),
       eyebrow: document.getElementById('s-eyebrow').value.trim(),
       title: document.getElementById('s-title').value.trim(),
       lead: document.getElementById('s-lead').value.trim(),
-      btn1Label: document.getElementById('s-btn1-label').value.trim(),
-      btn1Href: document.getElementById('s-btn1-href').value.trim() || 'pengumuman.html',
-      btn2Label: document.getElementById('s-btn2-label').value.trim(),
-      btn2Href: document.getElementById('s-btn2-href').value.trim() || 'layanan.html',
+      btn1Label: b1l ? b1l.value.trim() : '',
+      btn1Href: b1h ? (b1h.value.trim() || 'pengumuman.html') : 'pengumuman.html',
+      btn2Label: b2l ? b2l.value.trim() : '',
+      btn2Href: b2h ? (b2h.value.trim() || 'layanan.html') : 'layanan.html',
       bgImage: document.getElementById('s-image').value,
     };
     api('/api/slides', 'POST', item).then(() => {
@@ -2032,6 +2574,225 @@
       .then(() => showToast('Angka statistik beranda berhasil disimpan.'))
       .catch(() => showToast('Gagal menyimpan angka statistik.', 'danger'));
   }
+
+  // ===== ICON PICKER =====
+  const FA_ICONS = [
+    // Orang & Jabatan
+    { k: 'fa-user', l: 'User' }, { k: 'fa-user-tie', l: 'Staf' }, { k: 'fa-users', l: 'Grup' },
+    { k: 'fa-user-shield', l: 'Admin' }, { k: 'fa-user-clock', l: 'Jam Kerja' }, { k: 'fa-user-graduate', l: 'Lulusan' },
+    { k: 'fa-user-check', l: 'Cek User' }, { k: 'fa-id-card', l: 'Kartu ID' }, { k: 'fa-id-badge', l: 'Badge' },
+    // Kepegawaian
+    { k: 'fa-arrow-trend-up', l: 'Kenaikan' }, { k: 'fa-right-left', l: 'Mutasi' }, { k: 'fa-plane-departure', l: 'Cuti' },
+    { k: 'fa-medal', l: 'Penghargaan' }, { k: 'fa-star', l: 'Bintang' }, { k: 'fa-shield-halved', l: 'Perlindungan' },
+    { k: 'fa-scale-balanced', l: 'Disiplin' }, { k: 'fa-person-walking-arrow-right', l: 'Pensiun' }, { k: 'fa-person-military-pointing', l: 'ASN' },
+    { k: 'fa-handshake', l: 'Perjanjian' }, { k: 'fa-briefcase', l: 'Jabatan' }, { k: 'fa-sitemap', l: 'Struktur' },
+    // Dokumen & Berkas
+    { k: 'fa-file', l: 'File' }, { k: 'fa-file-lines', l: 'Dokumen' }, { k: 'fa-file-pdf', l: 'PDF' },
+    { k: 'fa-file-signature', l: 'Tanda Tangan' }, { k: 'fa-folder', l: 'Folder' }, { k: 'fa-folder-open', l: 'Folder Buka' },
+    { k: 'fa-clipboard', l: 'Clipboard' }, { k: 'fa-clipboard-list', l: 'Daftar' }, { k: 'fa-clipboard-check', l: 'Cek List' },
+    { k: 'fa-scroll', l: 'SK/Surat' }, { k: 'fa-book', l: 'Buku' }, { k: 'fa-book-open', l: 'Buku Buka' },
+    { k: 'fa-newspaper', l: 'Berita' }, { k: 'fa-stamp', l: 'Cap Resmi' }, { k: 'fa-pen-to-square', l: 'Edit' },
+    // Pendidikan & Pelatihan
+    { k: 'fa-graduation-cap', l: 'Kelulusan' }, { k: 'fa-chalkboard-user', l: 'Diklat' }, { k: 'fa-school', l: 'Sekolah' },
+    { k: 'fa-certificate', l: 'Sertifikat' }, { k: 'fa-award', l: 'Penghargaan' }, { k: 'fa-lightbulb', l: 'Ide' },
+    { k: 'fa-brain', l: 'Kompetensi' }, { k: 'fa-microscope', l: 'Riset' }, { k: 'fa-chart-line', l: 'Grafik' },
+    // Gedung & Lokasi
+    { k: 'fa-building', l: 'Gedung' }, { k: 'fa-building-columns', l: 'Instansi' }, { k: 'fa-building-flag', l: 'Kantor' },
+    { k: 'fa-landmark', l: 'Landmark' }, { k: 'fa-location-dot', l: 'Lokasi' }, { k: 'fa-map', l: 'Peta' },
+    { k: 'fa-map-pin', l: 'Pin' }, { k: 'fa-flag', l: 'Bendera' }, { k: 'fa-city', l: 'Kota' },
+    // Kesehatan & Kesejahteraan
+    { k: 'fa-heart', l: 'Hati' }, { k: 'fa-heart-pulse', l: 'Kesehatan' }, { k: 'fa-kit-medical', l: 'Medis' },
+    { k: 'fa-hand-holding-heart', l: 'Peduli' }, { k: 'fa-face-smile', l: 'Senyum' }, { k: 'fa-baby', l: 'Bayi' },
+    { k: 'fa-person-cane', l: 'Lansia' }, { k: 'fa-house-chimney', l: 'Rumah' }, { k: 'fa-circle-user', l: 'Profil' },
+    // Teknologi & Komunikasi
+    { k: 'fa-laptop', l: 'Laptop' }, { k: 'fa-mobile', l: 'HP' }, { k: 'fa-desktop', l: 'Desktop' },
+    { k: 'fa-envelope', l: 'Email' }, { k: 'fa-phone', l: 'Telepon' }, { k: 'fa-wifi', l: 'WiFi' },
+    { k: 'fa-database', l: 'Database' }, { k: 'fa-server', l: 'Server' }, { k: 'fa-cloud', l: 'Cloud' },
+    { k: 'fa-print', l: 'Print' }, { k: 'fa-qrcode', l: 'QR Code' }, { k: 'fa-barcode', l: 'Barcode' },
+    // Aksi & Status
+    { k: 'fa-check', l: 'Cek' }, { k: 'fa-check-circle', l: 'Selesai' }, { k: 'fa-circle-check', l: 'Berhasil' },
+    { k: 'fa-xmark', l: 'Tolak' }, { k: 'fa-triangle-exclamation', l: 'Peringatan' }, { k: 'fa-info-circle', l: 'Info' },
+    { k: 'fa-clock', l: 'Jam' }, { k: 'fa-hourglass-half', l: 'Proses' }, { k: 'fa-spinner', l: 'Loading' },
+    { k: 'fa-lock', l: 'Kunci' }, { k: 'fa-unlock', l: 'Buka Kunci' }, { k: 'fa-key', l: 'Kunci Master' },
+    { k: 'fa-search', l: 'Cari' }, { k: 'fa-magnifying-glass', l: 'Teropong' }, { k: 'fa-filter', l: 'Filter' },
+    // Keuangan & Admin
+    { k: 'fa-money-bill', l: 'Uang' }, { k: 'fa-wallet', l: 'Dompet' }, { k: 'fa-calculator', l: 'Kalkulator' },
+    { k: 'fa-chart-bar', l: 'Statistik' }, { k: 'fa-chart-pie', l: 'Pie Chart' }, { k: 'fa-table', l: 'Tabel' },
+    { k: 'fa-list', l: 'List' }, { k: 'fa-list-check', l: 'Checklist' }, { k: 'fa-gear', l: 'Pengaturan' },
+    { k: 'fa-arrows-rotate', l: 'Perbarui' }, { k: 'fa-download', l: 'Unduh' }, { k: 'fa-upload', l: 'Unggah' },
+    { k: 'fa-share-nodes', l: 'Bagikan' }, { k: 'fa-link', l: 'Link' }, { k: 'fa-arrow-right', l: 'Lanjut' },
+    // Alam & Umum
+    { k: 'fa-sun', l: 'Matahari' }, { k: 'fa-moon', l: 'Bulan' }, { k: 'fa-leaf', l: 'Hijau' },
+    { k: 'fa-tree', l: 'Pohon' }, { k: 'fa-fire', l: 'Api' }, { k: 'fa-water', l: 'Air' },
+    { k: 'fa-hand', l: 'Tangan' }, { k: 'fa-hands-holding', l: 'Bersama' }, { k: 'fa-globe', l: 'Dunia' },
+    { k: 'fa-infinity', l: 'Tak Terbatas' }, { k: 'fa-shapes', l: 'Bentuk' }, { k: 'fa-palette', l: 'Desain' },
+  ];
+
+  let _iconCurrentTab = 'fa';
+  let _allIconItems = [];
+
+  function initIconPicker() {
+    _allIconItems = FA_ICONS;
+    renderIconGrid(_allIconItems);
+  }
+
+  function renderIconGrid(icons) {
+    const grid = document.getElementById('icon-grid');
+    if (!grid) return;
+    const currentVal = document.getElementById('l-icon').value;
+    grid.innerHTML = icons.map(ic => {
+      const isSelected = currentVal === ic.k;
+      return `<button type="button" title="${ic.l}" onclick="selectFaIcon('${ic.k}','${ic.l}')"
+        style="width:46px;height:46px;border-radius:8px;border:2px solid ${isSelected ? 'var(--teal)' : 'transparent'};
+        background:${isSelected ? 'rgba(27,94,99,0.12)' : 'var(--cream)'};
+        display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;
+        gap:3px;transition:all .12s;font-size:17px;color:${isSelected ? 'var(--teal)' : '#4a5568'};"
+        onmouseover="this.style.borderColor='var(--teal-soft)';this.style.background='rgba(27,94,99,0.07)';"
+        onmouseout="this.style.borderColor='${isSelected ? 'var(--teal)' : 'transparent'}';this.style.background='${isSelected ? 'rgba(27,94,99,0.12)' : 'var(--cream)'}';">
+        <i class="fa-solid ${ic.k}"></i>
+      </button>`;
+    }).join('');
+  }
+
+  function filterIcons(q) {
+    const filtered = q.trim()
+      ? _allIconItems.filter(ic => ic.k.includes(q.toLowerCase()) || ic.l.toLowerCase().includes(q.toLowerCase()))
+      : _allIconItems;
+    renderIconGrid(filtered);
+  }
+
+  function selectFaIcon(faClass, label) {
+    document.getElementById('l-icon').value = faClass;
+    updateIconPreview(faClass, label, 'fa');
+    renderIconGrid(_allIconItems.filter(ic => {
+      const searchVal = document.getElementById('icon-search')?.value || '';
+      return !searchVal || ic.k.includes(searchVal) || ic.l.toLowerCase().includes(searchVal);
+    }));
+  }
+
+  function updateIconPreview(value, label, mode) {
+    const box = document.getElementById('icon-preview-box');
+    const lbl = document.getElementById('icon-preview-label');
+    const val = document.getElementById('icon-preview-value');
+    if (!box || !lbl || !val) return;
+    if (mode === 'img' && value.startsWith('/')) {
+      box.innerHTML = `<img src="${value}" style="width:100%;height:100%;object-fit:cover;">`;
+      lbl.textContent = label || 'Gambar custom';
+      val.textContent = value;
+    } else if (value) {
+      box.innerHTML = `<i class="fa-solid ${value}" style="color:var(--gold);font-size:20px;"></i>`;
+      lbl.textContent = label || value;
+      val.textContent = value;
+    } else {
+      box.innerHTML = '<i class="fa-solid fa-question" style="opacity:.4;"></i>';
+      lbl.textContent = 'Belum ada ikon dipilih';
+      val.textContent = '';
+    }
+  }
+
+  function clearIconSelection() {
+    document.getElementById('l-icon').value = '';
+    document.getElementById('icon-search').value = '';
+    updateIconPreview('', '', 'fa');
+    renderIconGrid(_allIconItems);
+    // juga bersihkan file upload
+    const fileInput = document.getElementById('l-icon-img-file');
+    if (fileInput) fileInput.value = '';
+    document.getElementById('l-icon-img-info').textContent = 'Belum ada gambar dipilih.';
+  }
+
+  function switchIconTab(tab) {
+    _iconCurrentTab = tab;
+    const panelFa = document.getElementById('icon-panel-fa');
+    const panelImg = document.getElementById('icon-panel-img');
+    const tabFa = document.getElementById('icon-tab-fa');
+    const tabImg = document.getElementById('icon-tab-img');
+    if (tab === 'fa') {
+      panelFa.style.display = 'block';
+      panelImg.style.display = 'none';
+      tabFa.style.background = 'var(--teal)';
+      tabFa.style.color = '#fff';
+      tabImg.style.background = 'transparent';
+      tabImg.style.color = '#5b6a63';
+    } else {
+      panelFa.style.display = 'none';
+      panelImg.style.display = 'block';
+      tabFa.style.background = 'transparent';
+      tabFa.style.color = '#5b6a63';
+      tabImg.style.background = 'var(--teal)';
+      tabImg.style.color = '#fff';
+    }
+  }
+
+  function handleIconImageUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const info = document.getElementById('l-icon-img-info');
+    info.textContent = 'Mengunggah...';
+    const fd = new FormData();
+    fd.append('file', file);
+    fetch('/api/upload', { method: 'POST', body: fd })
+      .then(r => r.json())
+      .then(res => {
+        if (res.filePath) {
+          document.getElementById('l-icon').value = res.filePath;
+          info.textContent = '✓ ' + file.name;
+          updateIconPreview(res.filePath, file.name, 'img');
+        } else {
+          info.textContent = 'Upload gagal.';
+          showToast('Upload gambar ikon gagal.', 'danger');
+        }
+      })
+      .catch(() => {
+        info.textContent = 'Terjadi kesalahan.';
+        showToast('Upload gagal: server error.', 'danger');
+      });
+  }
+
+  function setIconPickerValue(val) {
+    if (!val) {
+      updateIconPreview('', '', 'fa');
+      switchIconTab('fa');
+      const searchInput = document.getElementById('icon-search');
+      if (searchInput) searchInput.value = '';
+      renderIconGrid(_allIconItems);
+      const fileInput = document.getElementById('l-icon-img-file');
+      if (fileInput) fileInput.value = '';
+      document.getElementById('l-icon-img-info').textContent = 'Belum ada gambar dipilih.';
+      return;
+    }
+    // Deteksi apakah URL gambar atau kelas FA
+    if (val.startsWith('/') || val.startsWith('http')) {
+      // Gambar
+      switchIconTab('img');
+      document.getElementById('l-icon-img-info').textContent = '✓ Gambar terpasang';
+      updateIconPreview(val, 'Gambar custom', 'img');
+    } else {
+      // FA class
+      switchIconTab('fa');
+      const found = FA_ICONS.find(ic => ic.k === val);
+      updateIconPreview(val, found ? found.l : val, 'fa');
+      renderIconGrid(_allIconItems);
+      const searchInput = document.getElementById('icon-search');
+      if (searchInput) searchInput.value = '';
+    }
+  }
+
+  // Reset icon picker saat modal layanan dibuka untuk tambah baru
+  const _origOpenModal = window.openModal;
+  window.openModal = function(type) {
+    if (type === 'layanan') {
+      setIconPickerValue('');
+    }
+    _origOpenModal(type);
+  };
+
+  // Init saat DOM siap
+  document.addEventListener('DOMContentLoaded', function() {
+    initIconPicker();
+  });
+  // Fallback jika DOMContentLoaded sudah lewat
+  if (document.readyState !== 'loading') initIconPicker();
 </script>
 </body>
 </html>
