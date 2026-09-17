@@ -71,7 +71,8 @@
   }
   .seal img{width:100%; height:100%; object-fit:contain; display:block;}
   .brand .name{color:var(--cream);}
-  .brand .name b{display:block; font-family:'Fraunces',serif; font-size:16.5px; letter-spacing:0.01em;}
+  .brand .name b{display:flex; align-items:baseline; gap:6px; font-family:'Fraunces',serif; font-size:16.5px; letter-spacing:0.01em;}
+  .brand .name b small{font-size:11px; font-weight:500; font-family:'Plus Jakarta Sans',sans-serif; color:rgba(248,244,233,0.85); text-transform:none; letter-spacing:0;}
   .brand .name span{display:block; font-size:11px; color:var(--gold-light); letter-spacing:0.05em; margin-top:2px; font-family:'IBM Plex Mono',monospace;}
   nav.links{display:flex; align-items:center; gap:28px;}
   nav.links a{
@@ -247,6 +248,7 @@
   .mobile-panel a.active{color:var(--gold-light);}
 
   @media (max-width:980px){
+    .brand-sub{display:none !important;}
     nav.links{display:none;}
     .hamburger{display:flex;}
     .app-grid{grid-template-columns:1fr;}
@@ -265,7 +267,7 @@
     <a href="index.html" class="brand" style="cursor:pointer;">
       <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
       <div class="name">
-        <b>SIKAP</b>
+        <b>SIKAP <small class="brand-sub">(Sistem Informasi Kepegawaian dan Administrasi Pegawai)</small></b>
         <span>BKPSDM KOTA DUMAI</span>
       </div>
     </a>
@@ -332,7 +334,7 @@
       <div class="foot-brand">
         <div class="brand">
           <div class="seal"><img src="/uploads/logo-bkpsdm.jpg" alt="Logo BKPSDM"></div>
-          <div class="name"><b>SIKAP</b><span>BKPSDM KOTA DUMAI</span></div>
+          <div class="name"><b>SIKAP</b><span>Sistem Informasi Kepegawaian dan Administrasi Pegawai Kota Dumai</span></div>
         </div>
         <p>Sistem Informasi Pengumuman dan Layanan Kepegawaian — melayani Aparatur Sipil Negara di lingkungan Pemerintah Kota Dumai secara transparan dan akuntabel.</p>
         <div class="social">
