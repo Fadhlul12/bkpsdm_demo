@@ -478,21 +478,6 @@
           </div>
         </div>
 
-        <div class="field">
-          <label><span class="lbl-badge">4</span> CAPTCHA KEAMANAN (PENJUMLAHAN)</label>
-          <div class="captcha-row">
-            <div class="captcha-box" id="captchaBox">
-              <span id="captchaQuestion">7 + 12 = ?</span>
-            </div>
-            <div class="input-with-icon" style="flex:1;">
-              <i class="fa-solid fa-calculator input-icon"></i>
-              <input type="number" id="captchaAnswer" required placeholder="Hasil">
-            </div>
-            <button type="button" class="captcha-refresh-btn" onclick="generateCaptcha()" title="Acak Captcha">
-              <i class="fa-solid fa-arrows-rotate"></i>
-            </button>
-          </div>
-        </div>
 
         <div class="login-error" id="loginError">
           <i class="fa-solid fa-circle-exclamation"></i>
@@ -1307,7 +1292,6 @@
   }
 
   let currentRole = 'admin_web';
-  let captchaAnswerNum = 0;
 
   function selectRole(e, role) {
     if (e) {
@@ -1333,32 +1317,13 @@
     }
   }
 
-  function generateCaptcha() {
-    const num1 = Math.floor(Math.random() * 15) + 1;
-    const num2 = Math.floor(Math.random() * 15) + 1;
-    captchaAnswerNum = num1 + num2;
-    const qEl = document.getElementById('captchaQuestion');
-    if (qEl) qEl.textContent = `${num1} + ${num2} = ?`;
-    const ansInp = document.getElementById('captchaAnswer');
-    if (ansInp) ansInp.value = '';
-  }
-
   async function handleLogin(e) {
     e.preventDefault();
     const u = document.getElementById('loginUser').value.trim();
     const p = document.getElementById('loginPass').value;
-    const userCaptcha = parseInt(document.getElementById('captchaAnswer').value, 10);
     const errBox = document.getElementById('loginError');
 
-    // 1. Verify Captcha
-    if (isNaN(userCaptcha) || userCaptcha !== captchaAnswerNum) {
-      errBox.textContent = 'Jawaban captcha keamanan salah! Silakan hitung kembali.';
-      errBox.classList.add('show');
-      generateCaptcha();
-      return;
-    }
-
-    // 2. Try Secure Backend Auth API
+    // 1. Try Secure Backend Auth API
     try {
       const res = await fetch('/api/login', {
         method: 'POST',
@@ -1432,7 +1397,6 @@
   }
 
   window.addEventListener('DOMContentLoaded', () => {
-    generateCaptcha();
     const sessStr = sessionStorage.getItem(SESSION_KEY);
     if (sessStr) {
       try {
