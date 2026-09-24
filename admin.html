@@ -964,6 +964,9 @@
       <form id="formSlides" onsubmit="saveSlide(event)">
         <div class="field">
           <label>Foto Gambar Background Banner</label>
+          <small style="display:block; color:#1b4965; font-weight:600; margin-top:2px; margin-bottom:8px; font-size:12px; line-height:1.4;">
+            <i class="fa-solid fa-circle-info" style="color:#d97706;"></i> Rekomendasi Ukuran: <strong>Rasio 16 : 5</strong> (Contoh ideal: <strong>1920 × 600 px</strong> atau <strong>1600 × 500 px</strong>) agar gambar tampil sempurna tanpa terpotong.
+          </small>
           <input type="file" id="s-image-file" accept="image/*" onchange="handleImageUpload(event, 's-image', 's-preview')">
           <input type="hidden" id="s-image" value="">
           <div class="img-preview-box" id="s-preview"><span>Kosong (menggunakan gradien latar bawaan)</span></div>
@@ -1629,7 +1632,26 @@
       .then(res => {
         if (res.filePath) {
           document.getElementById(targetInputId).value = res.filePath;
-          document.getElementById(previewBoxId).innerHTML = `<img src="${res.filePath}">`;
+          const pBox = document.getElementById(previewBoxId);
+          pBox.innerHTML = `<img src="${res.filePath}">`;
+          
+          if (targetInputId === 's-image') {
+            const img = new Image();
+            img.src = res.filePath;
+            img.onload = function() {
+              const w = img.naturalWidth;
+              const h = img.naturalHeight;
+              const ratio = (w / h).toFixed(2);
+              const is16by5 = (ratio >= 2.7 && ratio <= 3.7);
+              
+              const badge = document.createElement('div');
+              badge.style.cssText = `margin-top:8px; font-size:12px; font-weight:600; padding:6px 12px; border-radius:4px; display:inline-flex; align-items:center; gap:6px; color:#fff; background:${is16by5 ? '#15803d' : '#d97706'};`;
+              badge.innerHTML = is16by5 
+                ? `<i class="fa-solid fa-circle-check"></i> Ukuran ${w}×${h} px — Rasio 16:5 Pas! ✨`
+                : `<i class="fa-solid fa-triangle-exclamation"></i> Ukuran ${w}×${h} px — Disarankan rasio 16:5 (1920×600 px)`;
+              pBox.appendChild(badge);
+            };
+          }
         } else {
           showToast('Upload gagal.', 'danger');
         }
