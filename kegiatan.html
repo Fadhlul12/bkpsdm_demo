@@ -4,7 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SIKAP — Kegiatan | BKPSDM Kota Dumai</title>
+<link rel="icon" type="image/jpeg" href="/uploads/logo-bkpsdm.jpg">
 <meta name="description" content="Dokumentasi kegiatan BKPSDM Kota Dumai — sosialisasi, rapat, pendidikan dan latihan ASN.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SIKAP — Kegiatan | BKPSDM Kota Dumai">
+<meta property="og:description" content="Dokumentasi kegiatan resmi BKPSDM Kota Dumai — sosialisasi kebijakan, rapat koordinasi, serta pendidikan dan pelatihan ASN.">
+<meta property="og:image" content="/uploads/logo-bkpsdm.jpg">
+<meta property="og:url" content="https://bkpsdm.dumaikota.go.id/kegiatan.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SIKAP — Kegiatan | BKPSDM Kota Dumai">
+<meta name="twitter:image" content="/uploads/logo-bkpsdm.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -23,6 +32,33 @@
     --line: rgba(27,54,93,0.12);
     --shadow: 0 20px 50px -25px rgba(27,54,93,0.35);
   }
+
+  /* ===== SKELETON LOADING ===== */
+  .skeleton {
+    background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.5s ease-in-out infinite;
+    border-radius: 6px;
+    display: block;
+  }
+  @keyframes skeletonShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  .skeleton-card {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .sk-img-area { height: 220px; }
+  .sk-body-area { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 10px; }
+  .sk-cat-lbl { height: 12px; width: 70px; }
+  .sk-title { height: 18px; width: 90%; }
+  .sk-title-2 { height: 18px; width: 60%; }
+  .sk-date-row { height: 11px; width: 120px; margin-top: 8px; }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{margin:0;background:var(--paper);color:var(--charcoal);font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;}
@@ -309,7 +345,12 @@
       <button class="filter-pill" data-filter="lainnya">Lainnya</button>
     </div>
 
-    <div class="kegiatan-grid" id="kegiatanGrid"></div>
+    <div class="kegiatan-grid" id="kegiatanGrid">
+      <!-- Skeleton Placeholders -->
+      <div class="skeleton-card"><span class="skeleton sk-img-area"></span><div class="sk-body-area"><span class="skeleton sk-cat-lbl"></span><span class="skeleton sk-title"></span><span class="skeleton sk-title-2"></span><span class="skeleton sk-date-row"></span></div></div>
+      <div class="skeleton-card"><span class="skeleton sk-img-area"></span><div class="sk-body-area"><span class="skeleton sk-cat-lbl"></span><span class="skeleton sk-title"></span><span class="skeleton sk-title-2"></span><span class="skeleton sk-date-row"></span></div></div>
+      <div class="skeleton-card"><span class="skeleton sk-img-area"></span><div class="sk-body-area"><span class="skeleton sk-cat-lbl"></span><span class="skeleton sk-title"></span><span class="skeleton sk-title-2"></span><span class="skeleton sk-date-row"></span></div></div>
+    </div>
 
     <div class="no-result" id="noResult">
       <i class="fa-solid fa-calendar-xmark"></i>

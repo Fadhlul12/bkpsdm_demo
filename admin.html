@@ -2184,6 +2184,28 @@
     }).catch(() => {});
   }
 
+  function handleServerUpload(event, targetInputId, targetPreviewId) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const formData = new FormData();
+    formData.append('file', file);
+    fetch(API_BASE + '/api/upload', { method: 'POST', body: formData })
+      .then(r => r.json())
+      .then(data => {
+        if (data.filePath) {
+          document.getElementById(targetInputId).value = data.filePath;
+          const preview = document.getElementById(targetPreviewId);
+          if (preview) {
+            preview.innerHTML = `<img src="${data.filePath}" style="max-height:100px;max-width:100%;object-fit:contain;">`;
+          }
+          showToast('Foto pejabat berhasil diunggah. Klik "Simpan Profil" untuk menerapkan.');
+        } else {
+          showToast('Gagal mengunggah foto.', 'danger');
+        }
+      })
+      .catch(() => showToast('Gagal mengunggah foto.', 'danger'));
+  }
+
   function renderPimpinanListEditor() {
     const listEl = document.getElementById('pimpinanListEditor');
     if (!currentPimpinanCards.length) {
@@ -2191,31 +2213,39 @@
       return;
     }
     listEl.innerHTML = currentPimpinanCards.map((p, idx) => `
-      <div style="background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px;position:relative;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-          <h5 style="margin:0;font-size:14px;color:var(--teal);">${p.role || 'Pejabat Baru'}</h5>
-          <button type="button" onclick="handleDeletePimpinan(${idx})" style="background:transparent;border:1px solid var(--danger);color:var(--danger);border-radius:4px;padding:3px 10px;cursor:pointer;font-size:12px;"><i class="fa-solid fa-trash"></i> Hapus</button>
+      <div style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:18px;position:relative;box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line);">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--teal);color:#fff;padding:2px 8px;border-radius:4px;font-weight:700;">#${idx+1}</span>
+            <h5 id="pimp-heading-${idx}" style="margin:0;font-size:15px;color:var(--ink);font-weight:700;">${p.role || 'Pejabat Baru'}</h5>
+          </div>
+          <button type="button" onclick="handleDeletePimpinan(${idx})" style="background:transparent;border:1px solid var(--danger);color:var(--danger);border-radius:4px;padding:4px 12px;cursor:pointer;font-size:12px;font-weight:600;"><i class="fa-solid fa-trash"></i> Hapus Pejabat</button>
         </div>
         <div class="field">
           <label>Nama Pejabat</label>
-          <input type="text" id="pimp-name-${idx}" value="${p.name || ''}" placeholder="Nama lengkap…">
+          <input type="text" id="pimp-name-${idx}" value="${escHtml(p.name || '')}" placeholder="Nama lengkap & gelar…">
         </div>
-        <div class="field-row" style="gap:10px;">
+        <div class="field-row" style="gap:12px;">
           <div class="field">
             <label>NIP</label>
-            <input type="text" id="pimp-nip-${idx}" value="${p.nip || ''}" placeholder="NIP…">
+            <input type="text" id="pimp-nip-${idx}" value="${escHtml(p.nip || '')}" placeholder="NIP…">
           </div>
           <div class="field">
             <label>Jabatan / Role</label>
-            <input type="text" id="pimp-role-${idx}" value="${p.role || ''}" placeholder="Jabatan…">
+            <input type="text" id="pimp-role-${idx}" value="${escHtml(p.role || '')}" placeholder="Contoh: Kepala Badan, Sekretaris, Kabid…" oninput="document.getElementById('pimp-heading-${idx}').textContent = this.value.trim() || 'Pejabat Baru'">
           </div>
         </div>
-        <div class="field">
-          <label>Foto Pejabat</label>
-          <input type="file" id="pimp-photo-file-${idx}" accept="image/*" onchange="handleServerUpload(event,'pimp-photo-${idx}','pimp-preview-${idx}')">
-          <input type="hidden" id="pimp-photo-${idx}" value="${p.photo || ''}">
-          <div class="img-preview-box" id="pimp-preview-${idx}" style="height:100px;margin-top:6px;">
-            ${p.photo ? `<img src="${p.photo}">` : '<span>Belum ada foto</span>'}
+        <div class="field" style="margin-bottom:0;">
+          <label>Foto Pejabat / Pimpinan</label>
+          <div style="display:flex;gap:12px;align-items:flex-start;margin-top:6px;">
+            <div class="img-preview-box" id="pimp-preview-${idx}" style="width:110px;height:120px;border-radius:8px;margin-top:0;flex-shrink:0;">
+              ${p.photo ? `<img src="${p.photo}" style="width:100%;height:100%;object-fit:cover;">` : '<span style="font-size:11px;">Belum ada foto</span>'}
+            </div>
+            <div style="flex:1;">
+              <input type="file" id="pimp-photo-file-${idx}" accept="image/*" onchange="handleServerUpload(event,'pimp-photo-${idx}','pimp-preview-${idx}')">
+              <input type="hidden" id="pimp-photo-${idx}" value="${escHtml(p.photo || '')}">
+              <p style="font-size:11.5px;color:#8a978f;margin-top:6px;margin-bottom:0;">Rekomendasi rasio 3:4 (contoh: 600x800px). JPG / PNG / WebP.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -2242,25 +2272,27 @@
   function handleAddPimpinan() {
     // Collect current values before re-render
     currentPimpinanCards = currentPimpinanCards.map((p, idx) => ({
-      name: (document.getElementById(`pimp-name-${idx}`) || {}).value?.trim() || p.name,
-      nip: (document.getElementById(`pimp-nip-${idx}`) || {}).value?.trim() || p.nip,
-      role: (document.getElementById(`pimp-role-${idx}`) || {}).value?.trim() || p.role,
-      photo: (document.getElementById(`pimp-photo-${idx}`) || {}).value?.trim() || p.photo,
+      name: (document.getElementById(`pimp-name-${idx}`) || {}).value?.trim() ?? p.name,
+      nip: (document.getElementById(`pimp-nip-${idx}`) || {}).value?.trim() ?? p.nip,
+      role: (document.getElementById(`pimp-role-${idx}`) || {}).value?.trim() ?? p.role,
+      photo: (document.getElementById(`pimp-photo-${idx}`) || {}).value?.trim() ?? p.photo,
     }));
     currentPimpinanCards.push({ name: '', role: '', nip: '', photo: '' });
     renderPimpinanListEditor();
     // Scroll to newly added card
     const listEl = document.getElementById('pimpinanListEditor');
-    listEl.lastElementChild && listEl.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (listEl && listEl.lastElementChild) {
+      listEl.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   function handleDeletePimpinan(idx) {
     // Collect current values first
     currentPimpinanCards = currentPimpinanCards.map((p, i) => ({
-      name: (document.getElementById(`pimp-name-${i}`) || {}).value?.trim() || p.name,
-      nip: (document.getElementById(`pimp-nip-${i}`) || {}).value?.trim() || p.nip,
-      role: (document.getElementById(`pimp-role-${i}`) || {}).value?.trim() || p.role,
-      photo: (document.getElementById(`pimp-photo-${i}`) || {}).value?.trim() || p.photo,
+      name: (document.getElementById(`pimp-name-${i}`) || {}).value?.trim() ?? p.name,
+      nip: (document.getElementById(`pimp-nip-${i}`) || {}).value?.trim() ?? p.nip,
+      role: (document.getElementById(`pimp-role-${i}`) || {}).value?.trim() ?? p.role,
+      photo: (document.getElementById(`pimp-photo-${i}`) || {}).value?.trim() ?? p.photo,
     }));
     currentPimpinanCards.splice(idx, 1);
     renderPimpinanListEditor();
@@ -2283,24 +2315,32 @@
   }
 
   function saveProfil() {
-    const updatedCards = currentPimpinanCards.map((p, idx) => ({
-      name: document.getElementById(`pimp-name-${idx}`).value.trim(),
-      nip: document.getElementById(`pimp-nip-${idx}`).value.trim(),
-      role: document.getElementById(`pimp-role-${idx}`).value.trim(),
-      photo: document.getElementById(`pimp-photo-${idx}`).value.trim(),
-    }));
+    const updatedCards = currentPimpinanCards.map((p, idx) => {
+      const nameEl = document.getElementById(`pimp-name-${idx}`);
+      const nipEl = document.getElementById(`pimp-nip-${idx}`);
+      const roleEl = document.getElementById(`pimp-role-${idx}`);
+      const photoEl = document.getElementById(`pimp-photo-${idx}`);
+      return {
+        name: nameEl ? nameEl.value.trim() : (p.name || ''),
+        nip: nipEl ? nipEl.value.trim() : (p.nip || ''),
+        role: roleEl ? roleEl.value.trim() : (p.role || ''),
+        photo: photoEl ? photoEl.value.trim() : (p.photo || ''),
+      };
+    });
+
+    currentPimpinanCards = updatedCards;
 
     const data = {
       sejarah: document.getElementById('profil-sejarah').value.trim(),
       visi: document.getElementById('profil-visi').value.trim(),
       misi: document.getElementById('profil-misi').value.trim().split('\n').filter(x => x.trim()),
       tusi: document.getElementById('profil-tusi').value.trim(),
-      leader: updatedCards[0], // sync the Kepala Badan as leader
+      leader: updatedCards[0] || { name: '', role: '', nip: '', photo: '' }, // sync the first leader
       pimpinanCards: updatedCards,
       strukturUrl: document.getElementById('profil-struktur-url').value.trim(),
     };
     api('/api/profil', 'POST', data)
-      .then(() => showToast('Profil instansi berhasil disimpan.'))
+      .then(() => showToast('Profil instansi & data seluruh pimpinan berhasil disimpan.'))
       .catch(() => showToast('Gagal menyimpan profil.', 'danger'));
   }
 

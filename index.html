@@ -4,8 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SIKAP — Beranda | BKPSDM Kota Dumai</title>
+<link rel="icon" type="image/jpeg" href="/uploads/logo-bkpsdm.jpg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SIKAP — Beranda | BKPSDM Kota Dumai">
+<meta property="og:description" content="Sistem Informasi Kepegawaian dan Administrasi Pegawai — melayani Aparatur Sipil Negara di lingkungan Pemerintah Kota Dumai secara transparan dan akuntabel.">
+<meta property="og:image" content="/uploads/logo-bkpsdm.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root{
@@ -30,6 +35,18 @@
     color:var(--charcoal);
     font-family:'Plus Jakarta Sans', sans-serif;
     -webkit-font-smoothing:antialiased;
+  }
+  /* Skeleton Loading Effect */
+  .skeleton {
+    background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.4s infinite;
+    border-radius: 6px;
+    display: inline-block;
+  }
+  @keyframes skeletonShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
   }
   h1,h2,h3,.display{
     font-family:'Fraunces', serif;
@@ -612,7 +629,9 @@
       <p>Seluruh pengumuman resmi kepegawaian, terverifikasi langsung oleh BKPSDM Kota Dumai dan diperbarui setiap hari kerja.</p>
     </div>
     <div class="announce-grid" id="homeAnnounceGrid">
-      <!-- Diisi dinamis oleh JS dari data admin -->
+      <div class="a-card" style="min-height:180px;"><div class="skeleton" style="height:22px;width:35%;margin-bottom:12px;"></div><div class="skeleton" style="height:32px;width:90%;margin-bottom:12px;"></div><div class="skeleton" style="height:48px;width:100%;"></div></div>
+      <div class="a-card" style="min-height:180px;"><div class="skeleton" style="height:22px;width:35%;margin-bottom:12px;"></div><div class="skeleton" style="height:32px;width:90%;margin-bottom:12px;"></div><div class="skeleton" style="height:48px;width:100%;"></div></div>
+      <div class="a-card" style="min-height:180px;"><div class="skeleton" style="height:22px;width:35%;margin-bottom:12px;"></div><div class="skeleton" style="height:32px;width:90%;margin-bottom:12px;"></div><div class="skeleton" style="height:48px;width:100%;"></div></div>
     </div>
     <div class="preview-foot">
       <a href="pengumuman.html" class="btn btn-outline-ink"><i class="fa-solid fa-list"></i> Lihat Semua Pengumuman</a>

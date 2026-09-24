@@ -4,8 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Detail Pengumuman — SIKAP BKPSDM Kota Dumai</title>
+<link rel="icon" type="image/jpeg" href="/uploads/logo-bkpsdm.jpg">
 <meta name="description" content="Detail pengumuman resmi kepegawaian dari BKPSDM Kota Dumai.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pengumuman Resmi — SIKAP BKPSDM Kota Dumai">
+<meta property="og:description" content="Baca pengumuman resmi kepegawaian dari BKPSDM Kota Dumai.">
+<meta property="og:image" content="/uploads/logo-bkpsdm.jpg">
+<meta property="og:url" content="https://bkpsdm.dumaikota.go.id/pengumuman-detail.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pengumuman Resmi — SIKAP BKPSDM Kota Dumai">
+<meta name="twitter:image" content="/uploads/logo-bkpsdm.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
@@ -212,6 +220,19 @@
     .announce-grid{grid-template-columns:1fr;}
     .foot-grid{grid-template-columns:1fr 1fr;}
   }
+
+  /* ===== SKELETON LOADING ===== */
+  .skeleton {
+    background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.5s ease-in-out infinite;
+    border-radius: 6px;
+    display: block;
+  }
+  @keyframes skeletonShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
 </style>
 </head>
 <body>
@@ -252,10 +273,22 @@
 
 <div class="wrap">
   <div class="article-card" id="articleContainer">
-    <div style="text-align:center;padding:40px;color:#8a978f;">
-      <i class="fa-solid fa-circle-notch fa-spin" style="font-size:28px;margin-bottom:12px;display:block;color:var(--teal);"></i>
-      Memuat detail pengumuman...
+    <!-- Skeleton article loader -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid #E2E8F0;">
+      <span class="skeleton" style="height:22px;width:120px;"></span>
+      <span class="skeleton" style="height:16px;width:100px;"></span>
     </div>
+    <span class="skeleton" style="height:36px;width:90%;margin-bottom:8px;"></span>
+    <span class="skeleton" style="height:36px;width:70%;margin-bottom:24px;"></span>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:32px;padding:12px 16px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:6px;width:fit-content;">
+      <span class="skeleton" style="width:24px;height:24px;border-radius:50%;"></span>
+      <span class="skeleton" style="height:14px;width:150px;"></span>
+    </div>
+    <span class="skeleton" style="height:16px;width:100%;margin-bottom:10px;"></span>
+    <span class="skeleton" style="height:16px;width:100%;margin-bottom:10px;"></span>
+    <span class="skeleton" style="height:16px;width:85%;margin-bottom:10px;"></span>
+    <span class="skeleton" style="height:16px;width:90%;margin-bottom:10px;"></span>
+    <span class="skeleton" style="height:16px;width:60%;margin-bottom:10px;"></span>
   </div>
 </div>
 

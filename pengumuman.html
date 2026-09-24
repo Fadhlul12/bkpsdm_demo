@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SIKAP — Pengumuman | BKPSDM Kota Dumai</title>
+<link rel="icon" type="image/jpeg" href="/uploads/logo-bkpsdm.jpg">
+<meta name="description" content="Seluruh pengumuman resmi CPNS/PPPK, kenaikan pangkat, diklat, mutasi, dan pensiun ASN Kota Dumai — diperbarui setiap hari kerja.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SIKAP — Pengumuman | BKPSDM Kota Dumai">
+<meta property="og:description" content="Seluruh pengumuman resmi CPNS/PPPK, kenaikan pangkat, diklat, mutasi, dan pensiun ASN Kota Dumai — diperbarui setiap hari kerja.">
+<meta property="og:image" content="/uploads/logo-bkpsdm.jpg">
+<meta property="og:url" content="https://bkpsdm.dumaikota.go.id/pengumuman.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SIKAP — Pengumuman | BKPSDM Kota Dumai">
+<meta name="twitter:image" content="/uploads/logo-bkpsdm.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -22,6 +32,37 @@
     --line: rgba(27,54,93,0.12);
     --shadow: 0 20px 50px -25px rgba(27,54,93,0.35);
   }
+
+  /* ===== SKELETON LOADING ===== */
+  .skeleton {
+    background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.5s ease-in-out infinite;
+    border-radius: 6px;
+    display: block;
+  }
+  @keyframes skeletonShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  .skeleton-card {
+    background: #ffffff;
+    border: 1.5px solid #d1d5db;
+    border-radius: 8px;
+    padding: 30px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  }
+  .sk-top { display: flex; justify-content: space-between; align-items: center; }
+  .sk-badge { height: 26px; width: 90px; border-radius: 4px; }
+  .sk-date  { height: 14px; width: 70px; border-radius: 4px; }
+  .sk-title-1 { height: 20px; width: 90%; border-radius: 4px; }
+  .sk-title-2 { height: 20px; width: 65%; border-radius: 4px; }
+  .sk-body-1 { height: 13px; width: 100%; border-radius: 4px; }
+  .sk-body-2 { height: 13px; width: 80%; border-radius: 4px; }
+  .sk-link   { height: 14px; width: 120px; border-radius: 4px; margin-top: auto; }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
@@ -579,7 +620,12 @@
       <button class="pill" data-cat="pensiun" onclick="filterCategory('pensiun')">Pensiun</button>
     </div>
 
-    <div class="announce-grid" id="announceGrid"></div>
+    <div class="announce-grid" id="announceGrid">
+      <!-- Skeleton Placeholders -->
+      <div class="skeleton-card" id="sk1"><div class="sk-top"><span class="skeleton sk-badge"></span><span class="skeleton sk-date"></span></div><span class="skeleton sk-title-1"></span><span class="skeleton sk-title-2"></span><span class="skeleton sk-body-1"></span><span class="skeleton sk-body-2"></span><span class="skeleton sk-link"></span></div>
+      <div class="skeleton-card" id="sk2"><div class="sk-top"><span class="skeleton sk-badge"></span><span class="skeleton sk-date"></span></div><span class="skeleton sk-title-1"></span><span class="skeleton sk-title-2"></span><span class="skeleton sk-body-1"></span><span class="skeleton sk-body-2"></span><span class="skeleton sk-link"></span></div>
+      <div class="skeleton-card" id="sk3"><div class="sk-top"><span class="skeleton sk-badge"></span><span class="skeleton sk-date"></span></div><span class="skeleton sk-title-1"></span><span class="skeleton sk-title-2"></span><span class="skeleton sk-body-1"></span><span class="skeleton sk-body-2"></span><span class="skeleton sk-link"></span></div>
+    </div>
 
     <div class="no-result" id="noResult" style="display:none;text-align:center;padding:60px 20px;color:#8a978f;">
       <i class="fa-solid fa-inbox" style="font-size:32px;display:block;margin-bottom:14px;color:var(--line);"></i>

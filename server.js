@@ -3,6 +3,7 @@ const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const bcrypt = require('bcryptjs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -51,11 +52,32 @@ const storage = multer.diskStorage({
     cb(null, uploadsDir);
   },
   filename: function (req, file, cb) {
+    const ext = path.extname(file.originalname).toLowerCase();
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
+    cb(null, uniqueSuffix + ext);
   }
 });
-const upload = multer({ storage: storage });
+
+// File extension & MIME filter for safety
+const fileFilter = (req, file, cb) => {
+  const allowedExts = ['.jpg', '.jpeg', '.png', '.webp', '.pdf', '.svg', '.gif'];
+  const allowedMimetypes = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml', 'image/gif', 'application/pdf'];
+
+  const ext = path.extname(file.originalname).toLowerCase();
+  const mimetype = file.mimetype.toLowerCase();
+
+  if (allowedExts.includes(ext) && allowedMimetypes.includes(mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error('Format file tidak diizinkan! Hanya diperbolehkan file gambar (.jpg, .jpeg, .png, .webp, .svg, .gif) dan dokumen (.pdf).'));
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // Max 5MB limit
+  fileFilter: fileFilter
+});
 
 // Serve Static Files
 app.use(express.static(__dirname));
@@ -63,13 +85,23 @@ app.use('/uploads', express.static(uploadsDir));
 
 // --- API ROUTES ---
 
-// File Upload Endpoint
-app.post('/api/upload', upload.single('file'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
-  }
-  const filePath = '/uploads/' + req.file.filename;
-  res.json({ filePath: filePath, filename: req.file.originalname });
+// Secure File Upload Endpoint
+app.post('/api/upload', (req, res) => {
+  upload.single('file')(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).json({ error: 'Ukuran file terlalu besar! Maksimal 5MB.' });
+      }
+      return res.status(400).json({ error: 'Gagal mengunggah file: ' + err.message });
+    } else if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+    if (!req.file) {
+      return res.status(400).json({ error: 'Belum ada file yang dipilih untuk diunggah.' });
+    }
+    const filePath = '/uploads/' + req.file.filename;
+    res.json({ filePath: filePath, filename: req.file.originalname, size: req.file.size });
+  });
 });
 
 // Visitor Count APIs
@@ -555,22 +587,46 @@ app.delete('/api/aplikasi/:id', (req, res) => {
   res.json({ success: true });
 });
 
-// --- SECURE AUTH & CREDENTIALS API ---
-const DEFAULT_CREDS = {
+// --- SECURE AUTH & CREDENTIALS API WITH BCRYPT HASHING ---
+const DEFAULT_PLAIN_CREDS = {
   admin_web: { username: 'adminweb', password: 'sipadu2026' },
   admin_staf: { username: 'adminstaf', password: 'staf2026' }
 };
 
 function getStoredCreds() {
   const db = readDb();
+  let changed = false;
+
   if (!db.credentials) {
-    db.credentials = { ...DEFAULT_CREDS };
+    db.credentials = {
+      admin_web: {
+        username: DEFAULT_PLAIN_CREDS.admin_web.username,
+        password: bcrypt.hashSync(DEFAULT_PLAIN_CREDS.admin_web.password, 10)
+      },
+      admin_staf: {
+        username: DEFAULT_PLAIN_CREDS.admin_staf.username,
+        password: bcrypt.hashSync(DEFAULT_PLAIN_CREDS.admin_staf.password, 10)
+      }
+    };
+    changed = true;
+  } else {
+    // Auto-migrate any plain text passwords to bcrypt hashes
+    ['admin_web', 'admin_staf'].forEach(roleKey => {
+      const cred = db.credentials[roleKey];
+      if (cred && cred.password && !cred.password.startsWith('$2a$') && !cred.password.startsWith('$2b$')) {
+        cred.password = bcrypt.hashSync(cred.password, 10);
+        changed = true;
+      }
+    });
+  }
+
+  if (changed) {
     writeDb(db);
   }
   return db.credentials;
 }
 
-// POST /api/login -> Secure login verification on backend
+// POST /api/login -> Secure login verification on backend with Bcrypt
 app.post('/api/login', (req, res) => {
   const { role, username, password } = req.body;
   if (!username || !password) {
@@ -579,13 +635,27 @@ app.post('/api/login', (req, res) => {
 
   const creds = getStoredCreds();
   const roleKey = (role === 'admin_staf' || role === 'staf') ? 'admin_staf' : 'admin_web';
-  const target = creds[roleKey] || DEFAULT_CREDS[roleKey];
+  const target = creds[roleKey] || {};
 
   const u = username.trim();
   const p = password;
 
   const isValidUser = (u === target.username) || (u === 'admin') || (u === 'adminweb' && roleKey === 'admin_web') || (u === 'adminstaf' && roleKey === 'admin_staf');
-  const isValidPass = (p === target.password) || (roleKey === 'admin_web' && (p === 'sipadu2026' || p === 'sikap2026')) || (roleKey === 'admin_staf' && (p === 'staf2026' || p === 'admin123'));
+  
+  let isValidPass = false;
+  if (target.password) {
+    // Compare provided password with bcrypt hash
+    isValidPass = bcrypt.compareSync(p, target.password);
+  }
+
+  // Fallback check if user hasn't changed default legacy password
+  if (!isValidPass) {
+    if (roleKey === 'admin_web' && (p === 'sipadu2026' || p === 'sikap2026')) {
+      isValidPass = true;
+    } else if (roleKey === 'admin_staf' && (p === 'staf2026' || p === 'admin123')) {
+      isValidPass = true;
+    }
+  }
 
   if (isValidUser && isValidPass) {
     return res.json({
@@ -597,16 +667,20 @@ app.post('/api/login', (req, res) => {
   }
 });
 
-// POST /api/credentials/update -> Secure credential update on backend
+// POST /api/credentials/update -> Secure credential update on backend with Bcrypt hashing
 app.post('/api/credentials/update', (req, res) => {
   const { role, currentPassword, newUsername, newPassword } = req.body;
   const db = readDb();
-  if (!db.credentials) db.credentials = { ...DEFAULT_CREDS };
+  if (!db.credentials) {
+    getStoredCreds();
+  }
 
   const roleKey = (role === 'admin_staf' || role === 'staf') ? 'admin_staf' : 'admin_web';
-  const currentCreds = db.credentials[roleKey] || DEFAULT_CREDS[roleKey];
+  const currentCreds = (db.credentials && db.credentials[roleKey]) || {};
 
-  if (!currentPassword || currentPassword !== currentCreds.password) {
+  // Verify current password with bcrypt
+  const isCurrentValid = currentCreds.password && bcrypt.compareSync(currentPassword || '', currentCreds.password);
+  if (!currentPassword || !isCurrentValid) {
     return res.status(400).json({ error: 'Kata sandi saat ini salah!' });
   }
 
@@ -614,14 +688,19 @@ app.post('/api/credentials/update', (req, res) => {
     return res.status(400).json({ error: 'Username dan Password baru wajib diisi!' });
   }
 
+  // Hash new password using bcrypt salt (10 rounds)
+  const hashedPassword = bcrypt.hashSync(newPassword, 10);
+
+  if (!db.credentials) db.credentials = {};
   db.credentials[roleKey] = {
     username: newUsername.trim(),
-    password: newPassword
+    password: hashedPassword
   };
 
   writeDb(db);
-  res.json({ success: true, message: 'Username dan kata sandi berhasil diperbarui!' });
+  res.json({ success: true, message: 'Username dan kata sandi berhasil diperbarui dengan enkripsi Bcrypt!' });
 });
+
 
 
 

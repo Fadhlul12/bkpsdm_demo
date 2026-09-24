@@ -4,7 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portal Staf — BKPSDM Kota Dumai</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="icon" type="image/jpeg" href="/uploads/logo-bkpsdm.jpg">
+<meta name="description" content="Direktori staf BKPSDM Kota Dumai — cari staf, lihat status kehadiran, dan hubungi langsung via WhatsApp atau email.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Portal Staf — BKPSDM Kota Dumai">
+<meta property="og:description" content="Cari nama staf, lihat status kehadiran saat ini, dan hubungi langsung lewat WhatsApp atau email.">
+<meta property="og:image" content="/uploads/logo-bkpsdm.jpg">
+<meta property="og:url" content="https://bkpsdm.dumaikota.go.id/staf.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Portal Staf — BKPSDM Kota Dumai">
+<meta name="twitter:image" content="/uploads/logo-bkpsdm.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
@@ -760,6 +769,35 @@
     100%{box-shadow: 0 0 0 3px rgba(234,169,0,0.35), 0 20px 40px -10px rgba(27,54,93,0.3);}
   }
 
+  /* ===== SKELETON LOADING ===== */
+  .skeleton {
+    background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.5s ease-in-out infinite;
+    border-radius: 6px;
+    display: block;
+  }
+  @keyframes skeletonShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  .skeleton-staff-card {
+    background: var(--cream);
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 28px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  }
+  .sk-avatar { width: 80px; height: 80px; border-radius: 50%; }
+  .sk-name { height: 18px; width: 70%; margin-top: 6px; }
+  .sk-role { height: 13px; width: 55%; }
+  .sk-status { height: 26px; width: 80%; border-radius: 20px; margin-top: 4px; }
+  .sk-btn { height: 40px; width: 100%; border-radius: 8px; margin-top: 8px; }
+
   /* ===== STAFF DETAIL MODAL & CARD CLICK (RAMAH LANSIA) ===== */
   .staff-card { cursor: pointer; }
   .btn-detail-trigger {
@@ -846,7 +884,13 @@
       <button class="btn btn-gold admin-add-btn" id="addStaffBtn"><i class="fa-solid fa-user-plus"></i> Tambah Staf</button>
     </div>
 
-    <div class="staff-grid" id="staffGrid"></div>
+    <div class="staff-grid" id="staffGrid">
+      <!-- Skeleton Placeholders -->
+      <div class="skeleton-staff-card"><span class="skeleton sk-avatar"></span><span class="skeleton sk-name"></span><span class="skeleton sk-role"></span><span class="skeleton sk-status"></span><span class="skeleton sk-btn"></span></div>
+      <div class="skeleton-staff-card"><span class="skeleton sk-avatar"></span><span class="skeleton sk-name"></span><span class="skeleton sk-role"></span><span class="skeleton sk-status"></span><span class="skeleton sk-btn"></span></div>
+      <div class="skeleton-staff-card"><span class="skeleton sk-avatar"></span><span class="skeleton sk-name"></span><span class="skeleton sk-role"></span><span class="skeleton sk-status"></span><span class="skeleton sk-btn"></span></div>
+      <div class="skeleton-staff-card"><span class="skeleton sk-avatar"></span><span class="skeleton sk-name"></span><span class="skeleton sk-role"></span><span class="skeleton sk-status"></span><span class="skeleton sk-btn"></span></div>
+    </div>
 
     <div class="no-result" id="noResult">
       <i class="fa-solid fa-user-magnifying-glass"></i>
