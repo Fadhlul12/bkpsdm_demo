@@ -957,26 +957,19 @@
   }
   fetchSlides();
 
-  // ===== Visitor Counter REAL — terhubung ke Backend API =====
+  // ===== Visitor Counter REAL — terhubung ke Backend API (Bertambah +1 Setiap Refresh) =====
   (function(){
     const el = document.getElementById('visitorCount');
     if (!el) return;
     const container = el.closest('.visitor-counter');
     
-    const hasVisited = sessionStorage.getItem('sipadu_visited');
-    const endpoint = hasVisited ? '/api/visitor' : '/api/visitor/increment';
-    const method = hasVisited ? 'GET' : 'POST';
-    
-    fetch(API_BASE + endpoint, { method: method })
+    fetch(API_BASE + '/api/visitor/increment', { method: 'POST' })
       .then(res => res.json())
       .then(data => {
         if (data && data.showCounter === false) {
           if (container) container.style.display = 'none';
         } else {
           if (container) container.style.display = 'inline-flex';
-        }
-        if (!hasVisited) {
-          sessionStorage.setItem('sipadu_visited', '1');
         }
         const target = (data && data.count) ? data.count : 47820;
         const duration = 1400;
